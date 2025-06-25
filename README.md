@@ -112,7 +112,6 @@ While not a user story, this list resides in Github Projects with the user stori
 
 ### Tasks included during project
 
-
 ## Basic design of website and page requirements
 
 The website will be constructed using Django and PostgreSQL database. Stripe will be used to facilitate payments. Other framework and tools such as JQuery, Bootstrap etc will be included as necessary
@@ -150,13 +149,28 @@ Latest ERD used in project. Some field types may differ from actual model due to
 Apart from the projects complete Github commit history, the following are a log of projects major steps:
 
 - **June 23, 2025** Project formally started with introduction, basic outlines of goals and session with Code Insitute mentor Spencer Barriball.
+- **June 25, 2025** Set up development enviroment, including (among others) venv, Postgressql and .gitignore
 
 ## Deployment
 
 ### Deployment strategies
-Early vs late?
-Same database all the time?
+The project was deployed to Heroku fairly quickly and new deployment has been made continuosly after first developing and testing new functions locally.  
+Another option would have been to complete all or major parts of the project locally and then deploy to Heroku, as with the Boutuiqe Ado-project. Early deployment was favored for testing purposes and not risking getting stuck late in the project with issues that could have been resolved earlier or step by step. This is also in line with the recommendations from Code Institute.  
+Another choice was to use the same PostgreSQL database throughout development or use separate development and production database (as also demonstrated in Boutique Ado project). The decision was made to use the same PostgreSQL database at all time, on the fact deployments to Heroku would be made on regular basis for testing and then it would make sence to have both development and production using the same data. This would make it easier to know if potential bugs or errors was caused by faulty/inconcistent data or by buggy code.  
+Other choices could have been made in bigger projects, or with mulitple developers working on differnt parts of the projects. Also, another factor would be if the deployed version would be used by real users while development continues on unctions with lower priority.
+
 ### Deployment process
+
+### Difference between development and deployed versions
+
+The development and deployed versions are the same, with the following exceptions:
+
+Sensitive data, such as private keys and enviroment-specific settings are stored in a file called env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables. The variables used to store this information are:
+- DATABASE_URL, containing path and key to PostgreSQL database
+- DEBUG, set to True in env.py and "" in config variable, translating to value False. This ensures Debug is always set to True respectively False in development and deployed version.
+- DJANGO_SECRET_KEY, containing the Django Secret Key
+
+Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
 
 ## Testing
 ## Finished website
