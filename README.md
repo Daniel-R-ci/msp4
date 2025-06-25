@@ -2,6 +2,11 @@
 
 Code Institute Milestone 4 project by Daniel Rydell
 
+Github repository available at  
+Github Project Board available at  
+Heroku deployment available at  
+## Table of contents
+
 ## Introduction
 
 The Creative Barn is a fictious art store, located just outside a small village but still close to one major and several smaller cities. Not the kind of place where you drop in when you have a few minutes; it is a place where you can find anything. The Barn attracts a very loyal and active, though somewhat small, customer group from the surrounding area but Arthur and Tricia (the couple running the Barn part time next to their regular jobs) now want to put more time and focus into their passion, art and creative hobbies.
@@ -24,11 +29,7 @@ While a web shop might seem a normal way to expand their business, Arthur and Tr
 - Registration will also be required to comment on the articles Arthur and Tricia publish.
 - To be able to share ideas, accomplishments and ask questions, a discussion forum or some sort of news feed would be welcomed.
 
-## User stories
-
-The outline above will be refined into user stories with tasks and criteria. Github Projects will be used to keep track of the user stories.
-
-## MVP Priority
+## MVP Priority 
 
 Not all functionality will need to be in place upon launch. In order to quickly and within a certain time frame reach a Minimal Viable Product (MVP) that still has value, the following priority will be followed (unless changes or circumstance demand a change)
 
@@ -38,11 +39,79 @@ Not all functionality will need to be in place upon launch. In order to quickly 
 
 **Medium priority**
 - Comment function on articles, news and events
-- Prescription for secret boxes
+- Discussion forum or news feed
 
 **Lower priority**
-- Discussion forum or news feed
+- Prescription for secret boxes
 - User interface not requiring the use of admin interface to handle articles and courses
+
+## User stories
+
+For fully detailed user stories with criteria and tasks, see [The Barn User Stories](/static/readme/README_user_stories.md)
+
+The user stories are also found and tracked on  [Github Projects](https://github.com/users/Daniel-R-ci/projects/8/)
+
+(MVP) (not included i excerpts below but featured in Github Project) means the criteria/task should be completed before moving on to the next task (and ulitately project submission). When all MVP criteria/tasks are fullfilled, work can start on non mvp-tasks in order of priority.
+
+### Owner: Publish courses and events
+As a _business owner_, I would like to _publish information about upcoming courses and events_ to _let customers now about them and to eventually let them sign up for them_.
+
+Priority: High
+
+### Owner: Post articles / news
+
+As a _business owner_, I would like to _publish news about new supplies, craft tips etc_, to _inspire future craft projects and bring more customers to the store_.
+
+Priority: High
+
+### Customer: User registration
+As a _customer_, I would like to _register a user account_ in order to _take advantage of the online fuctions being offered_
+
+Priority: High
+
+### Customer: Course and event registration
+
+As a _customer_, I would like to be able to _register for upcoming courses and events_ in order to _secure a spot at those that interest me_
+
+Priority: High
+
+### Customer: Comment on articles
+As a registered user, I would like to be able to _comment on articles and news_ posted on the website in order to _provide feedback to the store_.
+
+Priority: Medium
+
+### Customer: Post information about own projects or ask questions
+
+As a _registered user_, I would like a way to _show my projects or ask craft related questions_ in order to _receive feedback and interact more withthe creative community around The Barn._
+
+Priority: Medium
+
+### Owner: Inforamtion and contact
+
+As a _business owner_, I need a way to _give general information about my store, as well as a way to let customers contact us_ in order to _provide expected customer service_.
+
+Priority: Medium
+
+### Customer: Sign up for secret box subscription
+
+As as _customer_, I would like to _register for The Barns secret craft boxes_ in order to _try new creative areas of the craft hobby that I would not otherwise have considered_.
+
+Priority: Low
+
+## Developers reminder
+
+While not a user story, this list resides in Github Projects with the user stories and serves as a developer's reminder of overall goals, tasks and things that need to be checked off before project submission. Things will be added during the entire project as issues arise.
+
+### Tasks included from the project start
+
+- Create a responsive web page using Bootstrap and Django 
+- Validate all Javascript code
+- Validate all Python code
+- Validate all rendered html pages
+- Create Lightroom report
+
+### Tasks included during project
+
 
 ## Basic design of website and page requirements
 
@@ -52,18 +121,43 @@ The courses and events will mostly be on different themes and limited to one tim
 
 Courses and events will sometimes have a maximun number of participants, and registration will be done on a first come-first-serve basis. Upon regestering for a course/event, the spot should therefore be reserved for five minutes to complete registration and possibly payment. After five minutes, a spot can no longer be guaranteed but will still be completed if there free spaces.
 
+### Outline of apps to be developed
+
+- **Home**, entry site. Will eventually rely on other apps to provide information about what is happening at The Barn
+- ***Events*** (name chosen for events/courses). Will handle display and and registration of all events, both those that are free and those who require payments.
+- **Articles** (name chosen for news/articles). A blog function where The Barn can post news and inspiring articles not directly related to specific events.
+- **About**. Contact form and information about The Barn
+
+***Considerations made during app development***
+- Information sent with the contact form in About app will be saved in the database to be reviewed there. On a live website for this kind of business, it would probably make more sense to send an email to a specific mailbox but since the functions will be tested by CI assessors, and possibly used for other demonstration purposes, sending these emails to a live email adress makes little sense.
+
 ### Entity Relationship Diagram
-First ERD-draft, to visualise how the models would look. The ERD will be refined as user stories are developed into more detail, and lower-priority functions are being implemented.
+Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)).
 
-![ERD version 0.1](static/readme/images/erd_0_1.png)
+![ERD version 1.0](static/readme/images/erd_1_0.png)
 
-ERD created with [Draw SQL](https://drawsql.app/)
+**List of all ERDs created during project**  
+(from oldest to newest)  
+- [ERD version 0.1](static/readme/images/erd_0_1.png), first draft to visuallise how the models would look.
+- [ERD version 1.0](static/readme/images/erd_1_0.png), updated with Contact and draft field in Article. Used to start model creation in Django.
 ### Model implementation
 
 ### Wireframes
 ### Colors and fonts
 
+## Project log
+
+Apart from the projects complete Github commit history, the following are a log of projects major steps:
+
+- **June 23, 2025** Project formally started with introduction, basic outlines of goals and session with Code Insitute mentor Spencer Barriball.
+
 ## Deployment
+
+### Deployment strategies
+Early vs late?
+Same database all the time?
+### Deployment process
+
 ## Testing
 ## Finished website
 ## Credits
