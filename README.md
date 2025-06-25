@@ -1,5 +1,6 @@
-# Milestone Project 4 : The Creative Barn
+# Milestone Project 4 : The Creator Barn
 
+![The Creator Barn](static/images/home_image.png)  
 Code Institute Milestone 4 project by Daniel Rydell
 
 Github repository available at  
@@ -9,7 +10,7 @@ Heroku deployment available at
 
 ## Introduction
 
-The Creative Barn is a fictious art store, located just outside a small village but still close to one major and several smaller cities. Not the kind of place where you drop in when you have a few minutes; it is a place where you can find anything. The Barn attracts a very loyal and active, though somewhat small, customer group from the surrounding area but Arthur and Tricia (the couple running the Barn part time next to their regular jobs) now want to put more time and focus into their passion, art and creative hobbies.
+The Creator Barn is a fictious art store, located just outside a small village but still close to one major and several smaller cities. Not the kind of place where you drop in when you have a few minutes; it is a place where you can find anything. The Barn attracts a very loyal and active, though somewhat small, customer group from the surrounding area but Arthur and Tricia (the couple running the Barn part time next to their regular jobs) now want to put more time and focus into their passion, art and creative hobbies.
  
 ## Goals
 
@@ -18,7 +19,7 @@ While a web shop might seem a normal way to expand their business, Arthur and Tr
 ## Overview of users and needs
 
 **Store owners**  
-- Arthur and Tricia want an attractive web page that presents their store (The Creative Barn) to both new and existing customers
+- Arthur and Tricia want an attractive web page that presents their store (The Creator Barn) to both new and existing customers
 - They want to be able to publish articles about new supplies, creative ideas and other things related to creative hobbies.
 - They want to be able to present courses on different themes and crafts and let interested visitors register (and pay) for the events via the web page
 - Some events may be free but limited in how many can attend, so registration would be necessary for these events as well even if they don't cost anything
@@ -123,11 +124,11 @@ Courses and events will sometimes have a maximun number of participants, and reg
 ### Outline of apps to be developed
 
 - **Home**, entry site. Will eventually rely on other apps to provide information about what is happening at The Barn
-- ***Events*** (name chosen for events/courses). Will handle display and and registration of all events, both those that are free and those who require payments.
+- **Events** (name chosen for events/courses). Will handle display and and registration of all events, both those that are free and those who require payments.
 - **Articles** (name chosen for news/articles). A blog function where The Barn can post news and inspiring articles not directly related to specific events.
 - **About**. Contact form and information about The Barn
 
-***Considerations made during app development***
+**Considerations made during app development**
 - Information sent with the contact form in About app will be saved in the database to be reviewed there. On a live website for this kind of business, it would probably make more sense to send an email to a specific mailbox but since the functions will be tested by CI assessors, and possibly used for other demonstration purposes, sending these emails to a live email adress makes little sense.
 
 ### Entity Relationship Diagram
@@ -142,14 +143,33 @@ Latest ERD used in project. Some field types may differ from actual model due to
 ### Model implementation
 
 ### Wireframes
+
+Wireframes were constructed for each app before work started on each Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views.
+
+### Home view
+![Home view](static/readme/images/wireframe_home_1_0.png)
+
 ### Colors and fonts
+
+Fonts were chosen from Google Fonts. Criteria for selection was finding fonts that gave an artistic but still serious and easy to read headlines, and a relaxed easy to read style for other text. The fonts Chewy and Nunito Sans were found matching the needs.  
+![Fonts selected](static/readme/images/fonts_1_0.png)
+TEMPORARILY SAVED HERE: @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+Colors where chosen with the help of [Coolors.co](https://coolors.co/) by uploading the home image and picking matching colors for different purposes. The first finished views/pages were tested for constrast and clarity using <--- VALIDATORS GOES HERE --->
+![Color palette](static/readme/images/palette_1_0.png)  
+From left to right:  
+Jasmine: #f5d389; Background color
+Dark-moss-green: #5f5c1e; Header and footer
+Light-blue: #a5c5cc; Text on dark background
+Black: #00000f; Regular text
+Rust: #bf3d1f;  
 
 ## Project log
 
 Apart from the projects complete Github commit history, the following are a log of projects major steps:
 
 - **June 23, 2025** Project formally started with introduction, basic outlines of goals and session with Code Insitute mentor Spencer Barriball.
-- **June 25, 2025** Set up development enviroment, including (among others) venv, Postgressql and .gitignore
+- **June 25, 2025** Set up development enviroment, including (among others) venv, PostgreSQL and .gitignore
 
 ## Deployment
 
@@ -165,10 +185,8 @@ Other choices could have been made in bigger projects, or with mulitple develope
 
 The development and deployed versions are the same, with the following exceptions:
 
-Sensitive data, such as private keys and enviroment-specific settings are stored in a file called env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables. The variables used to store this information are:
-- DATABASE_URL, containing path and key to PostgreSQL database
-- DEBUG, set to True in env.py and "" in config variable, translating to value False. This ensures Debug is always set to True respectively False in development and deployed version.
-- DJANGO_SECRET_KEY, containing the Django Secret Key
+Sensitive data, such as private keys and enviroment-specific settings are stored in a file called env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables.  
+A complite list of the data stored this way can be viewed in [Config Variables](static/readme/README_config_variables.md)
 
 Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
 
@@ -176,7 +194,19 @@ Not all files or folders are pushed to Github, either due to security reasons as
 ## Finished website
 ## Credits
 
-### Resources used
-[Draw SQL](https://drawsql.app/) - Creation of Entity Relationship Diagram
+### Framework , resources and libraries used in project
+
+For a complete list of installed packages and versions, see [requirements.txt](requirements.txt)
+
+### Forums and guides 
+
+### Resources and tools used
+- [ChatGPT](https://chatgpt.com/) -Used for the following purposes:
+  - Make a painting out of photograph for use home page
+- [Coolors.co](https://coolors.co/) - Choosing a suitable color palette from a chosen image
+- [Draw SQL](https://drawsql.app/) - Creation of Entity Relationship Diagram
+- [Fotor.com](https://www.fotor.com/) - Online photo editor used to adjust size and quality of images
+- [Unsplash.com](https://unsplash.com/) - for images used in project
+
 
 
