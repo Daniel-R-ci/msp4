@@ -41,6 +41,7 @@ h3 {
 
 #nav-area>a {
     text-decoration: none;
+    margin-right: 3rem;
 }
 
 #nav-area h1 {
@@ -74,4 +75,18 @@ footer {
     background-color: var(--header-color);
     color: var(--header-text-color);
     margin-bottom: 0px;
+}
+
+/*** Styling of page elements ***/
+
+.col-image{
+    height: 150px;
+    width: 150px;
+}
+
+@media(min-width: 992px) {
+    .col-image{
+    height: 325px;
+    width: 325px;
+}
 }

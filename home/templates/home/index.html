@@ -1,1 +1,49 @@
 {% extends 'base.html' %}
+{% load static %}
+
+<!-- Default title Creators Barn -->
+<!-- Remove if custom title is not needed -->
+{% block title %}
+Welcome to The Creators Barn
+{% endblock %}
+
+<!-- Main content-->
+<!-- Container not supplied and must be included -->
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center">
+            <h1>Welcome to The Creators Barn</h1>
+        </div>
+        <div class="col-7 text-center">
+            <p>Art and hobby supplies in a creative environment</p>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 col-lg-4 text-center">
+            <img class="col-image" src="{% static 'images/home-image.png' %}" alt="Logo with the Barn">
+        </div>
+        <div class="col-12 col-lg-4 mt-2 align-self-center order-lg-first text-lg-end">
+            <p>
+                <strong>Latest news</strong>
+                <br>Three latest blog posts
+                <br>Three latest blog posts
+                <br>Three latest blog posts      
+            </p>
+            
+        </div>
+         <div class="col-12 mt-2 col-lg-4 align-self-center order-lg-last">
+            <p>
+                <strong>Latest news</strong>
+                <br>Three next events
+                <br>Three next events
+                <br>Three next events
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Custom JS specific to this page-->
+{% block custom_js %}
+{% endblock %}
