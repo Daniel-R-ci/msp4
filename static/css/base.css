@@ -7,36 +7,71 @@
     --headline-font: "Chewy", sans-serif;
 
     --background-color: #f5d389; /* Jasmine */
-    --header-color: #5f5c1e; /* Dark-moss-green */
+    --header-color: #525219; /* Dark-moss-green */
     --header-color-rgb: rgb(95, 92, 30);
-    --headline-color: #5f5c1e;; /* Dark-moss-green */
-    --header-text-color: #a5c5cc; /* Light-blue */
+    --headline-color: #525219; /* Dark-moss-green */
+    --header-text-color: #E8EFF3; /* Light-blue */
     --font-color: black;
 }
 
-body{
+body {
     background-color: var(--background-color);
     font-family: var(--primary-font);
     color: var(--font-color)
 }
 
 /* Main padding used to protect against menu overlap and assure distance to footer*/
-main{
-    padding-top: 4rem;
-    padding-bottom: 1.5rem;   
+main {
+    padding-top: 5rem;
 }
 
-h1, h2, h3{
+h1,
+h2,
+h3 {
     font-family: var(--headline-font);
     color: var(--headline-color);
 }
 
 /*** Custom styzling of Bootstrap Navbar ***/
 
+/* Set background to header color, for some reason it doesn't work without rgb values */
 [data-bs-theme=dark] {
-    --bs-tertiary-bg-rgb: 95,92,30;
+    --bs-tertiary-bg-rgb: 95, 92, 30;
 }
 
-.navbar-toggler{
-    border: none;
+#nav-area>a {
+    text-decoration: none;
+}
+
+#nav-area h1 {
+    color: var(--header-text-color)
+}
+
+.nav-link {
+    color: var(--header-text-color);
+}
+
+.nav-link:hover {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.navbar-toggler {
+    border-color: var(--header-text-color);
+}
+
+/* Set the color of nav Hamburger toggler as rest of nav elements */
+/* Code found on https://www.geeksforgeeks.org/how-to-change-hamburger-toggler-color-in-bootstrap/ */
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath stroke='rgba(232, 239, 243, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24' /%3E%3C/svg%3E");
+}
+
+/*** Footer ***/
+
+footer {
+    padding-top: 1rem;
+    background-color: var(--header-color);
+    color: var(--header-text-color);
+    margin-bottom: 0px;
 }

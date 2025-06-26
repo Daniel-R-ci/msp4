@@ -7,31 +7,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="The Creators Barn art supplies painting diamond art courses events woodcraft knitting textile dioramas">
+        content="The Creators Barn art supplies painting diamond painting courses events woodcraft knitting textile dioramas">
     <title>
         {% block title %}
         Creators Barn
         {% endblock %}
     </title>
+   
     <!-- 3rd Party CSS, Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-    <!-- Custom CSS -->
+    
+        <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
+
     <header>
-        <nav id="navbar" class="navbar navbar-expand-md bg-body-tertiary fixed-top" data-bs-theme="dark">
+        <nav id="mobile-navbar" class="navbar navbar-expand-md bg-body-tertiary fixed-top" data-bs-theme="dark">
             <div id="nav-area" class="container-fluid">
-                <div class="text-start">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                        <img src="{% static 'images/menu-icon.png' %}" alt="Menu">
-                    </button>
-                    <a class="navbar-brand" href="/">The Creators Barn</a>
-                </div>
-                <div class="collapse navbar-collapse" id="navbarNav">
+
+                 <a href="/">
+                    <img src="{% static 'images/menu-icon.png' %}" clss="d-inline" alt="Logo">
+                    &nbsp;&nbsp;
+                    <h1 class="d-inline">The Creators Barn</h1>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
+
+                <div class="collapse navbar-collapse text-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == home_url %}active" aria-current="page{% endif %}"
@@ -42,11 +52,13 @@
                                 href="">Blog</a>
                         <li class="nav-item">
                             <a class="nav-link  {% if request.path == about_url %}active" aria-current="page{% endif %}"
-                                href="">Courses & Events</a>
+                                href="">Courses &
+                                Events</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  {% if request.path == about_url %}active" aria-current="page{% endif %}"
-                                href="">About & Contact</a>
+                                href="">About &
+                                Contact</a>
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
@@ -56,7 +68,8 @@
                         {% else %}
                         <li class="nav-item">
                             <a class="nav-link  {% if request.path == signup_url %}active"
-                                aria-current="page{% endif %}" href="">Sign up</a>
+                                aria-current="page{% endif %}" href="">Sign
+                                up</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link  {% if request.path == login_url %}active" aria-current="page{% endif %}"
@@ -68,9 +81,11 @@
             </div>
         </nav>
     </header>
+
     <main>
         {% block content %}
-        <h1>The Creators Barn</h1>
+        <!-- Default content for testing -->
+        <h1>Welcome to The Creators Barn</h1>
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate odio labore accusantium magnam incidunt
             repellat quod in, repudiandae pariatur officia commodi totam corporis nemo, maiores veritatis velit
             voluptatibus
@@ -98,8 +113,10 @@
 
         {% endblock %}
     </main>
-    <footer>
-
+    <footer class="mt-auto">
+        <div class="container text-center">
+            <p>Footer text</p>
+        </div>
     </footer>
 
     <!-- 3rd Party JS, Bootstrap -->
