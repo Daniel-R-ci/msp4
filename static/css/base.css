@@ -1,3 +1,42 @@
+/*** Fonts Chewy and Nunito from Google Fonts ***/
+@import url('https://fonts.googleapis.com/css2?family=Chewy&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+/*** Root variables ***/
+:root {
+    --primary-font: "Nunito Sans", sans-serif;
+    --headline-font: "Chewy", sans-serif;
+
+    --background-color: #f5d389; /* Jasmine */
+    --header-color: #5f5c1e; /* Dark-moss-green */
+    --header-color-rgb: rgb(95, 92, 30);
+    --headline-color: #5f5c1e;; /* Dark-moss-green */
+    --header-text-color: #a5c5cc; /* Light-blue */
+    --font-color: black;
+}
+
 body{
-    background-color: brown;
+    background-color: var(--background-color);
+    font-family: var(--primary-font);
+    color: var(--font-color)
+}
+
+/* Main padding used to protect against menu overlap and assure distance to footer*/
+main{
+    padding-top: 4rem;
+    padding-bottom: 1.5rem;   
+}
+
+h1, h2, h3{
+    font-family: var(--headline-font);
+    color: var(--headline-color);
+}
+
+/*** Custom styzling of Bootstrap Navbar ***/
+
+[data-bs-theme=dark] {
+    --bs-tertiary-bg-rgb: 95,92,30;
+}
+
+.navbar-toggler{
+    border: none;
 }
