@@ -134,12 +134,14 @@ Courses and events will sometimes have a maximun number of participants, and reg
 ### Entity Relationship Diagram
 Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)).
 
-![ERD version 1.0](static/readme/images/erd_1_0.png)
+![ERD version 1.1](static/readme/images/erd_1_1.png)
 
 **List of all ERDs created during project**  
 (from oldest to newest)  
 - [ERD version 0.1](static/readme/images/erd_0_1.png), first draft to visuallise how the models would look.
 - [ERD version 1.0](static/readme/images/erd_1_0.png), updated with Contact and draft field in Article. Used to start model creation in Django.
+- [ERD version 1.1](static/readme/images/erd_1_1.png), add fields to event_registration for historical views if original event is deleted
+
 ### Model implementation
 
 ### Wireframes
@@ -153,7 +155,6 @@ Wireframes were constructed for each app before work started on each Django app.
 
 Fonts were chosen from Google Fonts. Criteria for selection was finding fonts that gave an artistic but still serious and easy to read headlines, and a relaxed easy to read style for other text. The fonts Chewy and Nunito Sans were found matching the needs.  
 ![Fonts selected](static/readme/images/fonts_1_0.png)
-TEMPORARILY SAVED HERE: @import url('https://fonts.googleapis.com/css2?family=Chewy&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 
 Colors where chosen with the help of [Coolors.co](https://coolors.co/) by uploading the home image and picking matching colors for different purposes. The first finished views/pages were tested for constrast and clarity using <--- VALIDATORS GOES HERE --->
 ![Color palette](static/readme/images/palette_1_0.png)  
@@ -163,6 +164,11 @@ Dark-moss-green: #5f5c1e; Header and footer
 Light-blue: #a5c5cc; Text on dark background
 Black: #00000f; Regular text
 Rust: #bf3d1f;  
+
+## Considerations, and alternative ideas considered or tried
+
+- **Saving historical data**  
+  The fields for event_title, event_time and event_cost in the Event_Registration model may seem like a duplicate of data already stored in a corresponding Event. This is to preserve order history, in case the corresponding event post gets deleted. The custumer/user will still be able to see this in his/her order history, even if more detailed information is no longer available.
 
 ## Project log
 
@@ -191,6 +197,7 @@ A complite list of the data stored this way can be viewed in [Config Variables](
 Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
 
 ## Testing
+## Notable bugs found during development or testing
 ## Finished website
 ## Credits
 
