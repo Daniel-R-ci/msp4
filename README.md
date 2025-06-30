@@ -132,15 +132,17 @@ Courses and events will sometimes have a maximun number of participants, and reg
 - Information sent with the contact form in About app will be saved in the database to be reviewed there. On a live website for this kind of business, it would probably make more sense to send an email to a specific mailbox but since the functions will be tested by CI assessors, and possibly used for other demonstration purposes, sending these emails to a live email adress makes little sense.
 
 ### Entity Relationship Diagram
-Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)).
+Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)). Id fields will be specified in models but implemented by Django, shown in ERD for relationshsip purposes.
 
 ![ERD version 1.1](static/readme/images/erd_1_1.png)
 
 **List of all ERDs created during project**  
 (from oldest to newest)  
-- [ERD version 0.1](static/readme/images/erd_0_1.png), first draft to visuallise how the models would look.
+- [ERD version 0.1](static/readme/images/erd_0_1.png), first draft to visuallise how the models could look and their relationships
 - [ERD version 1.0](static/readme/images/erd_1_0.png), updated with Contact and draft field in Article. Used to start model creation in Django.
 - [ERD version 1.1](static/readme/images/erd_1_1.png), add fields to event_registration for historical views if original event is deleted
+- [ERD version 1.2](static/readme/images/erd_1_1.png), add image_url field to Article to make use of Botutique_ADO AWS code. Also include same image field in Article_Comment to allow users to include images in their replies.
+- [ERD version 1.2]
 
 ### Model implementation
 
@@ -168,7 +170,8 @@ Rust: #bf3d1f;
 ## Considerations, and alternative ideas considered or tried
 
 - **Saving historical data**  
-  The fields for event_title, event_time and event_cost in the Event_Registration model may seem like a duplicate of data already stored in a corresponding Event. This is to preserve order history, in case the corresponding event post gets deleted. The custumer/user will still be able to see this in his/her order history, even if more detailed information is no longer available.
+  The fields for event_title, event_time and event_cost in the Event_Registration model may seem like a duplicate of data already stored in a corresponding Event.
+   This is to preserve order history, in case the corresponding event post gets deleted. The custumer/user will still be able to see this in his/her order history, even if more detailed information is no longer available.
 
 ## Project log
 
@@ -183,7 +186,7 @@ Apart from the projects complete Github commit history, the following are a log 
 The project was deployed to Heroku fairly quickly and new deployment has been made continuosly after first developing and testing new functions locally.  
 Another option would have been to complete all or major parts of the project locally and then deploy to Heroku, as with the Boutuiqe Ado-project. Early deployment was favored for testing purposes and not risking getting stuck late in the project with issues that could have been resolved earlier or step by step. This is also in line with the recommendations from Code Institute.  
 Another choice was to use the same PostgreSQL database throughout development or use separate development and production database (as also demonstrated in Boutique Ado project). The decision was made to use the same PostgreSQL database at all time, on the fact deployments to Heroku would be made on regular basis for testing and then it would make sence to have both development and production using the same data. This would make it easier to know if potential bugs or errors was caused by faulty/inconcistent data or by buggy code.  
-Other choices could have been made in bigger projects, or with mulitple developers working on differnt parts of the projects. Also, another factor would be if the deployed version would be used by real users while development continues on unctions with lower priority.
+Other choices could have been made in bigger projects, or with mulitple developers working on differnt parts of the projects. Also, another factor would be if the deployed version would be used by real users while development continues on functions with lower priority.
 
 ### Deployment process
 
