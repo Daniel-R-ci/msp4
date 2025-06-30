@@ -179,6 +179,7 @@ Apart from the projects complete Github commit history, the following are a log 
 
 - **June 23, 2025** Project formally started with introduction, basic outlines of goals and session with Code Insitute mentor Spencer Barriball.
 - **June 25, 2025** Set up development enviroment, including (among others) venv, PostgreSQL and .gitignore
+- **June 30, 20225** Deployment to Heroky to test config variables and database connection
 
 ## Deployment
 
@@ -190,11 +191,24 @@ Other choices could have been made in bigger projects, or with mulitple develope
 
 ### Deployment process
 
+- Set up Github repository
+- Frequent commits to Github during development
+- Deployment to Heroku:
+  - Install gunicorn and update requirements.txt
+  - Create Procfile, .python-version
+  - Commit changes to Github
+  - Create new Heroku app
+  - Set up Heroku config variables described in [Config Variables](static/readme/README_config_variables.md)
+  - Connect Heroku app to github repository
+  - Deploy project from main branch
+  - Set up static files collection (see Github commit history)
+  - Redeploy as necessry for testing
+
 ### Difference between development and deployed versions
 
 The development and deployed versions are the same, with the following exceptions:
 
-Sensitive data, such as private keys and enviroment-specific settings are stored in a file called env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables.  
+Sensitive data, such as private keys and enviroment-specific settings are stored in file env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables.  
 A complite list of the data stored this way can be viewed in [Config Variables](static/readme/README_config_variables.md)
 
 Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
