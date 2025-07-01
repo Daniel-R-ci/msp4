@@ -1,6 +1,6 @@
-# Milestone Project 4 : The Creators Barn
+# Milestone Project 4 : The Creativity Barn
 
-![The Creators Barn](static/images/home_image.png)  
+![The Creativity Barn](static/images/home_image.png)  
 Code Institute Milestone 4 project by Daniel Rydell
 
 Github repository available at [https://github.com/Daniel-R-ci/msp4](https://github.com/Daniel-R-ci/msp4)  
@@ -10,7 +10,7 @@ Heroku deployment available at
 
 ## Introduction
 
-The Creators Barn is a fictious art store, located just outside a small village but still close to one major and several smaller cities. Not the kind of place where you drop in when you have a few minutes; it is a place where you can find anything. The Barn attracts a very loyal and active, though somewhat small, customer group from the surrounding area but Arthur and Tricia (the couple running the Barn part time next to their regular jobs) now want to put more time and focus into their passion, art and creative hobbies.
+The Creativity Barn is a fictious art store, located just outside a small village but still close to one major and several smaller cities. Not the kind of place where you drop in when you have a few minutes; it is a place where you can find anything. The Barn attracts a very loyal and active, though somewhat small, customer group from the surrounding area but Arthur and Tricia (the couple running the Barn part time next to their regular jobs) now want to put more time and focus into their passion, art and creative hobbies.
  
 ## Goals
 
@@ -19,7 +19,7 @@ While a web shop might seem a normal way to expand their business, Arthur and Tr
 ## Overview of users and needs
 
 **Store owners**  
-- Arthur and Tricia want an attractive web page that presents their store (The Creators Barn) to both new and existing customers
+- Arthur and Tricia want an attractive web page that presents their store (The Creativity Barn) to both new and existing customers
 - They want to be able to publish articles about new supplies, creative ideas and other things related to creative hobbies.
 - They want to be able to present courses on different themes and crafts and let interested visitors register (and pay) for the events via the web page
 - Some events may be free but limited in how many can attend, so registration would be necessary for these events as well even if they don't cost anything
