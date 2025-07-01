@@ -227,8 +227,18 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 ## Testing
 ## Notable bugs found during development or testing
+
+### Setting up AWS
+
+Setting up AWS proved a bit tricky, it turned out the problem was some settings in Boutique_Ado project couldn't be used since that is made in Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the settings would be done in Django 5.
+
 ## Finished website
 ## Credits
+
+- Code Institute mentor Spencer Barriball - for guidelines, support and encouragement
+- Code Institute tutor support Oisin - for help with storage settings using AWS
+- Fellow Code Institute students Patrik L and Jere H for support, encouragement and sounding boards
+- Django 5 By Example, by Antonio Melé
 
 ### Framework , resources and libraries used in project
 
@@ -237,7 +247,7 @@ For a complete list of installed packages and versions, see [requirements.txt](r
 ### Forums and guides 
 
 ### Resources and tools used
-- [ChatGPT](https://chatgpt.com/) -Used for the following purposes:
+- [ChatGPT](https://chatgpt.com/) - Used for the following purposes:
   - Make a painting out of photograph for use home page
 - [Coolors.co](https://coolors.co/) - Choosing a suitable color palette from a chosen image
 - [Draw SQL](https://drawsql.app/) - Creation of Entity Relationship Diagram
