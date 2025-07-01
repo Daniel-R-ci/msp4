@@ -1,11 +1,11 @@
 # Milestone Project 4 : The Creativity Barn
 
-![The Creativity Barn](static/images/home_image.png)  
+![The Creativity Barn](static/images/home-image.png)
 Code Institute Milestone 4 project by Daniel Rydell
 
 Github repository available at [https://github.com/Daniel-R-ci/msp4](https://github.com/Daniel-R-ci/msp4)  
 Github Project Board available at [ttps://github.com/users/Daniel-R-ci/projects/8\]](https://github.com/users/Daniel-R-ci/projects/8)  
-Heroku deployment available at  
+Heroku deployment available at [https://dr-ci-msp4-87974008a79d.herokuapp.com/](https://dr-ci-msp4-87974008a79d.herokuapp.com/)
 ## Table of contents
 
 ## Introduction
