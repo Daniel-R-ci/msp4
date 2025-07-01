@@ -133,6 +133,12 @@ USE_I18N = True
 USE_TZ = True
 
 # AWS Bucket config
+
+# Cache control
+AWS_S3_OBJECT_PARAMETERS = {
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'CacheControl': 'max-age=94608000',
+    }
 AWS_STORAGE_BUCKET_NAME = 'msp4-the-barn'
 AWS_S3_REGION_NAME = 'eu-north-1'
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
@@ -143,7 +149,7 @@ AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 # Static files used locally
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 # Static files used in Heroku deployment
