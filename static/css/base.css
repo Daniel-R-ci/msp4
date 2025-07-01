@@ -6,12 +6,26 @@
     --primary-font: "Nunito Sans", sans-serif;
     --headline-font: "Chewy", sans-serif;
 
-    --background-color: #f5d389; /* Jasmine */
-    --header-color: #525219; /* Dark-moss-green */
-    --header-color-rgb: rgb(95, 92, 30);
-    --headline-color: #525219; /* Dark-moss-green */
-    --header-text-color: #E8EFF3; /* Light-blue */
+    /*   --background-color: #f5d389; /* Jasmine */
+    /*    --header-color: #525219; /* Dark-moss-green */
+    /*    --header-color-rgb: rgb(95, 92, 30);
+    /*    --headline-color: #525219; /* Dark-moss-green */
+    /*    --header-text-color: #E8EFF3; /* Light-blue */
+    /*    --font-color: black; */
+
+    --background-color: #f3e2b4; /* wheat */
+    /*--header-color: #75811c; /* olive */
+    /*--header-color-rgb: rgb(117, 129, 28); */
+    /*--header-color: #525219; /* Dark-moss-green */
+    /*--header-color-rgb: rgb(95, 92, 30); */
+    --header-color: #034c3c; /* brunswick-green */
+    --header-color-rgb: rgb(3, 76, 60);
+    --headline-color: #701005; /* barn-red */
+    --header-text-color: white;
+    --shadow-color: #906f3d; /* coyote */
     --font-color: black;
+    --extra-color: #76afd1; /* carolina-blue, not currently used */
+
 }
 
 body {
@@ -34,9 +48,9 @@ h3 {
 
 /*** Custom styzling of Bootstrap Navbar ***/
 
-/* Set background to header color, for some reason it doesn't work without rgb values */
+/* Set background to header color, for some reason it doesn't work without rgb values entered this way*/
 [data-bs-theme=dark] {
-    --bs-tertiary-bg-rgb: 95, 92, 30;
+    --bs-tertiary-bg-rgb: 3, 76, 60;
 }
 
 #nav-area>a {
@@ -65,7 +79,7 @@ h3 {
 /* Set the color of nav Hamburger toggler as rest of nav elements */
 /* Code found on https://www.geeksforgeeks.org/how-to-change-hamburger-toggler-color-in-bootstrap/ */
 .navbar-toggler-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath stroke='rgba(232, 239, 243, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24' /%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg' %3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24' /%3E%3C/svg%3E");
 }
 
 /*** Footer ***/
@@ -80,19 +94,19 @@ footer {
 
 /*** Styling of page elements ***/
 
-.col-image{
+.col-image {
     height: 200px;
     width: 200px;
 }
 
 /***** Blog  *****/
 
-.card{
-    border-color: darkblue;
-    box-shadow: 3px 3px #525219;
+.card {
+    border: 1px solid var(--extra-color);
+    box-shadow: 3px 3px var(--shadow-color);
 }
 
-.card-header > h2{
+.card-header>h2 {
     font-size: 1.25rem;
 }
 
@@ -102,14 +116,9 @@ footer {
     padding: 2rem;
 }
 
-.pagination-card a{
+.blog-post-image {
     border: 1px solid black;
-    text-decoration: none;
-    color: black;
-}
-
-.blog-post-image{
-    border: 1px solid black;
+    max-width: 100%;
     border-radius: 2%;
 }
 
@@ -117,41 +126,42 @@ footer {
 
 /***** TEST CSS TO BE REMOVED BEFORE SUBMISSION *****/
 
-.test-border{
+.test-border {
     border: dashed 1px red;
 }
 
 /*** Media querys ***/
 
 @media(min-width: 550px) {
-    .col-image{
+    .col-image {
         width: 300px;
         height: 300px;
     }
 }
 
 @media(min-width: 650px) {
-    .col-image{
+    .col-image {
         width: 350px;
         height: 350px;
     }
 }
+
 @media(min-width: 768px) {
-    .col-image{
+    .col-image {
         width: 225px;
         height: 225px;
     }
 }
 
 @media(min-width: 868px) {
-    .col-image{
+    .col-image {
         width: 260px;
         height: 260px;
     }
 }
 
 @media(min-width: 992px) {
-    .col-image{
+    .col-image {
         height: 450px;
         width: 450px;
     }

@@ -158,14 +158,19 @@ Wireframes were constructed for each app before work started on each Django app.
 Fonts were chosen from Google Fonts. Criteria for selection was finding fonts that gave an artistic but still serious and easy to read headlines, and a relaxed easy to read style for other text. The fonts Chewy and Nunito Sans were found matching the needs.  
 ![Fonts selected](static/readme/images/fonts_1_0.png)
 
-Colors where chosen with the help of [Coolors.co](https://coolors.co/) by uploading the home image and picking matching colors for different purposes. The first finished views/pages were tested for constrast and clarity using <--- VALIDATORS GOES HERE --->
-![Color palette](static/readme/images/palette_1_0.png)  
+Colors where chosen with the help of [Coolors.co](https://coolors.co/) by uploading the home image and picking matching colors for different purposes. The first finished views/pages were tested for constrast and clarity using <--- VALIDATORS GOES HERE --->. After validation, testing and demonstration it was decided that the color palette needed to be changed. Again, Coolors.co was used for this and the existing palette is:  
+
+![Color palette](static/readme/images/palette_2_0.png)  
 From left to right:  
-Jasmine: #f5d389; Background color
-Dark-moss-green: #5f5c1e; Header and footer
-Light-blue: #a5c5cc; Text on dark background
-Black: #00000f; Regular text
-Rust: #bf3d1f;  
+- Barn-red: #701005; Headlines
+- Wheat: #f3e2b4; Body background
+- Coyote: #906f3d; Shadowbox-effect
+- Brunswick-green: #034c3c; Header and footer
+- Carolina-blue: #76afd1; Used on some borders for accent
+
+Bootstrap button style outline was choosen as a good match for the styling.
+
+[Original color palette](static/readme/images/palette_1_0.png)
 
 ## Considerations, and alternative ideas considered or tried
 
