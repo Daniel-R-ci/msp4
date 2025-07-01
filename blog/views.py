@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.db.models import Q
 from datetime import datetime
+from django.core.paginator import Paginator
+
 from .models import Article
 
 # Create your views here.
@@ -8,10 +10,14 @@ from .models import Article
 
 def blog_list(request):
     # Get all published articles with publish_on later than now
-    articles = Article.objects.filter(
+    article_list = Article.objects.filter(
         Q(publish_on__lte=datetime.now()) &
         Q(published=True)
     )
+
+    paginator = Paginator(article_list, 1)
+    page_number = request.GET.get('page', 12)
+    articles = paginator.page(page_number)
 
     context = {
         'articles': articles,

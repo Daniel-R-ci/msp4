@@ -10,20 +10,43 @@ Blog - News and Articles
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-<div class="container-fluid">
+<div class="container-fluid mb-3">
     <div class="row">
         <div class="col-12 text-center">
             <h1>The Barn Blog - News and Articles</h1>
         </div>
         {% for article in articles %}
-        <div class="col-12">
-            <p>{{ article.title }} - Published on {{ article.publish_on|date }}</p>
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-3">
+            <div class="card">
+                {% if article.image_url %}
+                <!-- specific image -->
+                {% else %}
+                <img src="{% static 'images/blog_placeholder_image.jpg' %}" class="card-img-top" alt="Placeholder Image">
+                {% endif %}
+                <div class="card-header">
+                    <h2>{{ article.title }}</h2>
+                </div>
+
+
+                <div class="card-body">
+                    <p class="card-text">Published on {{ article.publish_on|date }} by {{article.author.first_name }}
+                    </p>
+                    <div class="text-center">
+                        <a href="#" class="btn btn-sm btn-info">Read more</a>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
         {% endfor %}
     </div>
-</div>
-{% endblock %}
+    <div class="row justify-content-center">
+        <div class="col-12 text-center mt-2 mb-2 justify-content-center">
+            {% include 'includes/pagination.html' with page=articles %}
+        </div>
+    </div>
+    {% endblock %}
 
-<!-- Custom JS specific to this page-->
-{% block custom_js %}
-{% endblock %}
+    <!-- Custom JS specific to this page-->
+    {% block custom_js %}
+    {% endblock %}
