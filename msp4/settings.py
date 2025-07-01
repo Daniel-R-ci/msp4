@@ -154,9 +154,9 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 STORAGES = {
     "default": {
-        "BACKEND": "custom_storages.MediaStorage",
+        "BACKEND": "custom_storage.MediaStorage",
     },
-    "staticfiles": {"BACKEND": "custom_storages.StaticStorage"},
+    "staticfiles": {"BACKEND": "custom_storage.StaticStorage"},
 }
 # Static files used in Heroku deployment
 if 'DEPLOYED' in os.environ:
