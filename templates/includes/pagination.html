@@ -1,4 +1,7 @@
+<!-- Exclude paginator info if there is only one page -->
+{% if page.paginator.num_pages > 1 %}
 <div class="pagination justify-content-center">
+
     <div class="card pagination-card">
         <div class="current">
             Page <strong>{{ page.number }}</strong> of {{ page.paginator.num_pages }}
@@ -6,7 +9,7 @@
 
         <div class="step-links text-center">
             {% if page.has_previous %} <a href="?page={{ page.previous_page_number }}"
-            class="d-inline">&nbsp;&lt;&lt;&nbsp;</a>
+                class="d-inline">&nbsp;&lt;&lt;&nbsp;</a>
             {% endif %}
             {% if page.has_next %}
             <a href="?page={{ page.next_page_number }}" class="d-inline">&nbsp;&gt;&gt;&nbsp;</a>
@@ -14,3 +17,4 @@
         </div>
     </div>
 </div>
+{% endif %}

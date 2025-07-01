@@ -11,7 +11,7 @@ Blog - News and Articles
 <!-- Container not supplied and must be included -->
 {% block content %}
 <div class="container-fluid mb-3">
-    <div class="row">
+    <div class="row justify-content-center">
         <div class="col-12 text-center">
             <h1>The Barn Blog - News and Articles</h1>
         </div>
@@ -32,7 +32,7 @@ Blog - News and Articles
                     <p class="card-text">Published on {{ article.publish_on|date }} by {{article.author.first_name }}
                     </p>
                     <div class="text-center">
-                        <a href="#" class="btn btn-sm btn-info">Read more</a>
+                        <a href="{% url 'blog_post' article.id %}" class="btn btn-sm btn-info">Read more</a>
                     </div>
                     
                 </div>
