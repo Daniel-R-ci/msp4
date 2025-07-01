@@ -18,7 +18,7 @@ def blog_list(request):
     article_list = Article.objects.filter(
         Q(publish_on__lte=datetime.now()) &
         Q(published=True)
-    )
+    ).order_by('-publish_on')
 
     # Use pagination, 12 posts per page
     paginator = Paginator(article_list, 12)

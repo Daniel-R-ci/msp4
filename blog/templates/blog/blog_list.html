@@ -17,9 +17,10 @@ Blog - News and Articles
         </div>
         {% for article in articles %}
         <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-3">
-            <div class="card">
-                {% if article.image_url %}
-                <!-- specific image -->
+            <div class="card h-100">
+                {% if article.image %}
+                <img src="{{ article.image.url }}"  class="card-img-top" alt="Image illustrating blog post">
+
                 {% else %}
                 <img src="{% static 'images/blog_placeholder_image.jpg' %}" class="card-img-top" alt="Placeholder Image">
                 {% endif %}

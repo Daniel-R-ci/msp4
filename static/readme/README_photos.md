@@ -2,4 +2,5 @@
 
 ## From unsplash.com
 
-- Red barn, by Chris Robert. Transformed into painting by ChatGPT and used on Home page (barn.jpg)
+- Red barn, by Chris Robert. Transformed into painting by ChatGPT and used on Home page, header icon and placeholder image
+- Grounds For Sculpture, by Praswin Prakashan

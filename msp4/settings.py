@@ -148,25 +148,37 @@ AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
+# Media files, always use AWS
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+
 # Static files used locally
 STATIC_URL = '/static/'
+STATICFILES_LOCATION = 'static'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 
 STORAGES = {
     "default": {
         "BACKEND": "custom_storage.MediaStorage",
     },
-    "staticfiles": {"BACKEND": "custom_storage.StaticStorage"},
+    "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"}, # noqa
 }
+
 # Static files used in Heroku deployment
 if 'DEPLOYED' in os.environ:
 
     STATICFILES_LOCATION = 'static'
     STATIC_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
 
-# Media files, always use AWS
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = f'http://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+    # Overwrite storages settings in deployed mode
+    STORAGES = {
+        "default": {
+            "BACKEND": "custom_storage.MediaStorage",
+        },
+        "staticfiles": {"BACKEND": "custom_storage.StaticStorage"},
+    }
+
+
 
 
 # Default primary key field type
