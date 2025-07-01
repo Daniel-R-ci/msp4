@@ -15,8 +15,8 @@ def blog_list(request):
         Q(published=True)
     )
 
-    paginator = Paginator(article_list, 1)
-    page_number = request.GET.get('page', 12)
+    paginator = Paginator(article_list, 12)
+    page_number = request.GET.get('page', 1)
     articles = paginator.page(page_number)
 
     context = {
