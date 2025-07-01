@@ -5,7 +5,7 @@ These are the variables stored in env.py for development, and in config variable
 ## Settings used in both env.py and Heroku Config Variables
 
 - DATABASE_URL, containing path and key to PostgreSQL database
-- DEBUG, set to True in env.py and "" in config variable, translating to value False. This ensures Debug is always set to True respectively False in development and deployed version.
+- DEBUG, set to True in env.py and "" in config variable, translating to value False. This ensures Debug is always set to True respectively False in development versus deployed version.
 - DJANGO_SECRET_KEY, containing the Django Secret Key
 - AWS_ACCES_KEY_ID and AWS_SECRET_ACCESS_KEY, to handle AWS requests
 

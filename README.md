@@ -128,8 +128,21 @@ Courses and events will sometimes have a maximun number of participants, and reg
 - **Blog** (name chosen for news/articles). A blog function where The Barn can post news and inspiring articles not directly related to specific events.
 - **About**. Contact form and information about The Barn
 
-**Considerations made during app development**
-- Information sent with the contact form in About app will be saved in the database to be reviewed there. On a live website for this kind of business, it would probably make more sense to send an email to a specific mailbox but since the functions will be tested by CI assessors, and possibly used for other demonstration purposes, sending these emails to a live email adress makes little sense.
+## Considerations made during development, other ideas considered or tried
+- **Notification when contact form is submitted**  
+  Information sent with the contact form in About app will be saved in the database to be reviewed there. On a live website for this kind of business, it would probably make more sense to send an email to a specific mailbox but since the functions will be tested by CI assessors, and possibly used for other demonstration purposes, sending these emails to a live email adress makes little sense.
+
+- **Saving historical data**  
+  The fields for event_title, event_time and event_cost in the Event_Registration model may seem like a duplicate of data already stored in a corresponding Event.
+   This is to preserve order history, in case the corresponding event post gets deleted. The custumer/user will still be able to see this in his/her order history, even if more detailed information is no longer available.
+- **To paginate, or not to paginate**  
+  Pagination of data, like blog posts, offer both advantages and disadvantages. Advantages include faster load times (less data/page to generate) and also reduced congnitive load on user since there is less data to take in at once. Disadvantages can occur with disruptive user flow to users who are used to scrolling, requiring more clicks to reach a particular post, and more interaction clicks needed to reach some content.  
+  In this project, the decision was made to go ahead with pagination for blog feeds, like news and articles. This was done both to reduce scrolling, especially on mobile devices, but also as a learning experience since the student (me, Daniel) didn't use pagination in previous Milestone Project even if it was considered already then.
+  Twelve posts per page seemed like the logical number of posts on each page since 1,2,3 or 4 posts are shown on each row depending on screen sizes, and 12 is the first product in common.
+- **Storage of media and static files**  
+  The choice stood between storing uploaded images on Cloudinary or Amazon Web Service (AWS), and to store static files and images with the deployed files on Heroky or use AWS for these as well.
+  AWS was choosen for both uploaded files and static files for two reasons. One was a way to build on what was learned in previous learning projects but in a newer version av Django (since there was known to be some differences), and also to be able to show larger variety in techniques and skills to potential employers if Milestone Projects are to be used as portfolio projects.
+
 
 ### Entity Relationship Diagram
 Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)). Id fields will be specified in models but implemented by Django, shown in ERD for relationshsip purposes.
@@ -148,10 +161,18 @@ Latest ERD used in project. Some field types may differ from actual model due to
 
 ### Wireframes
 
-Wireframes were constructed for each app before work started on each Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views.
+Wireframes were constructed for each app before work started on each Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views. Some minor changes where made to the header and menu area for better clarity and user experience.
 
 ### Home view
-![Home view](static/readme/images/wireframe_home_1_0.png)
+![Home view](static/readme/images/wireframe_home_1_1.png)
+Home page
+
+### Blog view
+![Blog list](static/readme/images/wireframe_bloglist_1_0.png)  
+List of blog entries, paginated
+
+![Blog post](static/readme/images/wireframe_bloglist_1_0.png)  
+Blog entry
 
 ### Colors and fonts
 
@@ -171,17 +192,6 @@ From left to right:
 Bootstrap button style outline was choosen as a good match for the styling.
 
 [Original color palette](static/readme/images/palette_1_0.png)
-
-## Considerations, and alternative ideas considered or tried
-
-- **Saving historical data**  
-  The fields for event_title, event_time and event_cost in the Event_Registration model may seem like a duplicate of data already stored in a corresponding Event.
-   This is to preserve order history, in case the corresponding event post gets deleted. The custumer/user will still be able to see this in his/her order history, even if more detailed information is no longer available.
-- **To paginate, or not to paginate**  
-  Pagination of data, like blog posts, offer both advantages and disadvantages. Advantages include faster load times (less data/page to generate) and also reduced congnitive load on user since there is less data to take in at once. Disadvantages can occur with disruptive user flow to users who are used to scrolling, requiring more clicks to reach a particular post, and more interaction clicks needed to reach some content.  
-  In this project, the decision was made to go ahead with pagination for blog feeds, like news and articles. This was done both to reduce scrolling, especially on mobile devices, but also as a learning experience since the student (me, Daniel) didn't use pagination in previous Milestone Project even if it was considered.
-  Twelve posts per page seemed like the logical number of posts on each page since 1,2,3 or 4 posts are shown on each row depending on screen sizes, and 12 is the first product in common.
-
 
 ## Project log
 
@@ -225,8 +235,10 @@ Other choices could have been made in bigger projects, or with mulitple develope
 
 The development and deployed versions are the same, with the following exceptions:
 
+Static files, such as css, javascript files etc are in development running directly from the development folder, but the deployed version uses Django Collectstatic to save these files to AWS and fetching them from there. One config variable in Heroku is used in settings.py to differentiate between development and deployed configurations.
+
 Sensitive data, such as private keys and enviroment-specific settings are stored in file env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables.  
-A complite list of the data stored this way can be viewed in [Config Variables](static/readme/README_config_variables.md)
+A complete list of settings stored this way can be viewed in [Config Variables](static/readme/README_config_variables.md)
 
 Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
 
