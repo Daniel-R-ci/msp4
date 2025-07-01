@@ -206,8 +206,15 @@ Other choices could have been made in bigger projects, or with mulitple develope
   - Set up Heroku config variables described in [Config Variables](static/readme/README_config_variables.md)
   - Connect Heroku app to github repository
   - Deploy project from main branch
-  - Set up static files collection (see Github commit history)
-  - Redeploy as necessry for testing
+  - Setting up Amazon Web Serive for Static and Media files
+    - Set up AWS S3 Bucket, following instructions in Code Institue Boutique_Ado lesson. Setup includes
+      - Create S3 Bucket
+      - Create User Group
+      - Set up Policy
+      - Create User
+  - Set up static files location, according using custom_storage.py, as shown in Code Institue Boutique_Ado lesson.
+  - Add DEPLOYED config var to Heroku with value True
+  - Redeploy as necessary for testing
 
 ### Difference between development and deployed versions
 
