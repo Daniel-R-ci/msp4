@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Custom
     'home',
     'blog',
+    'events',
 ]
 
 MIDDLEWARE = [
@@ -177,9 +178,6 @@ if 'DEPLOYED' in os.environ:
         },
         "staticfiles": {"BACKEND": "custom_storage.StaticStorage"},
     }
-
-
-
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
