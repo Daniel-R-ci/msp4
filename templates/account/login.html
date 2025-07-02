@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Default title Creativity Barn -->
+<!-- Remove if custom title is not needed -->
+{% block title %}
+The Barn - Login
+{% endblock %}
+
+<!-- Main content-->
+<!-- Container not supplied and must be included -->
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col12 text-center">
+            <h1>Login</h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4 account-form">
+
+            <p>Do you not already have a user account?</p>
+            <p>Please then <a href="{{ signup_url }}">create one here</a> first.
+            </p>
+
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                {% endif %}
+                <button class="btn btn-secondary" type="submit">Log In</button>
+                
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+<!-- Custom JS specific to this page-->
+{% block custom_js %}
+{% endblock %}
