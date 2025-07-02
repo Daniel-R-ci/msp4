@@ -99,7 +99,7 @@ footer {
     width: 200px;
 }
 
-/***** Blog  *****/
+/***** Blog and Events *****/
 
 .card {
     border: 1px solid var(--extra-color);
@@ -110,16 +110,17 @@ footer {
     font-size: 1.25rem;
 }
 
+.blog-post-image,
+.event-post-image {
+    border: 1px solid black;
+    max-width: 100%;
+    border-radius: 2%;
+}
+
 /***** Pagination styling *****/
 
 .pagination-card {
     padding: 2rem;
-}
-
-.blog-post-image {
-    border: 1px solid black;
-    max-width: 100%;
-    border-radius: 2%;
 }
 
 

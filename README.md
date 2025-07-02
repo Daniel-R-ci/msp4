@@ -4,7 +4,7 @@
 Code Institute Milestone 4 project by Daniel Rydell
 
 Github repository available at [https://github.com/Daniel-R-ci/msp4](https://github.com/Daniel-R-ci/msp4)  
-Github Project Board available at [ttps://github.com/users/Daniel-R-ci/projects/8\]](https://github.com/users/Daniel-R-ci/projects/8)  
+Github Project Board available at [https://github.com/users/Daniel-R-ci/projects/8/](https://github.com/users/Daniel-R-ci/projects/8)  
 Heroku deployment available at [https://dr-ci-msp4-87974008a79d.herokuapp.com/](https://dr-ci-msp4-87974008a79d.herokuapp.com/)
 ## Table of contents
 
@@ -145,17 +145,17 @@ Courses and events will sometimes have a maximun number of participants, and reg
 
 
 ### Entity Relationship Diagram
-Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)). Id fields will be specified in models but implemented by Django, shown in ERD for relationshsip purposes.
+Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)). Id fields will not be specified in models but implemented by Django, shown in ERD for relationshsip purposes.
 
-![ERD version 1.1](static/readme/images/erd_1_1.png)
+![ERD version 1.1](static/readme/images/erd_1_3.png)
 
 **List of all ERDs created during project**  
 (from oldest to newest)  
 - [ERD version 0.1](static/readme/images/erd_0_1.png), first draft to visuallise how the models could look and their relationships
 - [ERD version 1.0](static/readme/images/erd_1_0.png), updated with Contact and draft field in Article. Used to start model creation in Django.
 - [ERD version 1.1](static/readme/images/erd_1_1.png), add fields to event_registration for historical views if original event is deleted
-- [ERD version 1.2](static/readme/images/erd_1_1.png), add image_url field to Article to make use of Botutique_ADO AWS code. Also include same image field in Article_Comment to allow users to include images in their replies.
-- [ERD version 1.2]
+- [ERD version 1.2](static/readme/images/erd_1_2.png), add image_url field to Article to make use of Botutique_ADO AWS code. Also include same image field in Article_Comment to allow users to include images in their replies.
+- [ERD version 1.3](static/readme/images/erd_1_3.png), in Events model: fields image, published and published_on has been added to allow images and control when news are published, same as with blog posts.
 
 ### Model implementation
 
@@ -163,16 +163,20 @@ Latest ERD used in project. Some field types may differ from actual model due to
 
 Wireframes were constructed for each app before work started on each Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views. Some minor changes where made to the header and menu area for better clarity and user experience.
 
-### Home view
+### Home app
 ![Home view](static/readme/images/wireframe_home_1_1.png)
 Home page
 
-### Blog view
+### Blog app
 ![Blog list](static/readme/images/wireframe_bloglist_1_0.png)  
 List of blog entries, paginated
 
 ![Blog post](static/readme/images/wireframe_bloglist_1_0.png)  
 Blog entry
+
+### Events app
+![Blog list](static/readme/images/wireframe_eventlist_1_0.png)  
+List of events and courses, paginated
 
 ### Colors and fonts
 
