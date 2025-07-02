@@ -111,6 +111,7 @@ footer {
 
 /*** Styling of page elements ***/
 
+/* col-image, image used on home view, adjusted in size in media queries */
 .col-image {
     height: 200px;
     width: 200px;
@@ -134,10 +135,15 @@ footer {
     border-radius: 2%;
 }
 
-/***** Pagination styling *****/
+/* Pagination styling */
 
 .pagination-card {
     padding: 2rem;
+}
+
+/***** Toasts *****/
+.toast-container{  
+    padding-right: 1rem;
 }
 
 

@@ -270,6 +270,7 @@ For a complete list of installed packages and versions, see [requirements.txt](r
 ### Resources and tools used
 - [ChatGPT](https://chatgpt.com/) - Used for the following purposes:
   - Make a painting out of photograph for use home page
+  - Troubleshooting toast initialization
 - [Coolors.co](https://coolors.co/) - Choosing a suitable color palette from a chosen image
 - [Draw SQL](https://drawsql.app/) - Creation of Entity Relationship Diagram
 - [Fotor.com](https://www.fotor.com/) - Online photo editor used to adjust size and quality of images

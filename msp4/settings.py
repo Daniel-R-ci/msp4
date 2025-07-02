@@ -144,6 +144,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+# Messages and email config
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 # AWS Bucket config
 
 # Cache control

@@ -85,6 +85,25 @@
     </header>
 
     <main>
+        {% if messages %}
+        <div class="toast-container end-0">
+
+        {% for message in messages %}
+            {% with message.level as level %}
+                {% if level == 40 %}
+                    {% include 'includes/toasts/toast_error.html' %}
+                {% elif level == 30 %}
+                    {% include 'includes/toasts/toast_warning.html' %}
+                {% elif level == 25 %}
+                    {% include 'includes/toasts/toast_success.html' %}
+                {% else %}
+                    {% include 'includes/toasts/toast_info.html' %}
+                {% endif %}
+            {% endwith %}
+        {% endfor %}
+    </div>
+        {% endif %}
+
         {% block content %}
         <!-- Default content for testing -->
         <h1>Welcome to The Creativity Barn</h1>
@@ -135,11 +154,24 @@
         </div>
     </footer>
 
-    <!-- 3rd Party JS, Bootstrap -->
+    <!-- 3rd Party JS, Bootstrap JQUERY -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
+        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+
     <!-- Place for custom JS, to be included as necessary -->
+
+    <script>
+        $(document).ready(function () {
+            $(".toast").each(function () {
+                const toast = new bootstrap.Toast(this);
+                toast.show();
+            });
+        });
+    </script>
+
     {% block custom_js %}
     {% endblock %}
 </body>
