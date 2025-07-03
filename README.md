@@ -127,19 +127,26 @@ Courses and events will sometimes have a maximun number of participants, and reg
 - **Events** (name chosen for events/courses). Will handle display and and registration of all events, both those that are free and those who require payments.
 - **Blog** (name chosen for news/articles). A blog function where The Barn can post news and inspiring articles not directly related to specific events.
 - **About** Contact form and information about The Barn
-- **User_Profile** Lets a user see and update user information
+- **User_Profile** Lets a user see and update user information.
 
 ### Considerations made during development, other ideas considered or tried
 - **Notification when contact form is submitted**  
   Information sent with the contact form in About app will be saved in the database to be reviewed there. On a live website for this kind of business, it would probably make more sense to send an email to a specific mailbox but since the functions will be tested by CI assessors, and possibly used for other demonstration purposes, sending these emails to a live email adress makes little sense.
 
+- **Required first and last name**  
+  Django AllAuth have been used for user account handling. Since The Barn administrators would like to know the full name of those registering for courses or events, only username and email is not enough.  
+  It was quickly discovered that AllAuth settings does not allow these fields by simple settings change, but a custom form is required. Instead of dwelving into this area before MVP launch, an alternate solution was implemented where in base.html a check if performed to see if the user is logged in, but first name is missing. If true, the user is sent to a second registration page to complete the registration. This works for all pages that might be manually entererd or bookmarked, the only excemts are the name registration page and the logout page.
+  Since this solution uses Javascript on the client side, it should be complemented by server side checks in the different views. Howerver, for MVP launch it is considered adequate, with server side checks mentioned in backlog for future development.
+
 - **Saving historical data**  
   The fields for event_title, event_time and event_cost in the Event_Registration model may seem like a duplicate of data already stored in a corresponding Event.
-   This is to preserve order history, in case the corresponding event post gets deleted. The custumer/user will still be able to see this in his/her order history, even if more detailed information is no longer available.
+   This is to preserve order history, in case the corresponding event post gets deleted. The custumer/user will still be able to see this in his/her order history, even if more detailed information is no longer available.  
+
 - **To paginate, or not to paginate**  
   Pagination of data, like blog posts, offer both advantages and disadvantages. Advantages include faster load times (less data/page to generate) and also reduced congnitive load on user since there is less data to take in at once. Disadvantages can occur with disruptive user flow to users who are used to scrolling, requiring more clicks to reach a particular post, and more interaction clicks needed to reach some content.  
   In this project, the decision was made to go ahead with pagination for blog feeds, like news and articles. This was done both to reduce scrolling, especially on mobile devices, but also as a learning experience since the student (me, Daniel) didn't use pagination in previous Milestone Project even if it was considered already then.
-  Twelve posts per page seemed like the logical number of posts on each page since 1,2,3 or 4 posts are shown on each row depending on screen sizes, and 12 is the first product in common.
+  Twelve posts per page seemed like the logical number of posts on each page since 1,2,3 or 4 posts are shown on each row depending on screen sizes, and 12 is the first product in common.  
+
 - **Storage of media and static files**  
   The choice stood between storing uploaded images on Cloudinary or Amazon Web Service (AWS), and to store static files and images with the deployed files on Heroky or use AWS for these as well.
   AWS was choosen for both uploaded files and static files for two reasons. One was a way to build on what was learned in previous learning projects but in a newer version av Django (since there was known to be some differences), and also to be able to show larger variety in techniques and skills to potential employers if Milestone Projects are to be used as portfolio projects.
@@ -164,20 +171,23 @@ Latest ERD used in project. Some field types may differ from actual model due to
 
 Wireframes were constructed for each app before work started on each Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views. Some minor changes where made to the header and menu area for better clarity and user experience.
 
-### Home app
+**Home app**  
 ![Home view](static/readme/images/wireframe_home_1_1.png)
 Home page
 
-### Blog app
+**Blog app**  
 ![Blog list](static/readme/images/wireframe_bloglist_1_0.png)  
 List of blog entries, paginated
 
 ![Blog post](static/readme/images/wireframe_bloglist_1_0.png)  
 Blog entry
 
-### Events app
+**Events app**  
 ![Blog list](static/readme/images/wireframe_eventlist_1_0.png)  
 List of events and courses, paginated
+
+**User_Profile app**
+Wireframe mockup was not deemed necessary for these simple forms
 
 ### Colors and fonts
 
