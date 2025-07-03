@@ -42,7 +42,7 @@ Events and courses
                     <p class="card-text">
                         <strong>Event time: </strong>{{ event.time }}<br>
                         {% if event.max_capacity != 0 %}
-                        <strong>Spots available: </strong>X of {{event.max_capacity}}<br>
+                        <strong>Spots available: </strong>{{ event.available_spots}} of {{ event.max_capacity }}<br>
                         {% endif %}
                         {% if event.cost != 0 %}
                         <strong>Cost: </strong>£{{event.cost|floatformat:2}}<br>
