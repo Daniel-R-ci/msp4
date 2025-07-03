@@ -3,7 +3,7 @@ from django.db.models import Q
 from datetime import datetime
 from django.core.paginator import Paginator
 
-from .models import Event
+from .models import Event, Event_Registration
 
 # Create your views here.
 
@@ -44,6 +44,11 @@ def event_detail(request, event_id):
         published=True
     )
 
+    user_already_registered = False
+    if request.user.is_authenticated:
+        if Event_Registration.objects.filter(event=event, user=request.user).exists():
+            user_already_registered = True
+
     # Used to get back to previous page, regardless of pagination
     # Code found at https://groups.google.com/g/django-users/c/wWvhbbXq1tA
     # Adjusted to suit purpose
@@ -51,7 +56,8 @@ def event_detail(request, event_id):
 
     context = {
         'event': event,
-        'previous_url': previous_url
+        'previous_url': previous_url,
+        'user_already_registered': user_already_registered
     }
 
     return render(request, 'events/event_detail.html', context)

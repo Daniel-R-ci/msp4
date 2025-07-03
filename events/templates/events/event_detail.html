@@ -27,16 +27,35 @@
             <div>
                 {{ event.description | linebreaks }}
                 <hr>
-                <strong>Event time: </strong>{{ event.time }}<br>
-                {% if event.max_capacity != 0 %}
-                <strong>Spots available: </strong>X of {{event.max_capacity}}<br>
-                {% endif %}
-                {% if event.cost != 0 %}
-                <strong>Cost: </strong>£{{event.cost|floatformat:2}}<br>
-                {% endif %}
+                <div class="d-flex">
+                    <div class="d-inline-block">
+                        <strong>Event time: </strong>{{ event.time }}<br>
+                        {% if event.max_capacity != 0 %}
+                        <strong>Spots available: </strong>{{ event.available_spots}} of {{event.max_capacity}}<br>
+                        {% endif %}
+                        {% if event.cost != 0 %}
+                        <strong>Cost: </strong>£{{event.cost|floatformat:2}}<br>
+                        {% endif %}
+                    </div>
+                    <div class="d-inline-block ps-5 d-flex align-items-center">
+                        {% if event.max_capacity > 0 %}
+                        {% if user.is_authenticated %}
+                            {% if user_already_registered %}
+                            <a href="" class="btn btn-primary disabled">You have already signed up</a>
+                            {% elif event.available_spots < 1 %}
+                            <a href="" class="btn btn-primary disabled">There are no available spots for this event</a>
+                            {% else %}
+                            <a href="" class="btn btn-primary">Register for the event</a>
+                            {% endif %}
+                        {% else %}
+                        <p><strong>You need to log in to be able to sign up for this event</strong></p>
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-12 text-center mt-2 mb-2">
+        <div class="col-12 text-center mt-5 mb-2">
             <a href="{{ previous_url }}" class="btn btn-sm btn-secondary">Back to previous page</a>
         </div>
     </div>
