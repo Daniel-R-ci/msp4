@@ -1,9 +1,24 @@
 {% load static %}
+
+
 {% url 'home' as home_url %}
-<!-- Blog and Events does not need to be defined, they use other methods -->>
+<!-- Blog and Events does not need to be defined, they use other methods -->
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
+{% url 'request_name' as request_name_url %}
+
+<!-- Check to see if logged in user has completed registration -->
+{% if user.is_authenticated and user.first_name == "" %}
+{% if request.path == logout_url or request.path == request_name_url %} 
+    <!-- Nothing -->
+{% else %}
+<script type="text/javascript">
+    window.location.href = "{{request_name_url}}";
+</script>
+{% endif %}
+
+{% endif %}
 
 <!DOCTYPE html>
 <html lang="en">

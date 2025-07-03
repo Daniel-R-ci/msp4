@@ -126,9 +126,10 @@ Courses and events will sometimes have a maximun number of participants, and reg
 - **Home**, entry site. Will eventually rely on other apps to provide information about what is happening at The Barn
 - **Events** (name chosen for events/courses). Will handle display and and registration of all events, both those that are free and those who require payments.
 - **Blog** (name chosen for news/articles). A blog function where The Barn can post news and inspiring articles not directly related to specific events.
-- **About**. Contact form and information about The Barn
+- **About** Contact form and information about The Barn
+- **User_Profile** Lets a user see and update user information
 
-## Considerations made during development, other ideas considered or tried
+### Considerations made during development, other ideas considered or tried
 - **Notification when contact form is submitted**  
   Information sent with the contact form in About app will be saved in the database to be reviewed there. On a live website for this kind of business, it would probably make more sense to send an email to a specific mailbox but since the functions will be tested by CI assessors, and possibly used for other demonstration purposes, sending these emails to a live email adress makes little sense.
 

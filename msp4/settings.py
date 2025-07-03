@@ -49,11 +49,19 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'storages',
+    'crispy_forms',
+    'crispy_bootstrap5',
     # Custom
     'home',
     'blog',
     'events',
+    'user_profile',
 ]
+
+# Crispy settings
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Allauth-settings
 SITE_ID = 1
@@ -130,7 +138,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Allauth settings
+
 ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'first_name*', 'last_name*', 'password1*', 'password2*']
+ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 
 
 # Internationalization

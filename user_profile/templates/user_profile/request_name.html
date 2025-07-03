@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<!-- Default title Creativity Barn -->
+<!-- Remove if custom title is not needed -->
+
+
+<!-- Main content-->
+<!-- Container not supplied and must be included -->
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 text-center">
+            <h1>Complete your user registration</h1>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12 col-md-6">
+            <p>Thank you for registering an account here at the Creative Barn. Since this is the first time you log in
+                with your new account, we need to ask you for your first and last name. </p>
+            <p>Your full name will never be shown to other users, but we need to see it in case you sign up for courses
+                or events. If you choose to
+                comment on news and articles, only your username will be shown.
+            </p>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12 col-md-6">
+            <form id="updateNameForm" method="post">
+
+                {% csrf_token %}
+                {{ update_name_form | crispy }}
+                <div class="text-center">
+                <button id="submitButton" type="submit" class="btn btn-secondary mt-3">Register name</button>
+</div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    {% endblock %}
+
+    <!-- Custom JS specific to this page-->
+    {% block custom_js %}
+    {% endblock %}
