@@ -4,7 +4,7 @@
 <!-- Default title Creativity Barn -->
 <!-- Remove if custom title is not needed -->
 {% block title %}
-{{ article.title }}
+{{ event.title }}
 {% endblock %}
 
 <!-- Main content-->
@@ -45,7 +45,7 @@
                             {% elif event.available_spots < 1 %}
                             <a href="" class="btn btn-primary disabled">There are no available spots for this event</a>
                             {% else %}
-                            <a href="" class="btn btn-primary">Register for the event</a>
+                            <a href="{% url 'event_registration' event.id %}" class="btn btn-primary">Register for the event</a>
                             {% endif %}
                         {% else %}
                         <p><strong>You need to log in to be able to sign up for this event</strong></p>

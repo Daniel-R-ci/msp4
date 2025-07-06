@@ -13,10 +13,12 @@ def request_name(request):
             user.first_name = request.POST.get('first_name')
             user.last_name = request.POST.get('last_name')
             user.save()
-            messages.success(request, "Thank you for completing the registration by providing your full name!")
+            messages.success(request, "Thank you for completing the \
+                             registration by providing your full name!")
             return render(request, 'home/index.html',)
         else:
-            messages.error(request, "There was a problem completing the registration. Please try again!")
+            messages.error(request, "There was a problem completing the \
+                           registration. Please try again!")
 
     update_name_form = UpdateNameForm()
 

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Default title Creativity Barn -->
+<!-- Remove if custom title is not needed -->
+{% block title %}
+Event confirmed
+{% endblock %}
+
+<!-- Main content-->
+<!-- Container not supplied and must be included -->
+{% block content %}
+You have completed booking of {{ event.title }}
+{% endblock %}
+
+<!-- Custom JS specific to this page-->
+{% block custom_js %}
+{% endblock %}

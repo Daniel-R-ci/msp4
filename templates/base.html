@@ -10,8 +10,8 @@
 
 <!-- Check to see if logged in user has completed registration -->
 {% if user.is_authenticated and user.first_name == "" %}
-{% if request.path == logout_url or request.path == request_name_url %} 
-    <!-- Nothing -->
+{% if request.path == logout_url or request.path == request_name_url %}
+<!-- Nothing -->
 {% else %}
 <script type="text/javascript">
     window.location.href = "{{request_name_url}}";
@@ -103,57 +103,31 @@
         {% if messages %}
         <div class="toast-container end-0">
 
-        {% for message in messages %}
+            {% for message in messages %}
             {% with message.level as level %}
-                {% if level == 40 %}
-                    {% include 'includes/toasts/toast_error.html' %}
-                {% elif level == 30 %}
-                    {% include 'includes/toasts/toast_warning.html' %}
-                {% elif level == 25 %}
-                    {% include 'includes/toasts/toast_success.html' %}
-                {% else %}
-                    {% include 'includes/toasts/toast_info.html' %}
-                {% endif %}
+            {% if level == 40 %}
+            {% include 'includes/toasts/toast_error.html' %}
+            {% elif level == 30 %}
+            {% include 'includes/toasts/toast_warning.html' %}
+            {% elif level == 25 %}
+            {% include 'includes/toasts/toast_success.html' %}
+            {% else %}
+            {% include 'includes/toasts/toast_info.html' %}
+            {% endif %}
             {% endwith %}
-        {% endfor %}
-    </div>
+            {% endfor %}
+        </div>
         {% endif %}
 
         {% block content %}
-        <!-- Default content for testing -->
-        <h1>Welcome to The Creativity Barn</h1>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate odio labore accusantium magnam incidunt
-            repellat quod in, repudiandae pariatur officia commodi totam corporis nemo, maiores veritatis velit
-            voluptatibus
-            earum vero?</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum sequi dolores dolor, maxime, quidem dolore
-            molestias iusto mollitia iure error dolorum recusandae ipsa repudiandae iste? Voluptas recusandae
-            reprehenderit
-            repellendus itaque?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis inventore a est esse doloremque officiis
-            nostrum, sunt eaque ducimus nobis unde laboriosam facilis. Quod velit voluptatibus praesentium amet
-            molestiae
-            perferendis.</p>
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate odio labore accusantium magnam incidunt
-            repellat quod in, repudiandae pariatur officia commodi totam corporis nemo, maiores veritatis velit
-            voluptatibus
-            earum vero?</p>
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Laborum sequi dolores dolor, maxime, quidem dolore
-            molestias iusto mollitia iure error dolorum recusandae ipsa repudiandae iste? Voluptas recusandae
-            reprehenderit
-            repellendus itaque?</p>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corporis inventore a est esse doloremque officiis
-            nostrum, sunt eaque ducimus nobis unde laboriosam facilis. Quod velit voluptatibus praesentium amet
-            molestiae
-            perferendis.</p>
-
         {% endblock %}
+
     </main>
     <footer class="mt-auto">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 text-center">
-                    <p>The Creative Barn is a ficticious store, made up for education purposes</p>
+                    <p>The Creativity Barn is a ficticious store, made up for education purposes</p>
                 </div>
                 <div class="col-12 col-md-4 text-center text-md-end">
                     <strong>Opening hours</strong>
@@ -176,8 +150,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
         integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
 
-    <!-- Place for custom JS, to be included as necessary -->
-
+    <!-- Custom JS -->
     <script>
         $(document).ready(function () {
             $(".toast").each(function () {
@@ -187,6 +160,7 @@
         });
     </script>
 
+    <!-- Place for custom JS for each individual side, to be included as necessary -->
     {% block custom_js %}
     {% endblock %}
 </body>

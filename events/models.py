@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import timedelta
+from django.utils import timezone
 
 
 # Create your models here.
@@ -16,13 +18,27 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
+    # Retrieves number of reserved spots for event
+    # Includes booking being made (5-minute limit)
     @property
     def booked_spots(self):
+        """
+        Retrieves number of reserved spots for event
+        """
+
+        # Remove all uncofirmed bookings older than 5 minutes
+        Event_Registration.remove_unconfirmed_registrations()
+
+        # Count reservations for this event
         booked_spots = Event_Registration.objects.filter(event=self).count()
         return booked_spots
 
+    # Retrieves number of available spots for event
     @property
     def available_spots(self):
+        """
+        Retrieves number of available spots for event
+        """
         return self.max_capacity - self.booked_spots
 
 
@@ -44,3 +60,14 @@ class Event_Registration(models.Model):
 
     def __str__(self):
         return self.event_title
+
+    # Remove all registrations that has not been confirmed after five minutes
+    @staticmethod
+    def remove_unconfirmed_registrations():
+        """
+        Remove all event registrations that has not been
+        confirmed within five minutes
+        """
+        cutoff_time = timezone.now() - timedelta(minutes=5)
+        Event_Registration.objects.filter(
+            created_on__lt=cutoff_time, confirmed=False).delete()

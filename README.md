@@ -274,9 +274,17 @@ Setting up AWS proved a bit tricky, it turned out the problem was some settings 
 
 ### Framework , resources and libraries used in project
 
-For a complete list of installed packages and versions, see [requirements.txt](requirements.txt)
+- [Bootstrap v 5.3](https://getbootstrap.com/)
+- [JQuery (using 3.7.1 slim](https://jquery.com/)
+
+For a complete list of installed Django packages and versions, see [requirements.txt](requirements.txt)
 
 ### Forums and guides 
+
+- [Django Central](https://djangocentral.com/classmethod-and-staticmethod-explained/#static-method-in-python) - Information about how to declare static methods in Django
+- [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where needed
+- [W3 Schools](https://www.w3schools.com) - Guides and examples, escpecially countdown timer. Credited in code where used
+- [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files
 
 ### Resources and tools used
 - [ChatGPT](https://chatgpt.com/) - Used for the following purposes:

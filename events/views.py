@@ -1,5 +1,6 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404
 from django.db.models import Q
+from django.http import Http404
 from datetime import datetime
 from django.core.paginator import Paginator
 
@@ -35,7 +36,7 @@ def event_list(request):
 # Get a specific event
 def event_detail(request, event_id):
     """
-    Get specific article
+    Get specific event
     """
 
     event = get_object_or_404(
@@ -46,8 +47,8 @@ def event_detail(request, event_id):
 
     user_already_registered = False
     if request.user.is_authenticated:
-        if Event_Registration.objects.filter(event=event, user=request.user).exists():
-            user_already_registered = True
+        user_already_registered = Event_Registration.objects.filter(
+            event=event, user=request.user).exists()
 
     # Used to get back to previous page, regardless of pagination
     # Code found at https://groups.google.com/g/django-users/c/wWvhbbXq1tA
@@ -61,3 +62,85 @@ def event_detail(request, event_id):
     }
 
     return render(request, 'events/event_detail.html', context)
+
+
+# Register for an event
+def event_registration(request, event_id):
+    """
+    Register for an event
+    """
+
+    # Make sure user is logged in
+    if not request.user.is_authenticated:
+        raise Http404()
+
+    # Delete unconfirmed reservations older than five minutes
+    Event_Registration.remove_unconfirmed_registrations()
+
+    event = get_object_or_404(
+        Event,
+        id=event_id,
+        published=True
+    )
+
+    if request.method == "POST":
+        registration = get_object_or_404(
+            Event_Registration,
+            event=event_id,
+            user=request.user.id
+        )
+
+        registration.confirmed = True
+        registration.save()
+        return redirect('event_confirmed', event_id=event_id)
+
+    else:
+        # Check that there are still available spots
+        if event.available_spots < 1:
+            raise Http404("No available spots")
+
+        # Create new registration
+        registration = Event_Registration()
+        registration.event = event
+        registration.user = request.user
+        registration.event_title = event.title
+        registration.event_time = event.time
+        registration.event_cost = event.cost
+
+        if event.cost == 0:
+            # Event is free. Confirm reservation and send to event_confirmed
+            registration.confirmed = True
+            registration.save()
+            return redirect('event_confirmed', event_id=event_id)
+        else:
+            registration.save()
+
+            context = {
+                'event': event,
+            }
+            return render(request, 'events/event_registration.html', context)
+
+
+# Show confirmation of event registration
+def event_confirmed(request, event_id):
+
+    event = get_object_or_404(
+        Event,
+        id=event_id,
+        published=True
+    )
+
+    registration = get_object_or_404(
+        Event_Registration,
+        event=event,
+        user=request.user)
+
+    context = {
+        'event': event,
+        'event_registration': registration,
+    }
+
+    return render(request, 'events/event_confirmed.html', context)
+    """
+    return render(request, 'events/event_confirmed.html', )
+    """

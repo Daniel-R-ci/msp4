@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Default title Creativity Barn -->
+<!-- Remove if custom title is not needed -->
+{% block title %}
+Event registration
+{% endblock %}
+
+<!-- Main content-->
+<!-- Container not supplied and must be included -->
+{% block content %}
+<div class="container fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 mt-5">
+            <div class="text-center">
+                <h1>Event registration</h1>
+            </div>
+            <p>You have a preliminary reservation for {{event.title}}. You must complete payment within five minutes to confirm your spot.</p>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12 col-md-6 text-center">
+            <strong>Time remaining: </strong><span id="timer"></span>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-12 col-md-6 mt-3">
+            <div class="text-center">
+                <h2>{{ event.title }}</h2>
+            </div>
+            <p><strong>Date and time: </strong>{{ event.time }}</p>
+            <p><strong>Cost: </strong>£{{ event.cost }}</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="timeExpiredModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Time has expired</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>You must complete registration within five minutes.</p>
+                <p>You need to restart the reservation process, but there is a risk your spot now has been reserved for
+                    someone else.</p>
+
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseButton" type="button" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Custom JS specific to this page-->
+{% block custom_js %}
+
+
+<script>
+    // Variable to be used in event_registration.js
+    var timeoutUrl = "{% url 'event_detail' event.id %}"
+</script>
+
+<script src="{% static 'js/event_registration.js' %}"></script>
+
+
+
+{% endblock %}
