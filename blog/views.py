@@ -4,7 +4,7 @@ from django.contrib import messages
 from datetime import datetime
 from django.core.paginator import Paginator
 
-from .models import Article
+from .models import Article, Article_Comment
 from .forms import Article_Comment_Form
 
 # Create your views here.
@@ -45,9 +45,13 @@ def blog_detail(request, article_id):
         published=True
     )
 
+    comments = Article_Comment.objects.filter(article=article).order_by('-posted_on')
+
     if request.method == "POST":
-        comment_form = Article_Comment_Form(data=request.POST)
+        comment_form = Article_Comment_Form(request.POST, request.FILES)
         if comment_form.is_valid():
+            print(request.POST)
+            print(request.FILES)
             comment = comment_form.save(commit=False)
             comment.article = article
             comment.user = request.user
@@ -66,6 +70,7 @@ def blog_detail(request, article_id):
 
     context = {
         'article': article,
+        'comments': comments,
         'comment_form': comment_form,
         'previous_url': previous_url
     }

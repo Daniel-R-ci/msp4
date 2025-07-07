@@ -39,13 +39,30 @@
                         This article has {{ article.number_of_comments }}
                         comment{% if article.number_of_comments > 1%}s{% endif %}.
                     </p>
+                    {% if user.is_authenticated %}
                     <a href="#new-comment">Write a new comment</a>
                     {% endif %}
-                    
+
+                    {% endif %}
+
+                    {% for comment in comments %}
+                    <hr class="border border-primary mt-2">
+                    <div class="d-flex mt-1">
+                        <h3>Posted by {{comment.user}}&nbsp;</h3>
+                        on {{ comment.posted_on }}
+                    </div>
+
+                    {% if comment.image %}
+                    <img src="{{ comment.image.url }}" class="card-img-top" alt="Image illustrating blog comment">
+                    {% endif %}
+                    {{ comment.comment | linebreaks }}
+
+                    {% endfor %}
+
                 </div>
                 {% if user.is_authenticated %}
                 <div id="new-comment">
-                    <hr class="border border-primary">
+                    <hr class="border border-primary mt-2">
                     <h3>Write a new comment</h3>
                     <form id="commentForm" action="" method="post">
                         {% csrf_token %}
