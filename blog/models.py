@@ -15,8 +15,25 @@ class Article(models.Model):
     publish_on = models.DateTimeField()
     updated_on = models.DateTimeField(auto_now=True)
     content = models.TextField()
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.title
+
+
+class Article_Comment(models.Model):
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name="comments")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='article_commenter')
+    comment = models.TextField()
+    posted_on = models.DateTimeField(auto_now_add=True)
+    visible = models.BooleanField(default=True)
+    image = models.ImageField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.user} commenting on {self.article} on {self.posted_on}"
