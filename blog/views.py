@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Q
+from django.contrib import messages
 from datetime import datetime
 from django.core.paginator import Paginator
 
 from .models import Article
+from .forms import Article_Comment_Form
 
 # Create your views here.
 
@@ -43,13 +45,28 @@ def blog_detail(request, article_id):
         published=True
     )
 
+    if request.method == "POST":
+        comment_form = Article_Comment_Form(data=request.POST)
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.article = article
+            comment.user = request.user
+            comment.save()
+            messages.success(request, "Comment saved successfully!")
+        else:
+            messages.error(request, "An error occured posting your comment.\
+                            Please try again!")
+
     # Used to get back to previous page, regardless of pagination
     # Code found at https://groups.google.com/g/django-users/c/wWvhbbXq1tA
     # Adjusted to suit purpose
     previous_url = request.META.get('HTTP_REFERER', '/blog')
 
+    comment_form = Article_Comment_Form()
+
     context = {
         'article': article,
+        'comment_form': comment_form,
         'previous_url': previous_url
     }
 

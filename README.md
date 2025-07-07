@@ -292,10 +292,12 @@ For a complete list of installed Django packages and versions, see [requirements
 
 ### Forums and guides 
 
-- [Django Central](https://djangocentral.com/classmethod-and-staticmethod-explained/#static-method-in-python) - Information about how to declare static methods in Django
+- [Django Central](https://djangocentral.com/) - Information about how to declare static methods in Django
+- [Google Groups](https://groups.google.com/) - How to find referring page using metadata in request. Credited in code where used
 - [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where used
-- [W3 Schools](https://www.w3schools.com) - Guides and examples, escpecially countdown timer. Credited in code where used
 - [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files
+- [W3 Schools](https://www.w3schools.com) - Guides and examples, escpecially countdown timer. Credited in code where used
+
 
 ### Resources and tools used
 - [ChatGPT](https://chatgpt.com/) - Used for the following purposes:

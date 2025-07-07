@@ -20,6 +20,11 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    @property
+    def number_of_comments(self):
+        return Article_Comment.objects.filter(
+            article=self, visible=True).count()
+
 
 class Article_Comment(models.Model):
     article = models.ForeignKey(

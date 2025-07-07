@@ -30,8 +30,7 @@ class Event(models.Model):
         Event_Registration.remove_unconfirmed_registrations()
 
         # Count reservations for this event
-        booked_spots = Event_Registration.objects.filter(event=self).count()
-        return booked_spots
+        return Event_Registration.objects.filter(event=self).count()
 
     # Retrieves number of available spots for event
     @property

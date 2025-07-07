@@ -46,6 +46,16 @@ h3 {
     color: var(--headline-color);
 }
 
+h1 {
+    font-size: 2.5rem;
+}
+h2 {
+    font-size: 1.66rem;
+}
+h3 {
+    font-size: 1.25rem;
+}
+
 /*** Custom styzling of Bootstrap Navbar ***/
 
 /* Set background to header color, for some reason it doesn't work without rgb values entered this way*/
