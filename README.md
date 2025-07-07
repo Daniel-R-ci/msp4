@@ -152,10 +152,12 @@ Courses and events will sometimes have a maximun number of participants, and reg
   AWS was choosen for both uploaded files and static files for two reasons. One was a way to build on what was learned in previous learning projects but in a newer version av Django (since there was known to be some differences), and also to be able to show larger variety in techniques and skills to potential employers if Milestone Projects are to be used as portfolio projects.
 
 
-### Entity Relationship Diagram
+### Entity Relationship Diagram and Models
 Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)). Id fields will not be specified in models but implemented by Django, shown in ERD for relationshsip purposes.
 
-![ERD version 1.1](static/readme/images/erd_1_3.png)
+![ERD version 1.4](static/readme/images/erd_1_4.png)  
+
+-> Link to models document goes here <-
 
 **List of all ERDs created during project**  
 (from oldest to newest)  
@@ -164,8 +166,7 @@ Latest ERD used in project. Some field types may differ from actual model due to
 - [ERD version 1.1](static/readme/images/erd_1_1.png), add fields to event_registration for historical views if original event is deleted
 - [ERD version 1.2](static/readme/images/erd_1_2.png), add image_url field to Article to make use of Botutique_ADO AWS code. Also include same image field in Article_Comment to allow users to include images in their replies.
 - [ERD version 1.3](static/readme/images/erd_1_3.png), in Events model: fields image, published and published_on has been added to allow images and control when news are published, same as with blog posts.
-
-### Model implementation
+- [ERD version 1.4](static/readme/images/erd_1_4.png), in Article and Article_Comment, remove image_url fields, and in Article_Comment change commenter to user to better correspond with actual model name
 
 ### Wireframes
 
@@ -262,6 +263,10 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 - Back to previous page from event_details
 
+### Bootstrap toasts not showing
+**Problem:** Bootstrap toasts not showing as expected, sometimes causing error
+**Solution:** This was due to JS/JQUERY code used to show object was made for earlier Bootstrap version. Searching on Google did not help in find adjusted code, but ChatGPT was able to troubleshoot and provide correct code.
+
 ### User not being able to re-register after registration timeout
 **Problem:** After timeout on event registration, user was not able to registre again unless page was manually reloaded, or user went to another page and then back.  
 **Solution:** This was due to the deletion of unconfirmed registrations older than five minutes occured after the check if the user was already registered had accured. The deletion was not triggered until the property function available_spots() was called from the template. Calling the delete_unconfirmed_reservations() function before checking if user was registered solved this problem.
@@ -288,7 +293,7 @@ For a complete list of installed Django packages and versions, see [requirements
 ### Forums and guides 
 
 - [Django Central](https://djangocentral.com/classmethod-and-staticmethod-explained/#static-method-in-python) - Information about how to declare static methods in Django
-- [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where needed
+- [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where used
 - [W3 Schools](https://www.w3schools.com) - Guides and examples, escpecially countdown timer. Credited in code where used
 - [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files
 
@@ -299,7 +304,7 @@ For a complete list of installed Django packages and versions, see [requirements
 - [Coolors.co](https://coolors.co/) - Choosing a suitable color palette from a chosen image
 - [Draw SQL](https://drawsql.app/) - Creation of Entity Relationship Diagram
 - [Fotor.com](https://www.fotor.com/) - Online photo editor used to adjust size and quality of images
-- [Unsplash.com](https://unsplash.com/) - for images used in project
+- [Unsplash.com](https://unsplash.com/) - Images used in project
 
 
 
