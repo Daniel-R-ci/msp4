@@ -45,9 +45,9 @@ def event_detail(request, event_id):
         id=event_id,
         published=True
     )
-    # Needed to make user_already_registered function
+    # Needed to make user_already_registered work
     Event_Registration.remove_unconfirmed_registrations()
-    
+
     user_already_registered = False
     if request.user.is_authenticated:
         user_already_registered = Event_Registration.objects.filter(
