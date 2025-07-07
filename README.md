@@ -260,6 +260,12 @@ Not all files or folders are pushed to Github, either due to security reasons as
 ## Testing
 ## Notable bugs found during development or testing
 
+- Back to previous page from event_details
+
+### User not being able to re-register after registration timeout
+**Problem:** After timeout on event registration, user was not able to registre again unless page was manually reloaded, or user went to another page and then back.  
+**Solution:** This was due to the deletion of unconfirmed registrations older than five minutes occured after the check if the user was already registered had accured. The deletion was not triggered until the property function available_spots() was called from the template. Calling the delete_unconfirmed_reservations() function before checking if user was registered solved this problem.
+
 ### Setting up AWS
 
 Setting up AWS proved a bit tricky, it turned out the problem was some settings in Boutique_Ado project couldn't be used since that is made in Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the settings would be done in Django 5.

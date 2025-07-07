@@ -30,15 +30,15 @@
                 {% csrf_token %}
                 {{ update_name_form | crispy }}
                 <div class="text-center">
-                <button id="submitButton" type="submit" class="btn btn-secondary mt-3">Register name</button>
-</div>
+                    <button id="submitButton" type="submit" class="btn btn-secondary mt-3">Register name</button>
+                </div>
             </form>
         </div>
     </div>
 </div>
 
-    {% endblock %}
+{% endblock %}
 
-    <!-- Custom JS specific to this page-->
-    {% block custom_js %}
-    {% endblock %}
+<!-- Custom JS specific to this page-->
+{% block custom_js %}
+{% endblock %}

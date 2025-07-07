@@ -10,7 +10,36 @@ Event confirmed
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-You have completed booking of {{ event.title }}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="text-center">
+                <h1>Reservation complete</h1>
+            </div>
+            <p>You have a confirmed reservation for the following event:</p>
+            <table>
+                <tr>
+                    <td><strong>Event: </strong> </td>
+                    <td>{{ registration.event_title }} </td>
+                </tr>
+                <tr>
+                    <td><strong>Date and time: </strong></td>
+                    <td>{{ registration.event_time }}</td>
+                </tr>
+                {% if registration.event_cost > 0 %}
+                <tr>
+                    <td><strong>Cost: </strong></td>
+                    <td>${{ registration.event_cost|floatformat:2 }} <small>(payment completed</small>)</td>
+                </tr>
+                {% endif %}
+            </table>
+            <br>
+            <a href="{% url 'events' %}" class="btn btn-secondary">Back to Events page</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home page</a>
+        </div>
+    </div>
+</div>
+
 {% endblock %}
 
 <!-- Custom JS specific to this page-->

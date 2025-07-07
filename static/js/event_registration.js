@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
 
-    time_in_minutes = 5; // The time to countdown
+    time_in_minutes = 1; // The time to countdown
     distance = time_in_minutes * 60;
     // Update the countdown every second
     var x = setInterval(function () {
@@ -28,6 +28,8 @@ $(document).ready(function () {
         // If the countdown is finished, show modal
         if (distance < 0) {
             clearInterval(x);
+            // Disable submit button to prevent user from clicking on it while page reloads
+            $('submitbutton').prop("disabled", true);
             const timeOutModal = new bootstrap.Modal(document.getElementById('timeExpiredModal'));
             timeOutModal.show();
         }

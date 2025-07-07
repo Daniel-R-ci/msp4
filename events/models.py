@@ -68,6 +68,6 @@ class Event_Registration(models.Model):
         Remove all event registrations that has not been
         confirmed within five minutes
         """
-        cutoff_time = timezone.now() - timedelta(minutes=5)
+        cutoff_time = timezone.now() - timedelta(minutes=1)
         Event_Registration.objects.filter(
             created_on__lt=cutoff_time, confirmed=False).delete()

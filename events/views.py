@@ -5,6 +5,7 @@ from datetime import datetime
 from django.core.paginator import Paginator
 
 from .models import Event, Event_Registration
+from .forms import TempPaymentForm
 
 # Create your views here.
 
@@ -44,7 +45,9 @@ def event_detail(request, event_id):
         id=event_id,
         published=True
     )
-
+    # Needed to make user_already_registered function
+    Event_Registration.remove_unconfirmed_registrations()
+    
     user_already_registered = False
     if request.user.is_authenticated:
         user_already_registered = Event_Registration.objects.filter(
@@ -90,9 +93,18 @@ def event_registration(request, event_id):
             user=request.user.id
         )
 
-        registration.confirmed = True
-        registration.save()
-        return redirect('event_confirmed', event_id=event_id)
+        temp_payment_form = TempPaymentForm(data=request.POST)
+
+        if temp_payment_form.is_valid():
+            registration.confirmed = True
+            registration.save()
+            return redirect('event_confirmed', event_id=event_id)
+        else:
+            context = {
+                'event': event,
+                'temp_payment_form': temp_payment_form
+            }
+            return render(request, 'events/event_registration.html', context)
 
     else:
         # Check that there are still available spots
@@ -114,9 +126,11 @@ def event_registration(request, event_id):
             return redirect('event_confirmed', event_id=event_id)
         else:
             registration.save()
+            temp_payment_form = TempPaymentForm()
 
             context = {
                 'event': event,
+                'temp_payment_form': temp_payment_form
             }
             return render(request, 'events/event_registration.html', context)
 
@@ -137,10 +151,7 @@ def event_confirmed(request, event_id):
 
     context = {
         'event': event,
-        'event_registration': registration,
+        'registration': registration,
     }
 
     return render(request, 'events/event_confirmed.html', context)
-    """
-    return render(request, 'events/event_confirmed.html', )
-    """

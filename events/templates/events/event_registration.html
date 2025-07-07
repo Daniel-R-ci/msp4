@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!-- Default title Creativity Barn -->
 <!-- Remove if custom title is not needed -->
@@ -16,7 +17,8 @@ Event registration
             <div class="text-center">
                 <h1>Event registration</h1>
             </div>
-            <p>You have a preliminary reservation for {{event.title}}. You must complete payment within five minutes to confirm your spot.</p>
+            <p>You have a preliminary reservation for {{event.title}}. You must complete payment within five minutes to
+                confirm your spot.</p>
         </div>
         <div class="w-100"></div>
         <div class="col-12 col-md-6 text-center">
@@ -30,7 +32,17 @@ Event registration
             <p><strong>Date and time: </strong>{{ event.time }}</p>
             <p><strong>Cost: </strong>£{{ event.cost }}</p>
         </div>
-
+        <div class="w-100"></div>
+        <div class="col-12 col-md-6 mt-3">
+            <form id="tempPaymentForm" method="post">
+                <p>Enter your credit card number below to complete registration.</p>
+                {% csrf_token %}
+                {{ temp_payment_form | crispy }}
+                <div class="text-center">
+                    <button id="submitButton" type="submit" class="btn btn-secondary mt-3">Pay</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

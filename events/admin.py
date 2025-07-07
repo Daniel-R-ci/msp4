@@ -13,4 +13,5 @@ class EventAdmin(admin.ModelAdmin):
 @admin.register(Event_Registration)
 class Event_Registration_Admin(admin.ModelAdmin):
     list_display = ('event_title', 'event_time', 'user', 'confirmed')
+    readonly_fields = ('created_on',)
     ordering = ['event_time', 'event_title', 'user']
