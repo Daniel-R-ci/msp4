@@ -25,7 +25,7 @@
     --shadow-color: #906f3d; /* coyote */
     --font-color: black;
     --extra-color: #76afd1; /* carolina-blue, not currently used */
-
+    --comment-counter-color: gray;
 }
 
 body {
@@ -143,6 +143,10 @@ footer {
     border: 1px solid black;
     max-width: 100%;
     border-radius: 2%;
+}
+
+.comment-counter{
+    color: var(--comment-counter-color);
 }
 
 /* Pagination styling */

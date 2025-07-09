@@ -290,6 +290,7 @@ Setting up AWS proved a bit tricky, it turned out the problem was some settings 
 ### Framework , resources and libraries used in project
 
 - [Bootstrap v 5.3](https://getbootstrap.com/)
+- [Fontawesome](https://fontawesome.com/)
 - [JQuery (using 3.7.1 slim](https://jquery.com/)
 
 For a complete list of installed Django packages and versions, see [requirements.txt](requirements.txt)
