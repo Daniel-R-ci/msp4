@@ -40,6 +40,9 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}
+    {% endblock %}
+
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -143,16 +146,18 @@
         </div>
     </footer>
 
-    <!-- 3rd Party JS, Bootstrap JQUERY, FontAweseome -->
+    <!-- 3rd Party JS, Bootstrap JQUERY, FontAweseome, Stripe -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"
         integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d558ffb13f.js" crossorigin="anonymous"></script>
-    
+    <script src="https://js.stripe.com/basil/stripe.js"></script>
+
     <!-- Custom JS -->
     <script>
+        // Init all toasts, code troubleshooted and refined by ChatGPT
         $(document).ready(function () {
             $(".toast").each(function () {
                 const toast = new bootstrap.Toast(this);
