@@ -64,7 +64,7 @@
                 <div id="new-comment">
                     <hr class="border border-primary mt-2">
                     <h3>Write a new comment</h3>
-                    <form id="commentForm" action="" method="post">
+                    <form id="commentForm" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ comment_form | crispy }}
                         <div class="text-center">

@@ -50,8 +50,6 @@ def blog_detail(request, article_id):
     if request.method == "POST":
         comment_form = Article_Comment_Form(request.POST, request.FILES)
         if comment_form.is_valid():
-            print(request.POST)
-            print(request.FILES)
             comment = comment_form.save(commit=False)
             comment.article = article
             comment.user = request.user

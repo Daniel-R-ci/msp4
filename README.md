@@ -213,7 +213,7 @@ Bootstrap button style outline was choosen as a good match for the styling.
 
 Apart from the projects complete Github commit history, the following are a log of projects major steps:
 
-- **June 23, 2025** Project formally started with introduction, basic outlines of goals and session with Code Insitute mentor Spencer Barriball.
+- **June 23, 2025** Project formally started with introduction, basic outlines of goals and mentoring session with Code Insitute mentor Spencer Barriball.
 - **June 25, 2025** Set up development enviroment, including (among others) venv, PostgreSQL and .gitignore
 - **June 30, 20225** Deployment to Heroky to test config variables and database connection
 
@@ -262,6 +262,10 @@ Not all files or folders are pushed to Github, either due to security reasons as
 ## Notable bugs found during development or testing
 
 - Back to previous page from event_details
+
+### Files not uploading when commenting on blog posts
+**Problem:** Image files not uploading when user attaches a file to a blog post comment
+**Solution:** Googling revealed that the form used for uploading the files should have the attribute ***enctype="multipart/form-data"***. Unfortunately, no note was made of the page this information was found.
 
 ### Bootstrap toasts not showing
 **Problem:** Bootstrap toasts not showing as expected, sometimes causing error
