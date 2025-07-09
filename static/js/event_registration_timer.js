@@ -11,7 +11,7 @@ $(document).ready(function () {
     });
 
 
-    time_in_minutes = 1; // The time to countdown
+    time_in_minutes = 5; // The time to countdown
     distance = time_in_minutes * 60;
     // Update the countdown every second
     var x = setInterval(function () {

@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.db.models import Q
+from os import environ
 from django.http import Http404
 from datetime import datetime
 from django.core.paginator import Paginator
@@ -130,7 +131,10 @@ def event_registration(request, event_id):
 
             context = {
                 'event': event,
-                'temp_payment_form': temp_payment_form
+                'temp_payment_form': temp_payment_form,
+                'stripe_public_key': environ.get('STRIPE_PUBLIC_KEY'),
+                'stripe_secret_key': 'test_secret_key',
+
             }
             return render(request, 'events/event_registration.html', context)
 

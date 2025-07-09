@@ -265,7 +265,7 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 ### Files not uploading when commenting on blog posts
 **Problem:** Image files not uploading when user attaches a file to a blog post comment
-**Solution:** Googling revealed that the form used for uploading the files should have the attribute ***enctype="multipart/form-data"***. Unfortunately, no note was made of the page this information was found.
+**Solution:** Googling revealed that the form used for uploading the files should have the attribute ***enctype="multipart/form-data"***. [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/http/file-uploads/#basic-file-uploads)
 
 ### Bootstrap toasts not showing
 **Problem:** Bootstrap toasts not showing as expected, sometimes causing error
@@ -298,6 +298,7 @@ For a complete list of installed Django packages and versions, see [requirements
 ### Forums and guides 
 
 - [Django Central](https://djangocentral.com/) - Information about how to declare static methods in Django
+- [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/)
 - [Google Groups](https://groups.google.com/) - How to find referring page using metadata in request. Credited in code where used
 - [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where used
 - [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files

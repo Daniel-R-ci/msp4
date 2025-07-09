@@ -8,6 +8,10 @@
 Event registration
 {% endblock %}
 
+{% block extra_css %}
+ <link rel="stylesheet" href="{% static 'events/css/events.css' %}">
+{% endblock %}
+
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
@@ -34,14 +38,16 @@ Event registration
         </div>
         <div class="w-100"></div>
         <div class="col-12 col-md-6 mt-3">
-            <form id="tempPaymentForm" method="post">
+            <!-- <form id="tempPaymentForm" method="post">
                 <p>Enter your credit card number below to complete registration.</p>
                 {% csrf_token %}
                 {{ temp_payment_form | crispy }}
                 <div class="text-center">
                     <button id="submitButton" type="submit" class="btn btn-secondary mt-3">Pay</button>
                 </div>
-            </form>
+            </form> -->
+            <div id="card-element"></div>
+            <div id="card-errors"></div>
         </div>
     </div>
 </div>
@@ -73,13 +79,18 @@ Event registration
 <!-- Custom JS specific to this page-->
 {% block custom_js %}
 
-
+<!-- Variable to be used in js-files-->
+ {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+{{ stripe_secret_key|json_script:"id_stripe_secret_key" }}
 <script>
-    // Variable to be used in event_registration.js
     var timeoutUrl = "{% url 'event_detail' event.id %}"
 </script>
 
-<script src="{% static 'js/event_registration.js' %}"></script>
+<script src="{% static 'js/stripe_elements.js' %}"></script>
+<script src="{% static 'js/event_registration_timer.js' %}"></script>
+
+
+
 
 
 
