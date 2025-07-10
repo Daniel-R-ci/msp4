@@ -8,8 +8,13 @@
 Event registration
 {% endblock %}
 
+<!-- Extra JS och imports that needs to be placed in header -->
+{% block head_js %}
+{% endblock %}
+
+
 {% block extra_css %}
- <link rel="stylesheet" href="{% static 'events/css/events.css' %}">
+<link rel="stylesheet" href="{% static 'events/css/events.css' %}">
 {% endblock %}
 
 <!-- Main content-->
@@ -20,6 +25,8 @@ Event registration
         <div class="col-12 col-md-6 mt-5">
             <div class="text-center">
                 <h1>Event registration</h1>
+                <h2>{{ event.title }}</h2>
+                <p><strong>Date and time: </strong>{{ event.time }}</p>
             </div>
             <p>You have a preliminary reservation for {{event.title}}. You must complete payment within five minutes to
                 confirm your spot.</p>
@@ -30,24 +37,24 @@ Event registration
         </div>
         <div class="w-100"></div>
         <div class="col-12 col-md-6 mt-3">
-            <div class="text-center">
-                <h2>{{ event.title }}</h2>
-            </div>
-            <p><strong>Date and time: </strong>{{ event.time }}</p>
-            <p><strong>Cost: </strong>£{{ event.cost }}</p>
-        </div>
-        <div class="w-100"></div>
-        <div class="col-12 col-md-6 mt-3">
-            <!-- <form id="tempPaymentForm" method="post">
-                <p>Enter your credit card number below to complete registration.</p>
+            <div class="stripe-form">
+                <h3>Secure Payment via Stripe.com</h3>
+            <form method="post" id="payment-form">
                 {% csrf_token %}
-                {{ temp_payment_form | crispy }}
-                <div class="text-center">
-                    <button id="submitButton" type="submit" class="btn btn-secondary mt-3">Pay</button>
+                {{ payment_form | crispy }}
+                <label class="form-label">Amount to be paid</label>
+                <input type="text" vaLue="£ {{ event.cost | floatformat:2 }}" class="textinput form-control" disabled>
+                <label class="form-label requiredField">
+                Cardholder name<span class="asteriskField">*</span> </label>
+                <!-- Style code to make stripe elements look like Bootstrap forms found on https://stackoverflow.com/questions/46039315/how-can-i-style-a-stripe-elements-input-with-bootstrap-->
+                <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
+                <div class="text-center pt-3">
+                <button type="submit" class="btn btn-primary">Pay and register</button>
+                <button type="button" class="btn btn-secondary">Cancel</button>
                 </div>
-            </form> -->
-            <div id="card-element"></div>
-            <div id="card-errors"></div>
+                <div id="card-errors" role="alert"></div>
+            </form>
+            </div>
         </div>
     </div>
 </div>
@@ -77,19 +84,50 @@ Event registration
 {% endblock %}
 
 <!-- Custom JS specific to this page-->
-{% block custom_js %}
+{% block postload_custom_js %}
 
 <!-- Variable to be used in js-files-->
- {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+{{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ stripe_secret_key|json_script:"id_stripe_secret_key" }}
 <script>
     var timeoutUrl = "{% url 'event_detail' event.id %}"
 </script>
 
-<script src="{% static 'js/stripe_elements.js' %}"></script>
+<!-- <script src="{% static 'js/stripe_elements.js' %}"></script>-->
 <script src="{% static 'js/event_registration_timer.js' %}"></script>
 
+<script>
+    const stripe = Stripe("{{ stripe_public_key }}");
+    const elements = stripe.elements();
+    const card = elements.create('card');
+    card.mount('#card-element');
 
+    const clientSecret = "{{ client_secret }}";
+    const form = $('#payment-form')
+
+    form.on('submit', async function(event) {
+        event.preventDefault();
+        const cardholderName = $('#id_cardholder_name').value;
+        console.log(cardholderName);
+
+        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: card,
+                billing_details: {
+                    name: cardholderName
+                }
+            }
+        });
+
+        if (error) {
+            $('#card-errors').textContent = error.message;
+        } else {
+            if (paymentIntent.status === 'succeeded') {
+                form[0].submit();
+            }
+        }
+    });
+</script>
 
 
 

@@ -1,12 +1,14 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.db.models import Q
-from os import environ
+from django.contrib import messages
 from django.http import Http404
-from datetime import datetime
 from django.core.paginator import Paginator
+from os import environ
+from datetime import datetime
+import stripe
 
 from .models import Event, Event_Registration
-from .forms import TempPaymentForm
+from .forms import PaymentForm
 
 # Create your views here.
 
@@ -94,16 +96,17 @@ def event_registration(request, event_id):
             user=request.user.id
         )
 
-        temp_payment_form = TempPaymentForm(data=request.POST)
+        payment_form = PaymentForm(data=request.POST)
 
-        if temp_payment_form.is_valid():
+        if payment_form.is_valid():
             registration.confirmed = True
             registration.save()
+            
             return redirect('event_confirmed', event_id=event_id)
         else:
             context = {
                 'event': event,
-                'temp_payment_form': temp_payment_form
+                'payment_form': payment_form
             }
             return render(request, 'events/event_registration.html', context)
 
@@ -127,14 +130,21 @@ def event_registration(request, event_id):
             return redirect('event_confirmed', event_id=event_id)
         else:
             registration.save()
-            temp_payment_form = TempPaymentForm()
+            payment_form = PaymentForm()
+
+            # Stripe checkout session data
+            stripe.api_key = environ.get('CLIENT_SECRET')
+            intent = stripe.PaymentIntent.create(
+                amount=int(round(event.cost * 100)),
+                currency='gbp',
+                metadata={'integration_check': 'accept_a_payment'},
+            )
 
             context = {
                 'event': event,
-                'temp_payment_form': temp_payment_form,
+                'payment_form': payment_form,
                 'stripe_public_key': environ.get('STRIPE_PUBLIC_KEY'),
-                'stripe_secret_key': 'test_secret_key',
-
+                'client_secret': intent.client_secret,
             }
             return render(request, 'events/event_registration.html', context)
 
@@ -152,6 +162,8 @@ def event_confirmed(request, event_id):
         Event_Registration,
         event=event,
         user=request.user)
+    
+    messages.success(request, f"You have successfully registered for {registration.event_title}!")
 
     context = {
         'event': event,

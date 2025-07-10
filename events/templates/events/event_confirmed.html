@@ -29,7 +29,7 @@ Event confirmed
                 {% if registration.event_cost > 0 %}
                 <tr>
                     <td><strong>Cost: </strong></td>
-                    <td>${{ registration.event_cost|floatformat:2 }} <small>(payment completed</small>)</td>
+                    <td>£{{ registration.event_cost|floatformat:2 }} <small>(payment completed</small>)</td>
                 </tr>
                 {% endif %}
             </table>
