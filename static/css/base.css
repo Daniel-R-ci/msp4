@@ -46,7 +46,8 @@ h3 {
     color: var(--headline-color);
 }
 
-h1 {
+h1,
+.header-title {
     font-size: 2.5rem;
 }
 h2 {
@@ -169,6 +170,35 @@ footer {
 }
 
 /*** Media querys ***/
+
+@media(max-width: 455px){
+    .header-title {
+        font-size: 2rem;
+    }
+}
+
+@media(max-width: 394px){
+    .header-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media(max-width: 333px){
+    .header-title {
+        font-size: 1.2rem;
+    }
+
+    .header-logo{
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media(max-width: 285px) {
+    .header-logo{
+        display: none !important;
+    }
+}
 
 @media(min-width: 550px) {
     .col-image {

@@ -37,23 +37,24 @@ Event registration
         </div>
         <div class="w-100"></div>
         <div class="col-12 col-md-6 mt-3">
-            <div class="stripe-form">
+            <div class="stripe-form mb-3">
                 <h3>Secure Payment via Stripe.com</h3>
-            <form method="post" id="payment-form">
-                {% csrf_token %}
-                {{ payment_form | crispy }}
-                <label class="form-label">Amount to be paid</label>
-                <input type="text" vaLue="£ {{ event.cost | floatformat:2 }}" class="textinput form-control" disabled>
-                <label class="form-label requiredField">
-                Cardholder name<span class="asteriskField">*</span> </label>
-                <!-- Style code to make stripe elements look like Bootstrap forms found on https://stackoverflow.com/questions/46039315/how-can-i-style-a-stripe-elements-input-with-bootstrap-->
-                <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
-                <div class="text-center pt-3">
-                <button type="submit" class="btn btn-primary">Pay and register</button>
-                <button type="button" class="btn btn-secondary">Cancel</button>
-                </div>
-                <div id="card-errors" role="alert"></div>
-            </form>
+                <form method="post" id="payment-form">
+                    {% csrf_token %}
+                    {{ payment_form | crispy }}
+                    <label class="form-label">Amount to be paid</label>
+                    <input type="text" vaLue="£ {{ event.cost | floatformat:2 }}" class="textinput form-control"
+                        disabled>
+                    <label class="form-label requiredField">
+                        Credit/Debit card number<span class="asteriskField">*</span> </label>
+                    <!-- Style code to make stripe elements look like Bootstrap forms found on https://stackoverflow.com/questions/46039315/how-can-i-style-a-stripe-elements-input-with-bootstrap-->
+                    <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
+                    <div class="text-center pt-3">
+                        <button type="submit" class="btn btn-primary">Pay and register</button>
+                        <button type="button" class="btn btn-secondary">Cancel</button>
+                    </div>
+                    <div id="card-errors" role="alert"></div>
+                </form>
             </div>
         </div>
     </div>
@@ -105,10 +106,9 @@ Event registration
     const clientSecret = "{{ client_secret }}";
     const form = $('#payment-form')
 
-    form.on('submit', async function(event) {
+    form.on('submit', async function (event) {
         event.preventDefault();
         const cardholderName = $('#id_cardholder_name').value;
-        console.log(cardholderName);
 
         const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
