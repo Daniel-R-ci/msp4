@@ -251,9 +251,10 @@ Other choices could have been made in bigger projects, or with mulitple develope
 
 The development and deployed versions are the same, with the following exceptions:
 
-Static files, such as css, javascript files etc are in development running directly from the development folder, but the deployed version uses Django Collectstatic to save these files to AWS and fetching them from there. One config variable in Heroku is used in settings.py to differentiate between development and deployed configurations.
+- Sensitive data, such as private keys and enviroment-specific settings are stored in file env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables. 
+- Static files, such as css, javascript files etc are in development running directly from the development folder, but the deployed version uses Django Collectstatic to save these files to AWS and fetching them from there. The config variable Deployed set to True in Heroku is used in settings.py to differentiate between development and deployed configurations. There is no equivalant setting in env.py 
+- In development version, emails are printed to Terminal. In deployed version, a gmail account belonging to Daniel Rydell and used for web development purposes has been used.
 
-Sensitive data, such as private keys and enviroment-specific settings are stored in file env.py, which is not committed to Github. In Heroku, these settings are istead stored in config variables.  
 A complete list of settings stored this way can be viewed in [Config Variables](static/readme/README_config_variables.md)
 
 Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
