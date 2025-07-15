@@ -70,6 +70,7 @@
                 <div id="new-comment">
                     <hr class="border border-primary mt-2">
                     <h3 id="commentHeadline">Write a new comment</h3>
+                    <p>You are posting as <strong>{{ user.username }}</strong></p>
                     <form id="commentForm" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ comment_form | crispy }}
