@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.contrib import messages
 from datetime import datetime
@@ -74,3 +74,39 @@ def blog_detail(request, article_id):
     }
 
     return render(request, 'blog/blog_post.html', context)
+
+
+# Edit a comment
+def edit_comment(request, article_id, comment_id):
+    """
+    Edit and update an article comment
+    """
+
+    if request.method == "POST":
+        comment = get_object_or_404(
+            Article_Comment,
+            id=comment_id,
+            user=request.user
+        )
+
+        comment_form = Article_Comment_Form(request.POST, request.FILES)
+
+        if comment_form.is_valid():
+            comment.comment = comment_form.cleaned_data['comment']
+            image = comment_form.cleaned_data['image']
+            if image:
+                comment.image = image
+            else:
+                comment.image = None
+            comment.save()
+
+    return redirect('blog_post', article_id=article_id)
+
+
+# Delete a comment
+def delete_comment(request, article_id, comment_id):
+    """
+    Delete an article comment
+    """
+    Article_Comment.objects.filter(pk=comment_id).delete()
+    return redirect('blog_post', article_id=article_id)

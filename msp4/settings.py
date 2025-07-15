@@ -191,7 +191,7 @@ STORAGES = {
     "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"}, # noqa
 }
 
-# Static files used in Heroku deployment
+# Static files used in Heroku deployment, overwrites local settings
 if 'DEPLOYED' in os.environ:
 
     STATICFILES_LOCATION = 'static'

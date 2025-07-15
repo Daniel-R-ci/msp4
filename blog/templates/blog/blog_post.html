@@ -55,7 +55,13 @@
                     {% if comment.image %}
                     <img src="{{ comment.image.url }}" class="card-img-top" alt="Image illustrating blog comment">
                     {% endif %}
+                    <div id="comment{{comment.pk}}">
                     {{ comment.comment | linebreaks }}
+                    </div>
+                    {% if user.is_authenticated and comment.user == user %}
+                    <button class="btn btn-sm btn-success btn-edit" data-article_id="{{article.id}}" data-comment_id="{{comment.pk}}">Edit</button>
+                    <button class="btn btn-sm btn-danger btn-delete" data-article_id="{{article.id}}" data-comment_id="{{comment.pk}}">Delete</button>
+                    {% endif %}
 
                     {% endfor %}
 
@@ -63,7 +69,7 @@
                 {% if user.is_authenticated %}
                 <div id="new-comment">
                     <hr class="border border-primary mt-2">
-                    <h3>Write a new comment</h3>
+                    <h3 id="commentHeadline">Write a new comment</h3>
                     <form id="commentForm" action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ comment_form | crispy }}
@@ -80,8 +86,32 @@
         </div>
     </div>
 </div>
+
+<!-- Delete confirmation modal -->
+<!-- Reused from Code Institute I think therefore I blog walkthrough project -->
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteCommentModalLabel">Delete comment?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete your comment?
+                This action cannot be undone.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a id="deleteCommentConfirm" href="#" class="btn
+          btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 <!-- Custom JS specific to this page-->
-{% block custom_js %}
+{% block postload_custom_js %}
+<script src="{% static 'blog/js/blog_post.js' %}"></script>
 {% endblock %}
