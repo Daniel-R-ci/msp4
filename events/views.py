@@ -160,6 +160,21 @@ def event_registration(request, event_id):
             return render(request, 'events/event_registration.html', context)
 
 
+# Cancel an event registration
+def cancel_event_registration(request, event_id):
+    event = get_object_or_404(
+        Event,
+        id=event_id,
+        published=True
+    )
+    # Delete any previous uncompleted registration
+    Event_Registration.objects.filter(
+        event=event, user=request.user, confirmed=False).delete()
+
+    # Redirect user to event page
+    return redirect('event_detail', event_id=event_id)
+
+
 # Show confirmation of event registration
 def event_confirmed(request, event_id):
 
