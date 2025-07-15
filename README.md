@@ -269,17 +269,42 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 ### Bootstrap toasts not showing
 **Problem:** Bootstrap toasts not showing as expected, sometimes causing error
-**Solution:** This was due to JS/JQUERY code used to show object was made for earlier Bootstrap version. Searching on Google did not help in find adjusted code, but ChatGPT was able to troubleshoot and provide correct code.
+**Solution:** This was due to JS/JQUERY code used in Boutique_ADO to show object was made for earlier Bootstrap version. Searching on Google did not help in find adjusted code, but ChatGPT was able to troubleshoot and provide correct code.
 
 ### User not being able to re-register after registration timeout
 **Problem:** After timeout on event registration, user was not able to registre again unless page was manually reloaded, or user went to another page and then back.  
-**Solution:** This was due to the deletion of unconfirmed registrations older than five minutes occured after the check if the user was already registered had accured. The deletion was not triggered until the property function available_spots() was called from the template. Calling the delete_unconfirmed_reservations() function before checking if user was registered solved this problem.
+**Solution:** This was due to the deletion of unconfirmed registrations older than five minutes occured after the check if the user was already registered had accured. The deletion was not triggered until the property function available_spots() was called from the template. Calling the delete_unconfirmed_reservations() function before checking if user was registered solved this problem.  
+
+### Multiple preliminary bookings accidentally made during testing
+**Problem:** If a page refresh was made during the five minute countdown, a new preliminary booking would be made and the countdown would be restarted.  
+**Solution:** Before creating the registration all uncofirmed event registrations for this particular event and user is deleted, regardless of the normal five minute removal. After this deletion a new preliminary reservation is created. This does make it possible for a user to extend the reservation time indefinately by constantly refreshing the page, but the likelihood of doing so is very small.  
+**Remaining potential issue:** Every new refresh will send a new payment intent to Stripe and the previous one will never be completed, but from a transactional viewpoint it is safe and not worth investigation solutions for during this project.
+
+### User having to wait five minutes to retry booking
+**Problem:** If a user for some reason needed to restart their browser during the five minute registration countdown, the user would be greeted by a "you have already registered for this event" message until the preliminary booking was deleted after five minutes.  
+**Solution:** Delete all unconfirmed bookings matching user and event in the beginning of the event_details view. This allows the user to start a new reservation, while still preventing anyone else from taking the users place while browser/computer is restarting.  
+**Potential remaining issue:** For the time it takes from when the event_detail page loads until the user clicks the registration button, there is a possibility that another faster user might be able to grab the spot, but considering the expected load of users using the Barns page that is considered unlikely.
+
+### User being able to go back and making multiple bookings
+**Problem:** By using the browsers back-function, or saving urls, it was possible for a user to register several times for an event.  
+**Solution:** Before a new registratoin is made, a check is now done to see if there already is a confirmed registration for this user and event. If so, a 404 error is raised to prevent the user from accessing this page again.  
+**Remaining issue:** A more informational message would be nicer, and the idea of doing so has been entered in backlog.
+
+
 
 ### Setting up AWS
 
-Setting up AWS proved a bit tricky, it turned out the problem was some settings in Boutique_Ado project couldn't be used since that is made in Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the settings would be done in Django 5.
+Setting up AWS proved a bit tricky, it turned out the problem was some settings in Boutique_Ado project couldn't be used since that is made in Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the storage settings would be done in Django 5.
 
 ## Finished website
+
+## Future development
+
+### Backlog
+
+- Replace 404-errors with more informational errors, like when/if a user tries to browse back to event registration (or enter url manually)
+
+
 ## Credits
 
 - Code Institute mentor Spencer Barriball - for guidelines, support and encouragement

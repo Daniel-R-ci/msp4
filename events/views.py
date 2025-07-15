@@ -19,9 +19,10 @@ def event_list(request):
     Get all published events
     """
 
-    # Get all published articles with publish_on later than now
+    # Get all upcomfing published events with publish_on later than now
     event_list = Event.objects.filter(
         Q(publish_on__lte=datetime.now()) &
+        Q(time__gte=datetime.now()) &
         Q(published=True)
     ).order_by('time')
 
@@ -49,7 +50,11 @@ def event_detail(request, event_id):
         published=True
     )
     # Needed to make user_already_registered work
+    # Remove all uncofirmed registrations older than five minutes
     Event_Registration.remove_unconfirmed_registrations()
+    # Delete any previous uncompleted registration from current user
+    Event_Registration.objects.filter(
+        event=event, user=request.user, confirmed=False).delete()
 
     user_already_registered = False
     if request.user.is_authenticated:
@@ -101,7 +106,7 @@ def event_registration(request, event_id):
         if payment_form.is_valid():
             registration.confirmed = True
             registration.save()
-            
+
             return redirect('event_confirmed', event_id=event_id)
         else:
             context = {
@@ -111,9 +116,15 @@ def event_registration(request, event_id):
             return render(request, 'events/event_registration.html', context)
 
     else:
+        if Event_Registration.objects.filter(event=event, user=request.user, confirmed=True).exists():
+            raise Http404("You already have a confirmed reservation for this event")
         # Check that there are still available spots
         if event.available_spots < 1:
             raise Http404("No available spots")
+
+        # Delete any previous uncompleted registration
+        Event_Registration.objects.filter(
+            event=event, user=request.user, confirmed=False).delete()
 
         # Create new registration
         registration = Event_Registration()
@@ -162,8 +173,9 @@ def event_confirmed(request, event_id):
         Event_Registration,
         event=event,
         user=request.user)
-    
-    messages.success(request, f"You have successfully registered for {registration.event_title}!")
+
+    messages.success(request, f"You have successfully registered for \
+                     {registration.event_title}!")
 
     context = {
         'event': event,
