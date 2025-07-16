@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Default title Creativity Barn -->
+<!-- Remove if custom title is not needed -->
+{% block title %}
+Your user profile
+{% endblock %}
+
+<!-- Extra JS och imports that needs to be placed in header -->
+{% block head_js %}
+{% endblock %}
+
+<!-- Extra CSS files, if needed-->
+{% block extra_css %}
+{% endblock %}
+
+<!-- Main content-->
+<!-- Container not supplied and must be included -->
+{% block content %}
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 justify-content-center">
+            <div class="text-center">
+                <h1>Your user profile</h1>
+            </div>
+            <div class="d-flex justify-content-center">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="text-center">User information</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <th>Username:</th>
+                        <td>{{ user.username }}</td>
+                    </tr>
+                    <tr>
+                        <th>First name:</th>
+                        <td>{{ user.first_name }}</td>
+                    </tr>
+                    <tr>
+                        <th>Last name:</th>
+                        <td>{{ user.last_name }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="text-center">
+            <a href="{% url 'account_password_change'%}" class="btn btn-secondary mt-2 mb-2">Change your password</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Custom JS specific to this page-->
+{% block postload_custom_js %}
+{% endblock %}

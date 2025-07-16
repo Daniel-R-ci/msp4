@@ -1,10 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UpdateNameForm
 # Create your views here.
 
 
+# List user information
+def user_profile(request):
+    """
+    List user information
+    """
+    
+    return render(request, 'user_profile/user_profile.html',)
+
+
+# Ask for full name first time a new user log in
 def request_name(request):
+    """
+    Ask for full name first time a new user log in
+    """
 
     if request.method == "POST":
         update_name_form = UpdateNameForm(data=request.POST)
@@ -15,7 +28,7 @@ def request_name(request):
             user.save()
             messages.success(request, "Thank you for completing the \
                              registration by providing your full name!")
-            return render(request, 'home/index.html',)
+            return redirect('home')
         else:
             messages.error(request, "There was a problem completing the \
                            registration. Please try again!")

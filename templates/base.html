@@ -7,7 +7,7 @@
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
-{% url 'request_name' as request_name_url %}
+{% url 'user_profile' as user_profile_url %}
 
 <!-- Check to see if logged in user has completed registration -->
 {% if user.is_authenticated and user.first_name == "" %}
@@ -85,6 +85,10 @@
                                 href="{% url 'about' %}">About & Contact</a>
                         </li>
                         {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if request.path == user_profile_url %}active" aria-current="page{% endif %}"
+                                href="{% url 'user_profile' %}">Profile</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == logout_url %}active" aria-current="page{% endif %}"
                                 href="{% url 'account_logout' %}">Logout</a>
