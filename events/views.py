@@ -19,7 +19,7 @@ def event_list(request):
     Get all published events
     """
 
-    # Get all upcomfing published events with publish_on later than now
+    # Get all upcoming published events with publish_on later than now
     event_list = Event.objects.filter(
         Q(publish_on__lte=datetime.now()) &
         Q(time__gte=datetime.now()) &

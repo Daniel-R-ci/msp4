@@ -16,7 +16,7 @@ Welcome to The Creativity Barn
             <h1>Welcome to The Creativity Barn</h1>
         </div>
         <div class="col-7 text-center">
-            <p>Art and hobby supplies in a creative environment</p>
+            <h2>Art and hobby supplies in a creative environment</h2>
         </div>
     </div>
     <div class="row justify-content-center mt-2 mt-lg-5">
@@ -24,21 +24,34 @@ Welcome to The Creativity Barn
             <img class="col-image" src="{% static 'images/home-image.png' %}" alt="Logo with the Barn">
         </div>
         <div class="col-12 col-md-4 mt-2 align-self-center order-md-first text-center text-md-end">
-            <p>
-                <strong>Latest news</strong>
-                <br>Three latest blog posts
-                <br>Three latest blog posts
-                <br>Three latest blog posts      
-            </p>
-            
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Latest News</h2>
+                </div>
+                <div class="card-body">
+                    {% if articles.count == 0 %}
+                    <p>There are no blog posts to display</p>
+                    {% endif %}
+                    {% for article in articles %}
+                    <p><a href="{% url 'blog_post' article.id %}">{{article.title}}</a> - <em>{{ article.publish_on | date:"M d" }}</em></p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
-         <div class="col-12 mt-2 col-md-4 align-self-center text-center text-md-start order-md-last">
-            <p>
-                <strong>Upcoming events and courses</strong>
-                <br>Three next events
-                <br>Three next events
-                <br>Three next events
-            </p>
+        <div class="col-12 mt-2 col-md-4 align-self-center text-center text-md-start order-md-last mb-2">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2>Upcoming events and courses</h2>
+                </div>
+                <div class="card-body">
+                    {% if events.count == 0 %}
+                    <p>There are no events to display</p>
+                    {% endif %}
+                    {% for event in events %}
+                    <p><a href="{% url 'event_detail' event.id %}">{{event.title}}</a> - <em>{{ event.time | date:"M d" }}</em></p>
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

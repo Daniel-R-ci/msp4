@@ -99,12 +99,15 @@ h3 {
 
 /***** Styling of account pages, login etc... *****/
 
+.card-body a,
+.card-body a:visited,
 .account-form a,
 .account-form a:visited{
     color: blue;
     text-decoration: none;
 }
 
+.card-body a:hover,
 .account-form a:hover{
     font-weight: bold;
     text-decoration: underline;
