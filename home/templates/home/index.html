@@ -33,7 +33,7 @@ Welcome to The Creativity Barn
                     <p>There are no blog posts to display</p>
                     {% endif %}
                     {% for article in articles %}
-                    <p><a href="{% url 'blog_post' article.id %}">{{article.title}}</a> - <em>{{ article.publish_on | date:"M d" }}</em></p>
+                    <p><a href="{% url 'blog_post' article.id %}" class="home-card-url">{{article.title}}</a> - <em>{{ article.publish_on | date:"M d" }}</em></p>
                     {% endfor %}
                 </div>
             </div>
@@ -48,7 +48,7 @@ Welcome to The Creativity Barn
                     <p>There are no events to display</p>
                     {% endif %}
                     {% for event in events %}
-                    <p><a href="{% url 'event_detail' event.id %}">{{event.title}}</a> - <em>{{ event.time | date:"M d" }}</em></p>
+                    <p><a href="{% url 'event_detail' event.id %}" class="home-card-url">{{event.title}}</a> - <em>{{ event.time | date:"M d" }}</em></p>
                     {% endfor %}
                 </div>
             </div>
