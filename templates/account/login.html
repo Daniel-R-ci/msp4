@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 <!-- Default title Creativity Barn -->
 <!-- Remove if custom title is not needed -->
@@ -26,7 +27,7 @@ The Barn - Login
 
             <form class="login" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form | crispy }}
                 {% if redirect_field_value %}
                 <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                 {% endif %}
