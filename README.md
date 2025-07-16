@@ -180,12 +180,15 @@ Home page
 ![Blog list](static/readme/images/wireframe_bloglist_1_0.png)  
 List of blog entries, paginated
 
-![Blog post](static/readme/images/wireframe_bloglist_1_0.png)  
+![Blog post](static/readme/images/wireframe_blogpost_1_0.png)  
 Blog entry
 
 **Events app**  
 ![Blog list](static/readme/images/wireframe_eventlist_1_0.png)  
 List of events and courses, paginated
+
+**About app**
+Wireframe mockup was not deemed necessary for this simple information page with contact form
 
 **User_Profile app**
 Wireframe mockup was not deemed necessary for these simple forms

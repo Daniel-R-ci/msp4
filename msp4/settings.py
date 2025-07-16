@@ -52,9 +52,10 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     # Custom
-    'home',
+    'about',
     'blog',
     'events',
+    'home',
     'user_profile',
 ]
 
