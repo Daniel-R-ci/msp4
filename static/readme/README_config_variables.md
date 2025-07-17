@@ -12,5 +12,5 @@ These are the variables stored in env.py for development, and in config variable
 
 ## Settings used only as Heroku Config Variables
 
-- DEPLOYED, with value TRUE. A check if DEPLOYED exists in settings.py tells Django wether to use the local static folder, or the static folder deployed to AWS
+- DEPLOYED, with value TRUE. A check if DEPLOYED exists in settings.py tells Django wether to chose deployment or development settings (email and static folder)
 - EMAIL_HOST_PASS and EMAIL_HOST_USER, to handle sending emails. In development settings, emails are printed to terminal.

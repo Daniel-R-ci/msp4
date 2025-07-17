@@ -258,7 +258,7 @@ The development and deployed versions are the same, with the following exception
 - Static files, such as css, javascript files etc are in development running directly from the development folder, but the deployed version uses Django Collectstatic to save these files to AWS and fetching them from there. The config variable Deployed set to True in Heroku is used in settings.py to differentiate between development and deployed configurations. There is no equivalant setting in env.py 
 - In development version, emails are printed to Terminal. In deployed version, a gmail account belonging to Daniel Rydell and used for web development purposes has been used.
 
-A complete list of settings stored this way can be viewed in [Config Variables](static/readme/README_config_variables.md)
+A complete list of settings stored in env.py and Heroku Config vars can be viewed in [Config Variables](static/readme/README_config_variables.md)
 
 Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
 
@@ -294,8 +294,6 @@ Not all files or folders are pushed to Github, either due to security reasons as
 **Solution:** Before a new registratoin is made, a check is now done to see if there already is a confirmed registration for this user and event. If so, a 404 error is raised to prevent the user from accessing this page again.  
 **Remaining issue:** A more informational message would be nicer, and the idea of doing so has been entered in backlog.
 
-
-
 ### Setting up AWS
 
 Setting up AWS proved a bit tricky, it turned out the problem was some settings in Boutique_Ado project couldn't be used since that is made in Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the storage settings would be done in Django 5.
@@ -303,6 +301,8 @@ Setting up AWS proved a bit tricky, it turned out the problem was some settings 
 ## Finished website
 
 ## Future development
+
+### Ideas for further development or new functions
 
 ### Backlog
 
