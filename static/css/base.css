@@ -122,6 +122,15 @@ footer {
     margin-bottom: 0px;
 }
 
+.footer-link {
+    color: var(--header-text-color);
+    text-decoration: none;
+}
+
+.footer-link:hover {
+    font-weight: bold;
+    text-decoration: underline;
+}
 
 /*** Styling of page elements ***/
 

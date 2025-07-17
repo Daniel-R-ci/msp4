@@ -86,8 +86,8 @@
                         </li>
                         {% if user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link {% if request.path == user_profile_url %}active" aria-current="page{% endif %}"
-                                href="{% url 'user_profile' %}">Profile</a>
+                            <a class="nav-link {% if request.path == user_profile_url %}active"
+                                aria-current="page{% endif %}" href="{% url 'user_profile' %}">Profile</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link {% if request.path == logout_url %}active" aria-current="page{% endif %}"
@@ -140,14 +140,64 @@
                 <div class="col-12 text-center">
                     <p>The Creativity Barn is a ficticious store, made up for education purposes</p>
                 </div>
-                <div class="col-12 col-md-4 text-center text-md-end">
-                    <strong>Opening hours</strong>
+                <div class="col-12 col-md-4 d-flex justify-content-center justify-content-md-end text-md-end mb-1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th colspan="2"><strong>Opening hours</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Mon</strong></td>
+                                <td>Closed</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tue-Wed</strong></td>
+                                <td>14-20</td>
+                            </tr>
+                            <tr>
+                                <td>Thu-Fri</td>
+                                <td>10-16</td>
+                            </tr>
+                            <tr>
+                                <td>Sat-Sun</td>
+                                <td>10-14</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-12 col-md-4 text-center">
-                    <strong>Adress and phone</strong>
+                <div class="col-12 col-md-4 d-flex justify-content-center text-center mb-1">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><strong>Adress & Contact</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Little Creek Road 4</td>
+                            </tr>
+                            <tr>
+                                <td>Littleton</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td>012-34567</td>
+                            </tr>
+                            <tr>
+                                <td>info@thecreativebarn.com</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-12 col-md-4 text-center text-md-start">
-                    <strong>Follow us on</strong>
+                <div class="col-12 col-md-4 text-center text-md-start mb-1">
+                    <strong>Follow us on</strong><br>
+                    <a href="www.instagram.com" target="_blank" class="footer-link" referrerpolicy="no-referrer">
+                        <i class="fa-brands fa-instagram"></i> Instagram
+                    </a>
                 </div>
             </div>
 
