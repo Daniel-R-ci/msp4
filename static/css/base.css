@@ -240,7 +240,7 @@ footer {
 
 @media(min-width: 992px) {
     .col-image {
-        height: 450px;
-        width: 450px;
+        height: 280px;
+        width: 280px;
     }
 }
