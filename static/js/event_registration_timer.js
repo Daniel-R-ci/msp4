@@ -6,7 +6,7 @@ Modified to suit project
 $(document).ready(function () {
 
     // Create event handler for modal close button
-    $('#modalCloseButton').click(function () {
+    $('#modalTimeoutCloseButton').click(function () {
         window.location.href = timeoutUrl;
     });
 

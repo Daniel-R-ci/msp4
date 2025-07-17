@@ -60,7 +60,7 @@ Event registration
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modals -->
 <div class="modal fade" id="timeExpiredModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -76,8 +76,25 @@ Event registration
 
             </div>
             <div class="modal-footer">
-                <button id="modalCloseButton" type="button" class="btn btn-secondary"
+                <button id="modalTimeoutCloseButton" type="button" class="btn btn-secondary"
                     data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="pleaseWaitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Your payment is being processed</h1>
+            </div>
+            <div class="modal-body">
+                <p>Please wait while your payment is being processed.</p>
+                <p>Do not close your browser or browser tab until payment has been completed.</p>
+            </div>
+            <div class="modal-footer">
             </div>
         </div>
     </div>
@@ -98,34 +115,63 @@ Event registration
 <script src="{% static 'js/event_registration_timer.js' %}"></script>
 
 <script>
-    const stripe = Stripe("{{ stripe_public_key }}");
-    const elements = stripe.elements();
-    const card = elements.create('card');
-    card.mount('#card-element');
+    $(document).ready(function () {
+        
+        // Sleep function found at https://www.sitepoint.com/delay-sleep-pause-wait/
+        // Used to display information modal at least four seconds
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
-    const clientSecret = "{{ client_secret }}";
-    const form = $('#payment-form')
+        const stripe = Stripe("{{ stripe_public_key }}");
+        const elements = stripe.elements();
+        const card = elements.create('card');
+        card.mount('#card-element');
 
-    form.on('submit', async function (event) {
-        event.preventDefault();
-        const cardholderName = $('#id_cardholder_name').value;
+        const clientSecret = "{{ client_secret }}";
+        const form = $('#payment-form');
 
-        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-            payment_method: {
-                card: card,
-                billing_details: {
-                    name: cardholderName
+        form.on('submit', async function (event) {
+            event.preventDefault();
+            $('submitbutton').prop("disabled", true);
+
+            const pleaseWaitModal = new bootstrap.Modal(document.getElementById('pleaseWaitModal'));
+            pleaseWaitModal.show();
+
+            // How to measure time taken for a function found at https://stackoverflow.com/questions/313893/how-to-measure-time-taken-by-a-function-to-execute
+            const startTime = performance.now();
+
+            const cardholderName = $('#id_cardholder_name').val();
+
+            const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: card,
+                    billing_details: {
+                        name: cardholderName
+                    }
+                }
+            });
+
+            const endTime = performance.now();
+            const timeTaken = endTime - startTime
+            timeRemaining = 4000 - timeTaken;
+
+            if (timeRemaining > 0) {
+                sleep(timeRemaining).then(() => { pleaseWaitModal.hide() });
+            }
+            else{
+                pleaseWaitModal.hide();
+            }
+
+            if (error) {
+                $('#card-errors').textContent = error.message;
+            } else {
+                if (paymentIntent.status === 'succeeded') {
+                    form[0].submit();
                 }
             }
+            $('submitbutton').prop("disabled", false);
         });
-
-        if (error) {
-            $('#card-errors').textContent = error.message;
-        } else {
-            if (paymentIntent.status === 'succeeded') {
-                form[0].submit();
-            }
-        }
     });
 </script>
 
