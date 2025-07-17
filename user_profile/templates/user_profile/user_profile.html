@@ -20,17 +20,13 @@ Your user profile
 {% block content %}
 <div class="container-fluid">
     <div class="row justify-content-center">
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 justify-content-center">
-            <div class="text-center">
-                <h1>Your user profile</h1>
-            </div>
+        <div class="col-12 text-center mt-3">
+            <h1>Your user profile</h1>
+        </div>
+        <div class="col-12 col-md-8 col-lg-7 col-xl-4 mt-3">
+            <h2 class="text-center">User information</h2>
             <div class="d-flex justify-content-center">
                 <table>
-                    <thead>
-                        <tr>
-                            <th colspan="2" class="text-center">User information</th>
-                        </tr>
-                    </thead>
                     <tr>
                         <th>Username:</th>
                         <td>{{ user.username }}</td>
@@ -45,10 +41,93 @@ Your user profile
                     </tr>
                 </table>
             </div>
-            <div class="text-center">
-            <a href="{% url 'account_change_password'%}" class="btn btn-secondary mt-2 mb-2">Change your password</a>
+            <div class="text-center mt-1">
+                <a href="{% url 'account_change_password'%}" class="btn btn-secondary">Change your password</a>
             </div>
-
+        </div>
+        <div class="col-12 col-md-8 col-lg-7 col-xl-4 mt-3">
+            <h2 class="text-center">Upcoming events</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="text-center">
+                            You are registered for the upcoming events
+                        </th>
+                    </tr>
+                </thead>
+                {% if upcoming_events.count == 0 %}
+                <tr>
+                    <td colspan="4">You are not registered for any events</td>
+                </tr>
+                {% else %}
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Time
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in upcoming_events %}
+                    <tr>
+                        <td>{{ event.event_title }}</td>
+                        <td>{{ event.event_time | date:"l M j Y" }}</td>
+                        <td>{{ event.event_time | date:"g:i a" }}</td>
+                        <td>
+                            {% if event.event_cost == 0 %}
+                            Free
+                            {% else %}
+                            £{{event.event_cost|floatformat:2}}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% endif %}
+            </table>
+        </div>
+        <div class="col-12 col-md-8 col-lg-7 col-xl-4 mt-3">
+            <h2 class="text-center">Previous events</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="text-center">
+                            You have previously registered for these past events
+                        </th>
+                    </tr>
+                </thead>
+                {% if previous_events.count == 0 %}
+                <tr>
+                    <td colspan="4">You are not registered for any past events</td>
+                </tr>
+                {% else %}
+                <thead>
+                    <tr>
+                        <th>Event</th>
+                        <th>Date</th>
+                        <th>Time
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for event in previous_events %}
+                    <tr>
+                        <td>{{ event.event_title }}</td>
+                        <td>{{ event.event_time | date:"l M j Y" }}</td>
+                        <td>{{ event.event_time | date:"g:i a" }}</td>
+                        <td>
+                            {% if event.event_cost == 0 %}
+                            Free
+                            {% else %}
+                            £{{event.event_cost|floatformat:2}}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                {% endif %}
+            </table>
         </div>
     </div>
 </div>

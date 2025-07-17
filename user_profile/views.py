@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.db.models import Q
+from datetime import datetime
+
 from .forms import UpdateNameForm
+from events.models import Event_Registration
 # Create your views here.
 
 
@@ -9,8 +13,23 @@ def user_profile(request):
     """
     List user information
     """
-    
-    return render(request, 'user_profile/user_profile.html',)
+
+    upcoming_events = Event_Registration.objects.filter(
+        Q(event_time__gte=datetime.now()) &
+        Q(user=request.user)
+    ).order_by('event_time')
+
+    previous_events = Event_Registration.objects.filter(
+        Q(event_time__lte=datetime.now()) &
+        Q(user=request.user)
+    ).order_by('event_time')
+
+    context = {
+        'upcoming_events': upcoming_events,
+        'previous_events': previous_events,
+    }
+
+    return render(request, 'user_profile/user_profile.html', context)
 
 
 # Ask for full name first time a new user log in

@@ -131,6 +131,13 @@ footer {
     width: 200px;
 }
 
+.table {
+    border: 1px solid var(--extra-color);
+    border-collapse: separate;
+    border-radius: 5px;
+    box-shadow: 3px 3px var(--shadow-color);
+}
+
 /***** Blog and Events *****/
 
 .card {
