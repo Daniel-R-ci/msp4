@@ -8,6 +8,7 @@
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
 {% url 'user_profile' as user_profile_url %}
+{% url 'request_name' as request_name_url %}
 
 <!-- Check to see if logged in user has completed registration -->
 {% if user.is_authenticated and user.first_name == "" %}
@@ -157,11 +158,11 @@
                                 <td>14-20</td>
                             </tr>
                             <tr>
-                                <td>Thu-Fri</td>
+                                <td><strong>Thu-Fri</strong></td>
                                 <td>10-16</td>
                             </tr>
                             <tr>
-                                <td>Sat-Sun</td>
+                                <td><strong>Sat-Sun</strong></td>
                                 <td>10-14</td>
                             </tr>
                         </tbody>

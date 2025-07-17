@@ -267,6 +267,10 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 - Back to previous page from event_details
 
+### Constantly reloading pages when logging in as a new user
+**Problem:** First time logging in as a new user, a script meant to send users to the view request_name sent the browser into a refresh loop
+**Solution:** The corresponing name in user_profile urls file had been changed and the script hadn't been tested after that. After looking over all urls names the function again works as intended.
+
 ### Files not uploading when commenting on blog posts
 **Problem:** Image files not uploading when user attaches a file to a blog post comment
 **Solution:** Googling revealed that the form used for uploading the files should have the attribute ***enctype="multipart/form-data"***. [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/http/file-uploads/#basic-file-uploads)
@@ -291,12 +295,20 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 ### User being able to go back and making multiple bookings
 **Problem:** By using the browsers back-function, or saving urls, it was possible for a user to register several times for an event.  
-**Solution:** Before a new registratoin is made, a check is now done to see if there already is a confirmed registration for this user and event. If so, a 404 error is raised to prevent the user from accessing this page again.  
+**Solution:** Before a new registration is made, a check is now done to see if there already is a confirmed registration for this user and event. If so, a 404 error is raised to prevent the user from accessing this page again.  
 **Remaining issue:** A more informational message would be nicer, and the idea of doing so has been entered in backlog.
 
-### Setting up AWS
+### Image handling when editing comments
+**Problem:** When editing a blog comment that contains images, the image need to be uploaded again or it will be removed from the post.  
+**Remaining issue:** Problem noted in backlog
 
-Setting up AWS proved a bit tricky, it turned out the problem was some settings in Boutique_Ado project couldn't be used since that is made in Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the storage settings would be done in Django 5.
+### No restriction on image sizes in blog comments
+**Problem:** There is no restriction on image size (neither file size nor image size) when uploading images
+**Remaining issue:** Problem noted in backlog
+
+### Setting up AWS
+**Problem:** Guide from Boutique-Ado project couldn't be followed an caused errors
+**Solution:** Walkthrough project was made with Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the storage settings would be done in Django 5.
 
 ## Finished website
 
@@ -307,6 +319,8 @@ Setting up AWS proved a bit tricky, it turned out the problem was some settings 
 ### Backlog
 
 - Replace 404-errors with more informational errors, like when/if a user tries to browse back to event registration (or enter url manually)
+- Make sure images in blog comments are not removed when editing comment
+- Constrain image size when uploading images in blog comments
 
 
 ## Credits
