@@ -15,7 +15,7 @@ The Barn - Logout
     <div class="row">
         <div class="col-12 text-center account-form">
             <h1>Logout</h1>
-            <p>Are you sure you want to log out?</p>
+            <p>Goodbye {{ user.first_name }}. Are you sure you want to log out?</p>
             <form class="login" method="POST" action="{% url 'account_logout' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
