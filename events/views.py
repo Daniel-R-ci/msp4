@@ -1,4 +1,5 @@
-from django.shortcuts import redirect, render, get_object_or_404
+from django.shortcuts import redirect, render, get_object_or_404, HttpResponse
+from django.views.decorators.http import require_POST
 from django.db.models import Q
 from django.contrib import messages
 from django.http import Http404
@@ -73,6 +74,26 @@ def event_detail(request, event_id):
     }
 
     return render(request, 'events/event_detail.html', context)
+
+
+# Cache registration data for Stripe Webhook handling
+@require_POST
+def cache_registration_data(request):
+    """
+    Cache registration data for Stripe Webhook handling
+    """
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = environ.get('CLIENT_SECRET')
+        stripe.PaymentIntent.modify(pid, metadata={
+            'user_id': request.user.id,
+            'registration_id': request.POST.get('registration_id'),
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, "We apologize. Your payment can not be \
+                       completed at this time. Please try again later.")
+        return HttpResponse(content=e, status=400)  
 
 
 # Register for an event
@@ -153,6 +174,7 @@ def event_registration(request, event_id):
 
             context = {
                 'event': event,
+                'registration_id': registration.pk,
                 'payment_form': payment_form,
                 'stripe_public_key': environ.get('STRIPE_PUBLIC_KEY'),
                 'client_secret': intent.client_secret,
