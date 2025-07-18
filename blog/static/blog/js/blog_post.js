@@ -1,4 +1,10 @@
 $(document).ready(function () {
+
+    // Hide the new comment form and add event listener to show button
+    $('#newComment').hide();
+    $('#showCommentForm').click(function () {
+        $('#newComment').toggle();
+    });
   
     const editButtons = document.getElementsByClassName("btn-edit");
     const commentText = document.getElementById("id_comment");

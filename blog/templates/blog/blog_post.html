@@ -39,10 +39,20 @@
                         This article has {{ article.number_of_comments }}
                         comment{% if article.number_of_comments > 1%}s{% endif %}.
                     </p>
-                    {% if user.is_authenticated %}
-                    <a href="#new-comment">Write a new comment</a>
                     {% endif %}
-
+                    {% if user.is_authenticated %}
+                    <button id="showCommentForm" class="btn btn-secondary btn-sm mb-2">Post a new comment</button>
+                    <div id="newComment">
+                        <h3 id="commentHeadline">Write a new comment</h3>
+                        <p>You are posting as <strong>{{ user.username }}</strong></p>
+                        <form id="commentForm" action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            {{ comment_form | crispy }}
+                            <div class="text-center">
+                                <button id="submitButton" type="submit" class="btn btn-secondary btn-sm">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                     {% endif %}
 
                     {% for comment in comments %}
@@ -56,30 +66,19 @@
                     <img src="{{ comment.image.url }}" class="card-img-top" alt="Image illustrating blog comment">
                     {% endif %}
                     <div id="comment{{comment.pk}}">
-                    {{ comment.comment | linebreaks }}
+                        {{ comment.comment | linebreaks }}
                     </div>
                     {% if user.is_authenticated and comment.user == user %}
-                    <button class="btn btn-sm btn-success btn-edit" data-article_id="{{article.id}}" data-comment_id="{{comment.pk}}">Edit</button>
-                    <button class="btn btn-sm btn-danger btn-delete" data-article_id="{{article.id}}" data-comment_id="{{comment.pk}}">Delete</button>
+                    <button class="btn btn-sm btn-success btn-edit" data-article_id="{{article.id}}"
+                        data-comment_id="{{comment.pk}}">Edit</button>
+                    <button class="btn btn-sm btn-danger btn-delete" data-article_id="{{article.id}}"
+                        data-comment_id="{{comment.pk}}">Delete</button>
                     {% endif %}
 
                     {% endfor %}
 
                 </div>
-                {% if user.is_authenticated %}
-                <div id="new-comment">
-                    <hr class="border border-primary mt-2">
-                    <h3 id="commentHeadline">Write a new comment</h3>
-                    <p>You are posting as <strong>{{ user.username }}</strong></p>
-                    <form id="commentForm" action="" method="post" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        {{ comment_form | crispy }}
-                        <div class="text-center">
-                            <button id="submitButton" type="submit" class="btn btn-secondary btn-sm">Submit</button>
-                        </div>
-                    </form>
-                </div>
-                {% endif %}
+
             </div>
         </div>
         <div class="col-12 text-center mt-2 mb-2">
