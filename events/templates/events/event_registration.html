@@ -183,18 +183,16 @@ Event registration
                     await sleep(timeRemaining);
                 }
 
-                pleaseWaitModal.hide();
-
                 if (error) {
+                    pleaseWaitModal.hide();
                     $('#card-errors').text(error.message);
                     $('#submitbutton').prop("disabled", false);
                 } else if (paymentIntent.status === 'succeeded') {
-                    form[0].submit(); // ✅ Will now work
+                    form[0].submit(); 
                 }
 
             } catch (err) {
-                console.error("Error in AJAX or payment:", err);
-                //location.reload();  // fallback error handler
+                location.reload();  // fallback error handler
             }
         });
     });

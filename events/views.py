@@ -128,6 +128,8 @@ def event_registration(request, event_id):
             registration.confirmed = True
             registration.save()
 
+            # TODO: Send confirmation email to user
+
             return redirect('event_confirmed', event_id=event_id)
         else:
             context = {
