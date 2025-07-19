@@ -91,6 +91,13 @@ h3 {
     font-weight: bold;
 }
 
+.header-title {
+    font-family: var(--headline-font);
+    color: var(--header-text-color);
+    text-decoration: none !important;
+    font-weight: normal !important;
+}
+
 /* Set the color of nav Hamburger toggler as rest of nav elements */
 /* Code found on https://www.geeksforgeeks.org/how-to-change-hamburger-toggler-color-in-bootstrap/ */
 .navbar-toggler-icon {

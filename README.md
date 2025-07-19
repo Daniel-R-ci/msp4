@@ -277,7 +277,18 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 ### Lighthouse validation
 
-### Other validators used
+### HTML Validation
+All rendered html pages was tested with [W3 html validator](https://validator.w3.org/nu/)
+
+**Warnings/errors caught and solved**
+- ![H1 Warning](/static/readme/images/validation_01.png)  
+This warning occured on all pages due to using h1 tag in the header. The h1 was replaced with a div using the already existing class .header-title. Some additional css styling had to be applied to make look like the previous h1 tag.
+- ![Unclosed elements Error](/static/readme/images/validation_02.png)  
+Error in blog_list.html due to an unclosed div tag.
+
+### Javascript Validation
+
+### Python validation
 
 ### Notable bugs found during development or testing
 
