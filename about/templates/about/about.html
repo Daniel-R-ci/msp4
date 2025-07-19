@@ -49,7 +49,7 @@ About The Barn
             <h2 class="text-center">Contact us</h2>
             <p>If you have any questions for us, please fill out this form and we will get back to you as soon as
                 possible.</p>
-            <form action="" method="post">
+            <form method="post">
                 {% csrf_token %}
                 {{ contact_form | crispy }}
                 <div class="text-center">

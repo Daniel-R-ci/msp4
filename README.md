@@ -281,10 +281,24 @@ Not all files or folders are pushed to Github, either due to security reasons as
 All rendered html pages was tested with [W3 html validator](https://validator.w3.org/nu/)
 
 **Warnings/errors caught and solved**
-- ![H1 Warning](/static/readme/images/validation_01.png)  
+![H1 Warning](/static/readme/images/validation_01.png)  
 This warning occured on all pages due to using h1 tag in the header. The h1 was replaced with a div using the already existing class .header-title. Some additional css styling had to be applied to make look like the previous h1 tag.
-- ![Unclosed elements Error](/static/readme/images/validation_02.png)  
+<hr>
+
+![Unclosed elements Error](/static/readme/images/validation_02.png)  
 Error in blog_list.html due to an unclosed div tag.
+<hr>
+
+![Form action not set](static/readme/images/validation_03.png)
+Occured on several pages where form action="" was set. Although commonly used, this is not according to html standard. The solution was to simply delete the action method.
+<hr>
+
+![DuplicateID](static/readme/images/validation_04.png)  
+In event_registration.html there are two Bootstrap Modals for different purposes. The id of the modals (copied from Bootstrap) where changed upon implementation, but not the ID of all elements in the modal.
+<hr>
+
+![Incorrect use of thead and th](static/readme/images/validation_05.png)
+In user_profile.html, there had been some misplace thead-tags, and depending on the data being printed there was also some instances of a colspan being longer than the actual number of columns used.
 
 ### Javascript Validation
 

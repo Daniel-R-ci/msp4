@@ -32,6 +32,10 @@ Your user profile
                         <td>{{ user.username }}</td>
                     </tr>
                     <tr>
+                        <th>Email:</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
                         <th>First name:</th>
                         <td>{{ user.first_name }}</td>
                     </tr>
@@ -39,28 +43,25 @@ Your user profile
                         <th>Last name:</th>
                         <td>{{ user.last_name }}</td>
                     </tr>
+
                 </table>
             </div>
             <div class="text-center mt-1">
                 <a href="{% url 'account_change_password'%}" class="btn btn-secondary">Change your password</a>
             </div>
         </div>
-        <div class="col-12 col-md-8 col-lg-7 col-xl-4 mt-3">
+        <div class="col-12 col-md-8 col-lg-7 col-xl-4 mt-3 text-center">
             <h2 class="text-center">Upcoming events</h2>
+            {% if upcoming_events.count == 0 %}
+            <strong>You are not registered for any upcoming events</strong>
+            {% else %}
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th colspan="4" class="text-center">
-                            You are registered for the upcoming events
+                            You are registered for the following upcoming events
                         </th>
                     </tr>
-                </thead>
-                {% if upcoming_events.count == 0 %}
-                <tr>
-                    <td colspan="4">You are not registered for any events</td>
-                </tr>
-                {% else %}
-                <thead>
                     <tr>
                         <th>Event</th>
                         <th>Date</th>
@@ -83,26 +84,23 @@ Your user profile
                         </td>
                     </tr>
                     {% endfor %}
+
                 </tbody>
-                {% endif %}
             </table>
+            {% endif %}
         </div>
-        <div class="col-12 col-md-8 col-lg-7 col-xl-4 mt-3">
+        <div class="col-12 col-md-8 col-lg-7 col-xl-4 mt-3 text-center">
             <h2 class="text-center">Previous events</h2>
+            {% if previous_events.count == 0 %}
+            <strong>You have not attended any events</strong>
+            {% else %}
             <table class="table table-striped">
                 <thead>
                     <tr>
                         <th colspan="4" class="text-center">
-                            You have previously registered for these past events
+                            You have attended the following events
                         </th>
                     </tr>
-                </thead>
-                {% if previous_events.count == 0 %}
-                <tr>
-                    <td colspan="4">You are not registered for any past events</td>
-                </tr>
-                {% else %}
-                <thead>
                     <tr>
                         <th>Event</th>
                         <th>Date</th>
@@ -111,6 +109,8 @@ Your user profile
                     </tr>
                 </thead>
                 <tbody>
+
+
                     {% for event in previous_events %}
                     <tr>
                         <td>{{ event.event_title }}</td>
@@ -125,9 +125,10 @@ Your user profile
                         </td>
                     </tr>
                     {% endfor %}
+
                 </tbody>
-                {% endif %}
             </table>
+            {% endif %}
         </div>
     </div>
 </div>

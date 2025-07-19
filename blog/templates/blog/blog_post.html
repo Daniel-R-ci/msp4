@@ -45,7 +45,7 @@
                     <div id="newComment">
                         <h3 id="commentHeadline">Write a new comment</h3>
                         <p>You are posting as <strong>{{ user.username }}</strong></p>
-                        <form id="commentForm" action="" method="post" enctype="multipart/form-data">
+                        <form id="commentForm" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             {{ comment_form | crispy }}
                             <div class="text-center">
