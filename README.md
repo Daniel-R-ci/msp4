@@ -151,11 +151,14 @@ Courses and events will sometimes have a maximun number of participants, and reg
   The choice stood between storing uploaded images on Cloudinary or Amazon Web Service (AWS), and to store static files and images with the deployed files on Heroky or use AWS for these as well.
   AWS was choosen for both uploaded files and static files for two reasons. One was a way to build on what was learned in previous learning projects but in a newer version av Django (since there was known to be some differences), and also to be able to show larger variety in techniques and skills to potential employers if Milestone Projects are to be used as portfolio projects.
 
+- **Removing possibility to post images in blog comments**  
+  Nearing project submission, the decision was made to remove the feature to include images in blog comments. The idea was for The Creative Barn to be able to make a blog post on a certain theme, and then ask their visistors to contribute with pictures on their own relating projects. Unofrtunately there was no time to include constraints for file size, image size and style pictures with different proportions to look good. Since the "public blog", where users could post their own pictures and project, wouldn't be included in project submission picture upload for other than staff was removed. The features would still be a welcome adition to the site, and is noted in Future development ideas at the end of this file.
+
 
 ### Entity Relationship Diagram and Models
 Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)). Id fields will not be specified in models but implemented by Django, shown in ERD for relationshsip purposes.
 
-![ERD version 1.4](static/readme/images/erd_1_4.png)  
+![ERD version 1.5](static/readme/images/erd_1_5.png)  
 
 -> Link to models document goes here <-
 
@@ -167,14 +170,15 @@ Latest ERD used in project. Some field types may differ from actual model due to
 - [ERD version 1.2](static/readme/images/erd_1_2.png), add image_url field to Article to make use of Botutique_ADO AWS code. Also include same image field in Article_Comment to allow users to include images in their replies.
 - [ERD version 1.3](static/readme/images/erd_1_3.png), in Events model: fields image, published and published_on has been added to allow images and control when news are published, same as with blog posts.
 - [ERD version 1.4](static/readme/images/erd_1_4.png), in Article and Article_Comment, remove image_url fields, and in Article_Comment change commenter to user to better correspond with actual model name
+- [ERD version 1.5](static/readme/images/erd_1_5.png) , removed image in Article_Comment
 
 ### Wireframes
 
-Wireframes were constructed for each app before work started on each Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views. Some minor changes where made to the header and menu area for better clarity and user experience.
+Wireframes were constructed for most apps before work started on the respective Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views. Some minor changes where made to the header and menu area for better clarity and user experience.
 
 **Home app**  
 ![Home view](static/readme/images/wireframe_home_1_1.png)
-Home page
+Home page, index view when arriving to website
 
 **Blog app**  
 ![Blog list](static/readme/images/wireframe_bloglist_1_0.png)  
@@ -208,7 +212,7 @@ From left to right:
 - Brunswick-green: #034c3c; Header and footer
 - Carolina-blue: #76afd1; Used on some borders for accent
 
-Bootstrap button style outline was choosen as a good match for the styling.
+Bootstrap button style secondary was choosen as a good match for the styling on most of the website, with some confiramtion buttons using bootstrap primary button style.
 
 [Original color palette](static/readme/images/palette_1_0.png)
 
@@ -219,6 +223,9 @@ Apart from the projects complete Github commit history, the following are a log 
 - **June 23, 2025** Project formally started with introduction, basic outlines of goals and mentoring session with Code Insitute mentor Spencer Barriball.
 - **June 25, 2025** Set up development enviroment, including (among others) venv, PostgreSQL and .gitignore
 - **June 30, 20225** Deployment to Heroky to test config variables and database connection
+- **July 17, 2025** Midpoint mentoring session
+- **July 20, 2025** Final mentoring session
+- **Juky 22, 2025** Project submission
 
 ## Deployment
 
@@ -262,8 +269,17 @@ A complete list of settings stored in env.py and Heroku Config vars can be viewe
 
 Not all files or folders are pushed to Github, either due to security reasons as outlined above, or they are enviromental folders not needed for deployment. A complete list of files and folders not pushed to Github can be found in the .Gitignore file.
 
+## Stripe integration and registration flow
+
 ## Testing
-## Notable bugs found during development or testing
+
+### Testing procedures
+
+### Lighthouse validation
+
+### Other validators used
+
+### Notable bugs found during development or testing
 
 - Back to previous page from event_details
 

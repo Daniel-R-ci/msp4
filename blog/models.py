@@ -38,7 +38,6 @@ class Article_Comment(models.Model):
     comment = models.TextField()
     posted_on = models.DateTimeField(auto_now_add=True)
     visible = models.BooleanField(default=True)
-    image = models.ImageField(null=True, blank=True)
-
+    
     def __str__(self):
         return f"{self.user} commenting on {self.article} on {self.posted_on}"
