@@ -48,15 +48,12 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     {% block extra_css %}
     {% endblock %}
-
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-
     <header>
         <nav id="mobile-navbar" class="navbar navbar-expand-lg bg-body-tertiary fixed-top" data-bs-theme="dark">
             <div id="nav-area" class="container-fluid">
-
                 <a href="{% url 'home' %}">
                     <img src="{% static 'images/menu-icon.png' %}" class="d-inline header-logo" alt="Logo">
                     &nbsp;
@@ -66,7 +63,6 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse text-end" id="navbarNav">
                     <ul class="navbar-nav">
                         <li class="nav-item">
@@ -112,6 +108,7 @@
     </header>
 
     <main class="mb-3">
+        <!-- Display any messages as Bootstrap Toasts -->
         {% if messages %}
         <div class="toast-container end-0">
 
@@ -133,8 +130,8 @@
 
         {% block content %}
         {% endblock %}
-
     </main>
+
     <footer class="mt-auto">
         <div class="container-fluid">
             <div class="row">
@@ -210,20 +207,12 @@
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/d558ffb13f.js" crossorigin="anonymous"></script>
     <script src="https://js.stripe.com/v3/"></script>
 
     <!-- Custom JS -->
-    <script>
-        // Init all toasts, code troubleshooted and refined by ChatGPT
-        $(document).ready(function () {
-            $(".toast").each(function () {
-                const toast = new bootstrap.Toast(this);
-                toast.show();
-            });
-        });
-    </script>
+     <!-- Script to show any message toasts -->
+    <script src="{% static 'js/base.js' %}"></script>
 
     <!-- Place for custom JS for each individual side, to be included as necessary -->
     {% block postload_custom_js %}
