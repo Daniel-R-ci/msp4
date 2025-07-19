@@ -1,12 +1,69 @@
-from django.db import models
-from django.contrib.auth.models import User
-from datetime import timedelta
-from django.utils import timezone
+# Overview of all models used
 
-# Create your models here.
+## About app
+
+````
+class Contact(models.Model):**  
+    """  
+    Stores information from contact form  
+    """  
+    name = models.CharField(max_length=100)  
+    email = models.EmailField(max_length=100)  
+    message = models.TextField()  
+    sent_on = models.DateField(auto_now_add=True)  
+    read = models.BooleanField(default=False)
+```` 
+
+## Blog
+
+````
+class Article(models.Model):
+    """  
+    Containes one blog article  
+    """  
+    author = models.ForeignKey(  
+        User,  
+        null=True,  
+        on_delete=models.SET_NULL,  
+        related_name="articles")  
+    title = models.CharField(max_length=255)  
+    published = models.BooleanField(default=False)  
+    publish_on = models.DateTimeField()  
+    updated_on = models.DateTimeField(auto_now=True)  
+    content = models.TextField()  
+    image = models.ImageField(null=True, blank=True)  
+
+    def __str__(self):  
+     &nbsp; &nbsp;    return self.title
+
+    @property  
+    def number_of_comments(self):  
+         &nbsp; &nbsp;return Article_Comment.objects.filter(  
+         &nbsp; &nbsp; &nbsp; &nbsp;    article=self, visible=True).count()
 
 
-# Contains information about a specific Event/Course
+class Article_Comment(models.Model):
+    """
+    Contains one comment on specific blog article
+    """
+    article = models.ForeignKey(
+        Article,
+        on_delete=models.CASCADE,
+        related_name="comments")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='article_commenter')
+    comment = models.TextField()
+    posted_on = models.DateTimeField(auto_now_add=True)
+    visible = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.user} commenting on {self.article} on {self.posted_on}"
+````
+
+## Events
+````
 class Event(models.Model):
     """
     Contains information about a specific Event/Course
@@ -42,7 +99,6 @@ class Event(models.Model):
         return self.max_capacity - self.booked_spots
 
 
-# Registration for a specific event
 class Event_Registration(models.Model):
     """
     Registration for a specific event
@@ -75,3 +131,4 @@ class Event_Registration(models.Model):
         cutoff_time = timezone.now() - timedelta(minutes=5)
         Event_Registration.objects.filter(
             created_on__lt=cutoff_time, confirmed=False).delete()
+````

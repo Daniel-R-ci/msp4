@@ -4,7 +4,11 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+# Contains one blog article
 class Article(models.Model):
+    """
+    Containes one blog article
+    """
     author = models.ForeignKey(
         User,
         null=True,
@@ -27,6 +31,9 @@ class Article(models.Model):
 
 
 class Article_Comment(models.Model):
+    """
+    Contains one comment on specific blog article
+    """
     article = models.ForeignKey(
         Article,
         on_delete=models.CASCADE,
@@ -38,6 +45,6 @@ class Article_Comment(models.Model):
     comment = models.TextField()
     posted_on = models.DateTimeField(auto_now_add=True)
     visible = models.BooleanField(default=True)
-    
+
     def __str__(self):
         return f"{self.user} commenting on {self.article} on {self.posted_on}"

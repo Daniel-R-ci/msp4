@@ -3,9 +3,10 @@ from django.db import models
 # Create your models here.
 
 
+# Stores information from contact form
 class Contact(models.Model):
     """
-    Stores informatio from contact form
+    Stores information from contact form
     """
     name = models.CharField(max_length=100)
     email = models.EmailField(max_length=100)

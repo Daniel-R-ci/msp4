@@ -160,7 +160,7 @@ Latest ERD used in project. Some field types may differ from actual model due to
 
 ![ERD version 1.5](static/readme/images/erd_1_5.png)  
 
--> Link to models document goes here <-
+[Overview of all models as implemented in Django](static/readme/README_models.md)
 
 **List of all ERDs created during project**  
 (from oldest to newest)  
