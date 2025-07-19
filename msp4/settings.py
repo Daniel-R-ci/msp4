@@ -142,7 +142,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Allauth settings
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'first_name*', 'last_name*', 'password1*', 'password2*']
+ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
 ACCOUNT_LOGIN_METHODS = {'username', 'email'}
 
 

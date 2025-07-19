@@ -93,7 +93,7 @@ def cache_registration_data(request):
     except Exception as e:
         messages.error(request, "We apologize. Your payment can not be \
                        completed at this time. Please try again later.")
-        return HttpResponse(content=e, status=400)  
+        return HttpResponse(content=e, status=400)
 
 
 # Register for an event
@@ -140,7 +140,8 @@ def event_registration(request, event_id):
 
     else:
         if Event_Registration.objects.filter(event=event, user=request.user, confirmed=True).exists():
-            raise Http404("You already have a confirmed reservation for this event")
+            raise Http404("You already have a confirmed reservation \
+                          for this event")
         # Check that there are still available spots
         if event.available_spots < 1:
             raise Http404("No available spots")

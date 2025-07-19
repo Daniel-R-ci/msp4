@@ -45,7 +45,8 @@ def blog_detail(request, article_id):
         published=True
     )
 
-    comments = Article_Comment.objects.filter(article=article).order_by('-posted_on')
+    comments = Article_Comment.objects.filter(
+        article=article).order_by('-posted_on')
 
     if request.method == "POST":
         comment_form = Article_Comment_Form(request.POST, request.FILES)

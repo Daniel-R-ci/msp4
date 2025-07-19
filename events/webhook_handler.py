@@ -27,7 +27,8 @@ class StripeWH_Handler:
         Handle payment_intent.succeeded webhook from Stripe
         """
 
-        # Sleep for 10 seconds before continuing, to make time for database and server to complete work
+        # Sleep for 10 seconds before continuing, to make time for database
+        # and server to complete work
         time.sleep(10)
 
         intent = event.data.object
@@ -59,7 +60,8 @@ class StripeWH_Handler:
             stripe.Refund.create(
                 charge=charge_id,
                 reason='requested_by_customer',
-                metadata={'note': 'Customer refunded: Reservation not completed'},
+                metadata={'note': 'Customer refunded: Reservation \
+                          not completed'},
             )
 
             # TODO: Send an email to user informing that a reservation can't
