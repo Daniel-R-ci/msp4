@@ -1,3 +1,7 @@
+/***** Settings for JSHINT.COM, including variables created before calling this script file */
+/* jshint esversion: 8 */
+/* global bootstrap */
+
 $(document).ready(function () {
 
     // Hide the new comment form and add event listener to show button

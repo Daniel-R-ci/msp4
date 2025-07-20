@@ -1,3 +1,6 @@
+/***** Settings for JSHINT.COM, including variables created before calling this script file */
+/* jshint esversion: 8 */
+/* global bootstrap */
 
 /** Loop through and initiate all toasts after document has loaded **/
 

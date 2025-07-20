@@ -307,18 +307,19 @@ All custom-made Javascripts has been tested using [JSHINT.COM](https://jshint.co
 Settings used during validation shown below  
 ![jshint_configuration_settings.png](static/readme/images/jshint_settings.png)
 
-**event_registration.js**
-This file assumes that  
-- constants timeoutUrl, stripePublicKey and clientSecret has ben set in the html file using event_registration.js
-- Bootstrap, Jquery and Stripe has been included, either in the html file using event_registration.js or base template
-
-The use of asychnronus functions also assumes ES8 standard. JSHint is told this with the inclusion of
-````
-/* jshint esversion: 8 */
+External JS files may assume that certain constants are declared in other places before calling the JS file. 
+Bootstrap, Jquery and Stripe is included in the base.html template, and assumed to be recognized anywhere.  
+The use of asychnronus functions in some scripts also assumes ES8 standard. JSHint is told this with the inclusion of  
+/* jshint esversion: 8 */  
+at the top of every js file. 
+Objects, variables or constants are declared using global where needed, for example
 /* global timeoutUrl, stripePublicKey, clientSecret, bootstrap, Stripe */
-````
 
-Assuming this settings, the file passes without warnings or errors  
+**base.js**  
+![jshint_base.png](static/readme/images/jshint_base.png)  
+**blog_post.js**  
+![jshint_blog_post.png](static/readme/images/jshint_blog_post.png)  
+**event_registration.js**  
 ![jshint_event_registration.png](static/readme/images/jshint_event_registration.png)
 
 ### Python validation
@@ -326,6 +327,7 @@ Assuming this settings, the file passes without warnings or errors
 Flake 8 was installed and used to find any remaining linting problems that remained after manually going through the files. Some linting errors remain and all in the form of django.*something* imported but unused. These are all from files created by Django and has not been edited at all during the project. Those files are all models.py and admin.py (in apps that don't use any own models) and tests.py, since no automated testing has been performed.
 
 The command ***python -m flake8 --exclude .venv,migrations*** was used to exclude files in the .venv and migrations folder, as recommended in CI Boutique Ado lessons.
+![flake_linter.png](static/readme/images/flake_linter.png)
 
 [CI Python Linter](https://pep8ci.herokuapp.com/) could have been used as in previous MS3 project with copying the code from all relevant files, but using Flake 8 this way ensures that no file was missed.
 
@@ -357,7 +359,7 @@ The command ***python -m flake8 --exclude .venv,migrations*** was used to exclud
 ### User having to wait five minutes to retry booking
 **Problem:** If a user for some reason needed to restart their browser during the five minute registration countdown, the user would be greeted by a "you have already registered for this event" message until the preliminary booking was deleted after five minutes.  
 **Solution:** Delete all unconfirmed bookings matching user and event in the beginning of the event_details view. This allows the user to start a new reservation, while still preventing anyone else from taking the users place while browser/computer is restarting.  
-**Potential remaining issue:** For the time it takes from when the event_detail page loads until the user clicks the registration button, there is a possibility that another faster user might be able to grab the spot, but considering the expected load of users using the Barns page that is considered unlikely.
+**Potential remaining issue:** For the time it takes from when the event_detail page loads until the user clicks the registration button, there is a possibility that another faster user might be able to grab the spot, but considering the expected load of users using the Barns page that is considered unlikely. Also, there is a first-come first-serve priority.
 
 ### User being able to go back and making multiple bookings
 **Problem:** By using the browsers back-function, or saving urls, it was possible for a user to register several times for an event.  
