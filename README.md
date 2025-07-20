@@ -304,6 +304,9 @@ In user_profile.html, there had been some misplace thead-tags, and depending on 
 
 ### Python validation
 
+**Linting**
+Flake 8 was installed and used to find any remaining linting problems that remained after manually going through the files. Some linting errors remain, these are from files created by Django and has not been edited at all during the project. Those files are all models.py and admin.py (in apps that don't use any own models) and tests.py, since no automated testing has been performed.
+
 ### Notable bugs found during development or testing
 
 - Back to previous page from event_details

@@ -18,8 +18,9 @@ def about_view(request):
         if contact_form.is_valid():
             contact = contact_form.save(commit=False)
             contact.save()
-            messages.success(request,
-                             "Thank you for contacting The Creative Barn!\nWe will get back to you as soon as possible.")
+            messages.success(
+                request, "Thank you for contacting The Creative Barn!\
+                    \nWe will get back to you as soon as possible.")
             contact_form = Contact_Form()
     else:
         contact_form = Contact_Form()

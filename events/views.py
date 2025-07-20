@@ -139,7 +139,9 @@ def event_registration(request, event_id):
             return render(request, 'events/event_registration.html', context)
 
     else:
-        if Event_Registration.objects.filter(event=event, user=request.user, confirmed=True).exists():
+        if Event_Registration.objects.filter(
+            event=event, user=request.user, confirmed=True
+        ).exists():
             raise Http404("You already have a confirmed reservation \
                           for this event")
         # Check that there are still available spots
