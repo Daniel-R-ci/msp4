@@ -41,7 +41,7 @@ $(document).ready(function () {
             'client_secret': clientSecret,
             'registration_id': registrationId,
         };
-        var url = '/registration/cache_registration_data/';
+        var url = '/events/cache_registration_data/';
         try {
             // Use await for AJAX call
             await $.ajax({
@@ -79,7 +79,8 @@ $(document).ready(function () {
             }
 
         } catch (err) {
-            location.reload();  // fallback error handler
+            console.log(err);
+            //location.reload();  // fallback error handler
         }
     });
 
