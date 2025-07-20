@@ -79,8 +79,7 @@ $(document).ready(function () {
             }
 
         } catch (err) {
-            console.log(err);
-            //location.reload();  // fallback error handler
+            location.reload();  // fallback error handler
         }
     });
 
