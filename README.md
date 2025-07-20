@@ -318,7 +318,7 @@ The use of asychnronus functions also assumes ES8 standard. JSHint is told this 
 /* global timeoutUrl, stripePublicKey, clientSecret, bootstrap, Stripe */
 ````
 
-Assuming this settings, the file passes without warnings or errors
+Assuming this settings, the file passes without warnings or errors  
 ![jshint_event_registration.png](static/readme/images/jshint_event_registration.png)
 
 ### Python validation
