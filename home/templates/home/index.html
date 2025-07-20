@@ -10,51 +10,59 @@ Welcome to The Creativity Barn
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-12 text-center">
-            <h1>Welcome to The Creativity Barn</h1>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h1>Welcome to The Creativity Barn</h1>
+            </div>
+            <div class="col-7 text-center">
+                <h2>Art and hobby supplies in a creative environment</h2>
+            </div>
         </div>
-        <div class="col-7 text-center">
-            <h2>Art and hobby supplies in a creative environment</h2>
-        </div>
-    </div>
-    <div class="row justify-content-center mt-2 mt-lg-5">
-        <div class="col-12 col-md-4 col-xl-3 text-center">
-            <img class="col-image" src="{% static 'images/home-image.png' %}" alt="Logo with the Barn">
-        </div>
-        <div class="col-12 col-md-4 mt-2 align-self-center order-md-first text-center text-md-end">
-            <div class="card">
-                <div class="card-header text-center text-md-end">
-                    <h2>Latest News</h2>
+        <div class="row justify-content-center mt-2 mt-lg-5">
+            <div class="col-12 col-md-4 col-xl-3 text-center">
+                <img class="col-image" src="{% static 'images/home-image.png' %}" alt="Logo with the Barn">
+            </div>
+            <div class="col-12 col-md-4 mt-2 align-self-center order-md-first text-center text-md-end">
+                <div class="card">
+                    <div class="card-header text-center text-md-end">
+                        <h2>Latest News</h2>
+                    </div>
+                    <div class="card-body">
+                        {% if articles.count == 0 %}
+                            <p>There are no blog posts to display</p>
+                        {% endif %}
+                        
+                        {% for article in articles %}
+                            <p>
+                                <a href="{% url 'blog_post' article.id %}" class="home-card-url">{{article.title}}</a>
+                                 - <em>{{ article.publish_on | date:"M d" }}</em>
+                            </p>
+                        {% endfor %}
+                    </div>
                 </div>
-                <div class="card-body">
-                    {% if articles.count == 0 %}
-                    <p>There are no blog posts to display</p>
-                    {% endif %}
-                    {% for article in articles %}
-                    <p><a href="{% url 'blog_post' article.id %}" class="home-card-url">{{article.title}}</a> - <em>{{ article.publish_on | date:"M d" }}</em></p>
-                    {% endfor %}
+            </div>
+            <div class="col-12 mt-2 col-md-4 align-self-center text-center text-md-start order-md-last mb-2">
+                <div class="card">
+                    <div class="card-header text-center text-md-start">
+                        <h2>Upcoming events and courses</h2>
+                    </div>
+                    <div class="card-body">
+                        {% if events.count == 0 %}
+                            <p>There are no events to display</p>
+                        {% endif %}
+
+                        {% for event in events %}
+                            <p>
+                                <a href="{% url 'event_detail' event.id %}" class="home-card-url">{{event.title}}</a>
+                                 - <em>{{ event.time | date:"M d" }}</em>
+                            </p>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 mt-2 col-md-4 align-self-center text-center text-md-start order-md-last mb-2">
-            <div class="card">
-                <div class="card-header text-center text-md-start">
-                    <h2>Upcoming events and courses</h2>
-                </div>
-                <div class="card-body">
-                    {% if events.count == 0 %}
-                    <p>There are no events to display</p>
-                    {% endif %}
-                    {% for event in events %}
-                    <p><a href="{% url 'event_detail' event.id %}" class="home-card-url">{{event.title}}</a> - <em>{{ event.time | date:"M d" }}</em></p>
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
     </div>
-</div>
 {% endblock %}
 
 <!-- Custom JS specific to this page-->

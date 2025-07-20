@@ -19,46 +19,46 @@ About The Barn
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-<div class="container-fluid mb-2">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6">
-            <h1 class="text-center">About The Creative Barn</h1>
-            <p>
-                In 2015 we, Arthur and Tricia, fullfilled our dreams of moving away from the busy city of London. We
-                bought a farm and has worked hard to turn the old barn into an oasis for craft and creativity,
-                <strong><em>The Creative Barn</em></strong>.
-            </p>
-            <p>
-                Here we have room for Arthurs wood and metal craftshop, our atelier, a gallery section and a well
-                equiped art store. We get a lot of questions if we do mail orders, but we're afraid the answer is no.
-                We run The Barn in addition to our regular jobs, and we can not put the time and effort into a lot of
-                mail handling. We prefer to focus on the atmosphere in the store and creating interesting and inspiring
-                events. Even if we live out in the countryside, it's not a long drive from several neighbouring cities
-                and communities.
-            </p>
-            <p>So please come visit us and take a look at our very varied inventory, including (among others)</p>
-            <ul>
-                <li><strong>Painting:</strong> Paints (acryllics, oil, watercolor), paper, canvases, brushes, tools...
-                </li>
-                <li><strong>Textile:</strong> Fabric, yarn, threads, knitting needles... </li>
-                <li><strong>Wood and metal:</strong> Balsa, plywood, mdf, tools, metal tubing and sheets... </li>
-                <li><strong>Other crafts:</strong> Diamond painting, puzzles, plaster and molds...</li>
-                <li><strong>For the kids:</strong> Puzzles, easy kits in various crafts...</li>
-            </ul>
+    <div class="container-fluid mb-2">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <h1 class="text-center">About The Creative Barn</h1>
+                <p>
+                    In 2015 we, Arthur and Tricia, fullfilled our dreams of moving away from the busy city of London. We
+                    bought a farm and has worked hard to turn the old barn into an oasis for craft and creativity,
+                    <strong><em>The Creative Barn</em></strong>.
+                </p>
+                <p>
+                    Here we have room for Arthurs wood and metal craftshop, our atelier, a gallery section and a well
+                    equiped art store. We get a lot of questions if we do mail orders, but we're afraid the answer is no.
+                    We run The Barn in addition to our regular jobs, and we can not put the time and effort into a lot of
+                    mail handling. We prefer to focus on the atmosphere in the store and creating interesting and inspiring
+                    events. Even if we live out in the countryside, it's not a long drive from several neighbouring cities
+                    and communities.
+                </p>
+                <p>So please come visit us and take a look at our very varied inventory, including (among others)</p>
+                <ul>
+                    <li><strong>Painting:</strong> Paints (acryllics, oil, watercolor), paper, canvases, brushes, tools...
+                    </li>
+                    <li><strong>Textile:</strong> Fabric, yarn, threads, knitting needles... </li>
+                    <li><strong>Wood and metal:</strong> Balsa, plywood, mdf, tools, metal tubing and sheets... </li>
+                    <li><strong>Other crafts:</strong> Diamond painting, puzzles, plaster and molds...</li>
+                    <li><strong>For the kids:</strong> Puzzles, easy kits in various crafts...</li>
+                </ul>
 
-            <h2 class="text-center">Contact us</h2>
-            <p>If you have any questions for us, please fill out this form and we will get back to you as soon as
-                possible.</p>
-            <form method="post">
-                {% csrf_token %}
-                {{ contact_form | crispy }}
-                <div class="text-center">
-                    <button id="submitButton" type="submit" class="btn btn-secondary btn-sm">Submit</button>
-                </div>
-            </form>
+                <h2 class="text-center">Contact us</h2>
+                <p>If you have any questions for us, please fill out this form and we will get back to you as soon as
+                    possible.</p>
+                <form method="post">
+                    {% csrf_token %}
+                    {{ contact_form | crispy }}
+                    <div class="text-center">
+                        <button id="submitButton" type="submit" class="btn btn-secondary btn-sm">Submit</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endblock %}
 
 <!-- Custom JS specific to this page-->

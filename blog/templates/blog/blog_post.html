@@ -11,104 +11,100 @@
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1>{{ article.title }}</h1>
-        </div>
-        <div class="col-12 col-md-6 mt-2">
-            {% if article.image %}
-            <img src="{{ article.image.url }}" class="blog-post-image" alt="Image illustrating blog post">
-            {% else %}
-            <img src="{% static 'images/blog_placeholder_image.jpg' %}" class="blog-post-image" alt="Placeholder Image">
-            {% endif %}
-        </div>
-        <div class="col-12 col-md-6 mt-2 d-flex flex-column align-items-center">
-            <div>
-                <p>Posted by <strong>{{ article.author.first_name }}</strong> on <em>{{ article.publish_on|date}}</em>
-                </p>
-                <hr class="border border-primary">
-                {{ article.content | linebreaks }}
-                <hr class="border border-primary border-2">
-                <div id="comments">
-                    <h2>Comments section</h2>
-                    {% if article.number_of_comments == 0 %}
-                    <p>This article has no comments</p>
-                    {% else %}
-                    <p>
-                        This article has {{ article.number_of_comments }}
-                        comment{% if article.number_of_comments > 1%}s{% endif %}.
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1>{{ article.title }}</h1>
+            </div>
+            <div class="col-12 col-md-6 mt-2">
+                {% if article.image %}
+                    <img src="{{ article.image.url }}" class="blog-post-image" alt="Image illustrating blog post">
+                {% else %}
+                    <img src="{% static 'images/blog_placeholder_image.jpg' %}" class="blog-post-image" alt="Placeholder Image">
+                {% endif %}
+            </div>
+            <div class="col-12 col-md-6 mt-2 d-flex flex-column align-items-center">
+                <div>
+                    <p>Posted by <strong>{{ article.author.first_name }}</strong> on <em>{{ article.publish_on|date}}</em>
                     </p>
-                    {% endif %}
-                    {% if user.is_authenticated %}
-                    <button id="showCommentForm" class="btn btn-secondary btn-sm mb-2">Post a new comment</button>
-                    <div id="newComment">
-                        <h3 id="commentHeadline">Write a new comment</h3>
-                        <p>You are posting as <strong>{{ user.username }}</strong></p>
-                        <form id="commentForm" method="post" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {{ comment_form | crispy }}
-                            <div class="text-center">
-                                <button id="submitButton" type="submit" class="btn btn-secondary btn-sm">Submit</button>
+                    <hr class="border border-primary">
+                    {{ article.content | linebreaks }}
+                    <hr class="border border-primary border-2">
+                    <div id="comments">
+                        <h2>Comments section</h2>
+                        {% if article.number_of_comments == 0 %}
+                            <p>This article has no comments</p>
+                        {% else %}
+                            <p>
+                                This article has {{ article.number_of_comments }}
+                                comment{% if article.number_of_comments > 1%}s{% endif %}.
+                            </p>
+                        {% endif %}
+
+                        {% if user.is_authenticated %}
+                            <button id="showCommentForm" class="btn btn-secondary btn-sm mb-2">Post a new comment</button>
+                            <div id="newComment">
+                                <h3 id="commentHeadline">Write a new comment</h3>
+                                <p>You are posting as <strong>{{ user.username }}</strong></p>
+                                <form id="commentForm" method="post" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    {{ comment_form | crispy }}
+                                    <div class="text-center">
+                                        <button id="submitButton" type="submit" class="btn btn-secondary btn-sm">Submit</button>
+                                    </div>
+                                </form>
                             </div>
-                        </form>
+                        {% endif %}
+
+                        {% for comment in comments %}
+                            <hr class="border border-primary mt-2">
+                            <div class="d-flex mt-1">
+                                <h3>Posted by {{comment.user}}&nbsp;</h3>
+                                on {{ comment.posted_on }}
+                            </div>
+                            <div id="comment{{comment.pk}}">
+                                {{ comment.comment | linebreaks }}
+                            </div>
+                            {% if user.is_authenticated and comment.user == user %}
+                                <button class="btn btn-sm btn-success btn-edit" data-article_id="{{article.id}}"
+                                    data-comment_id="{{comment.pk}}">Edit</button>
+                                <button class="btn btn-sm btn-danger btn-delete" data-article_id="{{article.id}}"
+                                    data-comment_id="{{comment.pk}}">Delete</button>
+                            {% endif %}
+                        {% endfor %}
                     </div>
-                    {% endif %}
-
-                    {% for comment in comments %}
-                    <hr class="border border-primary mt-2">
-                    <div class="d-flex mt-1">
-                        <h3>Posted by {{comment.user}}&nbsp;</h3>
-                        on {{ comment.posted_on }}
-                    </div>
-
-                    <div id="comment{{comment.pk}}">
-                        {{ comment.comment | linebreaks }}
-                    </div>
-                    {% if user.is_authenticated and comment.user == user %}
-                    <button class="btn btn-sm btn-success btn-edit" data-article_id="{{article.id}}"
-                        data-comment_id="{{comment.pk}}">Edit</button>
-                    <button class="btn btn-sm btn-danger btn-delete" data-article_id="{{article.id}}"
-                        data-comment_id="{{comment.pk}}">Delete</button>
-                    {% endif %}
-
-                    {% endfor %}
-
                 </div>
-
             </div>
-        </div>
-        <div class="col-12 text-center mt-2 mb-2">
-            <a href="{{ previous_url }}" class="btn btn-sm btn-secondary">Back to previous page</a>
-        </div>
-    </div>
-</div>
-
-<!-- Delete confirmation modal -->
-<!-- Reused from Code Institute I think therefore I blog walkthrough project -->
-<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteCommentModalLabel">Delete comment?</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                Are you sure you want to delete your comment?
-                This action cannot be undone.
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <a id="deleteCommentConfirm" href="#" class="btn
-          btn-danger">Delete</a>
+            <div class="col-12 text-center mt-2 mb-2">
+                <a href="{{ previous_url }}" class="btn btn-sm btn-secondary">Back to previous page</a>
             </div>
         </div>
     </div>
-</div>
+
+    <!-- Delete confirmation modal -->
+    <!-- Reused from Code Institute I think therefore I blog walkthrough project -->
+    <div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-labelledby="deleteCommentModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteCommentModalLabel">Delete comment?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete your comment?
+                    This action cannot be undone.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <a id="deleteCommentConfirm" href="#" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 <!-- Custom JS specific to this page-->
 {% block postload_custom_js %}
-<script src="{% static 'blog/js/blog_post.js' %}"></script>
+    <script src="{% static 'blog/js/blog_post.js' %}"></script>
 {% endblock %}

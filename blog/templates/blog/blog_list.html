@@ -10,53 +10,50 @@ Blog - News and Articles
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-<div class="container-fluid mb-3">
-    <div class="row justify-content-center">
-        <div class="col-12 text-center">
-            <h1>The Barn Blog - News and Articles</h1>
-        </div>
-        {% for article in articles %}
-        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-3">
-            <div class="card h-100">
-                {% if article.image %}
-                <img src="{{ article.image.url }}" class="card-img-top" alt="Image illustrating blog post">
+    <div class="container-fluid mb-3">
+        <div class="row justify-content-center">
+            <div class="col-12 text-center">
+                <h1>The Barn Blog - News and Articles</h1>
+            </div>
+            {% for article in articles %}
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mt-3">
+                    <div class="card h-100">
+                        {% if article.image %}
+                            <img src="{{ article.image.url }}" class="card-img-top" alt="Image illustrating blog post">
+                        {% else %}
+                            <img src="{% static 'images/blog_placeholder_image.jpg' %}" class="card-img-top" alt="Placeholder Image">
+                        {% endif %}
 
-                {% else %}
-                <img src="{% static 'images/blog_placeholder_image.jpg' %}" class="card-img-top"
-                    alt="Placeholder Image">
-                {% endif %}
-                <div class="card-header">
-                    <h2>{{ article.title }}</h2>
-                </div>
+                        <div class="card-header">
+                            <h2>{{ article.title }}</h2>
+                        </div>
 
-
-                <div class="card-body">
-                    <p class="card-text">Published on {{ article.publish_on|date }} by {{article.author.first_name }}
-                    </p>
-                    {% if article.number_of_comments == 1 %}
-                    <p class="comment-counter">
-                        <i class="fa-solid fa-comment"></i> 1 comment
-                    </p>
-                    {% elif article.number_of_comments > 1 %}
-                    <p class="comment-counter">
-                        <i class="fa-solid fa-comments"></i> {{ article.number_of_comments }} comments
-                    </p>
-                    {% endif %}
-                    <div class="text-center">
-                        <a href="{% url 'blog_post' article.id %}" class="btn btn-sm btn-secondary">Read more</a>
+                        <div class="card-body">
+                            <p class="card-text">Published on {{ article.publish_on|date }} by {{article.author.first_name }}
+                            </p>
+                            {% if article.number_of_comments == 1 %}
+                                <p class="comment-counter">
+                                    <i class="fa-solid fa-comment"></i> 1 comment
+                                </p>
+                            {% elif article.number_of_comments > 1 %}
+                                <p class="comment-counter">
+                                    <i class="fa-solid fa-comments"></i> {{ article.number_of_comments }} comments
+                                </p>
+                            {% endif %}
+                            <div class="text-center">
+                                <a href="{% url 'blog_post' article.id %}" class="btn btn-sm btn-secondary">Read more</a>
+                            </div>
+                        </div>
                     </div>
-
                 </div>
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 text-center mt-2 mb-2 justify-content-center">
+                {% include 'includes/pagination.html' with page=articles %}
             </div>
         </div>
-        {% endfor %}
     </div>
-    <div class="row justify-content-center">
-        <div class="col-12 text-center mt-2 mb-2 justify-content-center">
-            {% include 'includes/pagination.html' with page=articles %}
-        </div>
-    </div>
-</div>
 {% endblock %}
 
 <!-- Custom JS specific to this page-->

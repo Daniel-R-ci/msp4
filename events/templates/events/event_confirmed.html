@@ -4,42 +4,42 @@
 <!-- Default title Creativity Barn -->
 <!-- Remove if custom title is not needed -->
 {% block title %}
-Event confirmed
+    Event confirmed
 {% endblock %}
 
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-<div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6 text-center">
-            <h1>Reservation complete</h1>
-            <p>You have a confirmed reservation for the following event:</p>
-            <div class="d-flex justify-content-center text-start">
-                <table>
-                    <tr>
-                        <td><strong>Event: </strong> </td>
-                        <td>{{ registration.event_title }} </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Date and time: </strong></td>
-                        <td>{{ registration.event_time }}</td>
-                    </tr>
-                    {% if registration.event_cost > 0 %}
-                    <tr>
-                        <td><strong>Cost: </strong></td>
-                        <td>£{{ registration.event_cost|floatformat:2 }} <small>(payment completed</small>)</td>
-                    </tr>
-                    {% endif %}
-                </table>
-            </div>
-            <div class="mt-2">
-                <a href="{% url 'events' %}" class="btn btn-secondary">Back to Events page</a>
-                <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home page</a>
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 text-center">
+                <h1>Reservation complete</h1>
+                <p>You have a confirmed reservation for the following event:</p>
+                <div class="d-flex justify-content-center text-start">
+                    <table>
+                        <tr>
+                            <td><strong>Event: </strong> </td>
+                            <td>{{ registration.event_title }} </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Date and time: </strong></td>
+                            <td>{{ registration.event_time }}</td>
+                        </tr>
+                        {% if registration.event_cost > 0 %}
+                            <tr>
+                                <td><strong>Cost: </strong></td>
+                                <td>£{{ registration.event_cost|floatformat:2 }} <small>(payment completed</small>)</td>
+                            </tr>
+                        {% endif %}
+                    </table>
+                </div>
+                <div class="mt-2">
+                    <a href="{% url 'events' %}" class="btn btn-secondary">Back to Events page</a>
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Back to Home page</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 {% endblock %}
 

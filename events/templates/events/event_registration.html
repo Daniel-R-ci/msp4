@@ -20,106 +20,100 @@ Event registration
 <!-- Main content-->
 <!-- Container not supplied and must be included -->
 {% block content %}
-<div class="container fluid">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-6 mt-5">
-            <div class="text-center">
-                <h1>Event registration</h1>
-                <h2>{{ event.title }}</h2>
-                <p><strong>Date and time: </strong>{{ event.time }}</p>
+    <div class="container fluid">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 mt-5">
+                <div class="text-center">
+                    <h1>Event registration</h1>
+                    <h2>{{ event.title }}</h2>
+                    <p><strong>Date and time: </strong>{{ event.time }}</p>
+                </div>
+                <p>You have a preliminary reservation for {{event.title}}. You must complete payment within five minutes to
+                    confirm your spot.</p>
             </div>
-            <p>You have a preliminary reservation for {{event.title}}. You must complete payment within five minutes to
-                confirm your spot.</p>
-        </div>
-        <div class="w-100"></div>
-        <div class="col-12 col-md-6 text-center">
-            <strong>Time remaining: </strong><span id="timer"></span>
-        </div>
-        <div class="w-100"></div>
-        <div class="col-12 col-md-6 mt-3">
-            <div class="stripe-form mb-3">
-                <h3>Secure Payment via Stripe.com</h3>
-                <form method="post" id="payment-form">
-                    {% csrf_token %}
-                    {{ payment_form | crispy }}
-                    <label class="form-label">Amount to be paid</label>
-                    <input type="text" vaLue="£ {{ event.cost | floatformat:2 }}" class="textinput form-control"
-                        disabled>
-                    <input type="hidden" id="userId" value="{{ user.id }}">
-                    <input type="hidden" id="userEmail" value="{{ user.email }}">
-                    <input type="hidden" id="registrationId" value="{{ registration_id }}">
-                    <label class="form-label requiredField">
-                        Credit/Debit card number<span class="asteriskField">*</span> </label>
-                    <!-- Style code to make stripe elements look like Bootstrap forms found on https://stackoverflow.com/questions/46039315/how-can-i-style-a-stripe-elements-input-with-bootstrap-->
-                    <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
-                    <div class="text-center pt-3">
-                        <button type="submit" class="btn btn-primary">Pay and register</button>
-                        <a href="{% url 'event_cancel' event.id %}" class="btn btn-secondary">Cancel</a>
-                    </div>
-                    <div id="card-errors" role="alert"></div>
-                </form>
+            <div class="w-100"></div>
+            <div class="col-12 col-md-6 text-center">
+                <strong>Time remaining: </strong><span id="timer"></span>
             </div>
-        </div>
-    </div>
-</div>
-
-<!-- Modals -->
-<div class="modal fade" id="timeExpiredModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="timeExpiredLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="timeExpiredLabel">Time has expired</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>You must complete registration within five minutes.</p>
-                <p>You need to restart the reservation process, but there is a risk your spot now has been reserved for
-                    someone else.</p>
-
-            </div>
-            <div class="modal-footer">
-                <button id="modalTimeoutCloseButton" type="button" class="btn btn-secondary"
-                    data-bs-dismiss="modal">Close</button>
+            <div class="w-100"></div>
+            <div class="col-12 col-md-6 mt-3">
+                <div class="stripe-form mb-3">
+                    <h3>Secure Payment via Stripe.com</h3>
+                    <form method="post" id="payment-form">
+                        {% csrf_token %}
+                        {{ payment_form | crispy }}
+                        <label class="form-label">Amount to be paid</label>
+                        <input type="text" vaLue="£ {{ event.cost | floatformat:2 }}" class="textinput form-control"
+                            disabled>
+                        <input type="hidden" id="userId" value="{{ user.id }}">
+                        <input type="hidden" id="userEmail" value="{{ user.email }}">
+                        <input type="hidden" id="registrationId" value="{{ registration_id }}">
+                        <label class="form-label requiredField">
+                            Credit/Debit card number<span class="asteriskField">*</span> </label>
+                        <!-- Style code to make stripe elements look like Bootstrap forms found on https://stackoverflow.com/questions/46039315/how-can-i-style-a-stripe-elements-input-with-bootstrap-->
+                        <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'></div>
+                        <div class="text-center pt-3">
+                            <button type="submit" class="btn btn-primary">Pay and register</button>
+                            <a href="{% url 'event_cancel' event.id %}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                        <div id="card-errors" role="alert"></div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<div class="modal fade" id="pleaseWaitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="pleaseWaitLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="pleaseWaitLabel">Your payment is being processed</h1>
-            </div>
-            <div class="modal-body">
-                <p>Please wait while your payment is being processed.</p>
-                <p>Do not close your browser or browser tab until payment has been completed.</p>
-            </div>
-            <div class="modal-footer">
+    <!-- Modals -->
+    <div class="modal fade" id="timeExpiredModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="timeExpiredLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="timeExpiredLabel">Time has expired</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>You must complete registration within five minutes.</p>
+                    <p>You need to restart the reservation process, but there is a risk your spot now has been reserved for
+                        someone else.</p>
+                </div>
+                <div class="modal-footer">
+                    <button id="modalTimeoutCloseButton" type="button" class="btn btn-secondary"
+                        data-bs-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
+
+    <div class="modal fade" id="pleaseWaitModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="pleaseWaitLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="pleaseWaitLabel">Your payment is being processed</h1>
+                </div>
+                <div class="modal-body">
+                    <p>Please wait while your payment is being processed.</p>
+                    <p>Do not close your browser or browser tab until payment has been completed.</p>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 <!-- Custom JS specific to this page-->
 {% block postload_custom_js %}
 
-<!-- Variable to be used in js-files-->
-  
-<script>
-    // How to get values from Django template to external js file found at https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html
-    const timeoutUrl = "{% url 'event_detail' event.id %}";
-    const stripePublicKey = "{{stripe_public_key}}";
-    const clientSecret = "{{ client_secret }}";
-</script>
+    <!-- Variable to be used in js-files-->
+    <script>
+        // How to get values from Django template to external js file found at https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html
+        const timeoutUrl = "{% url 'event_detail' event.id %}";
+        const stripePublicKey = "{{stripe_public_key}}";
+        const clientSecret = "{{ client_secret }}";
+    </script>
 
-<script src="{% static 'events/js/event_registration.js' %}"></script>
-
-
-
-
+    <script src="{% static 'events/js/event_registration.js' %}"></script>
 
 {% endblock %}
