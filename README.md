@@ -52,7 +52,7 @@ For fully detailed user stories with criteria and tasks, see [The Barn User Stor
 
 The user stories are also found and tracked on  [Github Projects](https://github.com/users/Daniel-R-ci/projects/8/)
 
-(MVP) (not included i excerpts below but featured in Github Project) means the criteria/task should be completed before moving on to the next task (and ulitately project submission). When all MVP criteria/tasks are fullfilled, work can start on non mvp-tasks in order of priority.
+(MVP) (not included i excerpts below but featured in Github Project) means the criteria/task should be completed before moving on to the next user story (and ulitately project submission). When all MVP criteria/tasks are fullfilled, work can start on non mvp-tasks in order of priority.
 
 ### Owner: Publish courses and events
 As a _business owner_, I would like to _publish information about upcoming courses and events_ to _let customers now about them and to eventually let them sign up for them_.
@@ -135,7 +135,7 @@ Courses and events will sometimes have a maximun number of participants, and reg
 
 - **Required first and last name**  
   Django AllAuth have been used for user account handling. Since The Barn administrators would like to know the full name of those registering for courses or events, only username and email is not enough.  
-  It was quickly discovered that AllAuth settings does not allow these fields by simple settings change, but a custom form is required. Instead of dwelving into this area before MVP launch, an alternate solution was implemented where in base.html a check if performed to see if the user is logged in, but first name is missing. If true, the user is sent to a second registration page to complete the registration. This works for all pages that might be manually entererd or bookmarked, the only excemts are the name registration page and the logout page.
+  It was quickly discovered that AllAuth settings does not allow these fields by simple settings change, but a custom form is required. Instead of dwelving into this area before MVP launch, an alternate solution was implemented where in base.html a check if performed to see if the user is logged in, but first name is missing. If true, the user is sent to a second registration page to complete the registration. This works for all pages that might be manually entererd or bookmarked, the only excepts are the name registration page and the logout page.
   Since this solution uses Javascript on the client side, it should be complemented by server side checks in the different views. Howerver, for MVP launch it is considered adequate, with server side checks mentioned in backlog for future development.
 
 - **Saving historical data**  
@@ -302,10 +302,31 @@ In user_profile.html, there had been some misplace thead-tags, and depending on 
 
 ### Javascript Validation
 
+All custom-made Javascripts has been tested using [JSHINT.COM](https://jshint.com/).
+
+Settings used during validation shown below  
+![jshint_configuration_settings.png](static/readme/images/jshint_settings.png)
+
+**event_registration.js**
+This file assumes that  
+- constants timeoutUrl, stripePublicKey and clientSecret has ben set in the html file using event_registration.js
+- Bootstrap, Jquery and Stripe has been included, either in the html file using event_registration.js or base template
+
+The use of asychnronus functions also assumes ES8 standard. JSHint is told this with the inclusion of
+````
+/* jshint esversion: 8 */
+/* global timeoutUrl, stripePublicKey, clientSecret, bootstrap, Stripe */
+````
+
+Assuming this settings, the file passes without warnings or errors
+
 ### Python validation
 
-**Linting**
-Flake 8 was installed and used to find any remaining linting problems that remained after manually going through the files. Some linting errors remain, these are from files created by Django and has not been edited at all during the project. Those files are all models.py and admin.py (in apps that don't use any own models) and tests.py, since no automated testing has been performed.
+Flake 8 was installed and used to find any remaining linting problems that remained after manually going through the files. Some linting errors remain and all in the form of django.*something* imported but unused. These are all from files created by Django and has not been edited at all during the project. Those files are all models.py and admin.py (in apps that don't use any own models) and tests.py, since no automated testing has been performed.
+
+The command ***python -m flake8 --exclude .venv,migrations*** was used to exclude files in the .venv and migrations folder, as recommended in CI Boutique Ado lessons.
+
+[CI Python Linter](https://pep8ci.herokuapp.com/) could have been used as in previous MS3 project with copying the code from all relevant files, but using Flake 8 this way ensures that no file was missed.
 
 ### Notable bugs found during development or testing
 
@@ -358,13 +379,14 @@ Flake 8 was installed and used to find any remaining linting problems that remai
 
 ## Future development
 
-### Ideas for further development or new functions
+### Ideas for further development or new functions / backlog
 
-### Backlog
-
+- Implement the secret box subscription user story
+- Move STRIPE payment from Events app to a general checkout/payment app, especially when/if subscription or other material will require payment
+- Implement the users blog/feed where users can post images of their own proojects
+- Re-introduce possibility to post images in blog comments
 - Replace 404-errors with more informational errors, like when/if a user tries to browse back to event registration (or enter url manually)
-- Make sure images in blog comments are not removed when editing comment
-- Constrain image size when uploading images in blog comments
+- Implement a convenient way for staff to copy event or blog post that may be very similar, and edit the new post before publishing.
 
 
 ## Credits
@@ -376,16 +398,17 @@ Flake 8 was installed and used to find any remaining linting problems that remai
 
 ### Framework , resources and libraries used in project
 
+For a complete list of installed Django packages and versions, see [requirements.txt](requirements.txt)
+
 - [Bootstrap v 5.3](https://getbootstrap.com/)
 - [Fontawesome](https://fontawesome.com/)
-- [JQuery (using 3.7.1 slim](https://jquery.com/)
+- [JQuery (using 3.7.1 min](https://jquery.com/)
 
-For a complete list of installed Django packages and versions, see [requirements.txt](requirements.txt)
 
 ### Forums and guides 
 
 - [Django Central](https://djangocentral.com/) - Information about how to declare static methods in Django
-- [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/)
+- [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/) - For lookup different aspects, methods, syntax etc.
 - [Google Groups](https://groups.google.com/) - How to find referring page using metadata in request. Credited in code where used
 - [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where used
 - [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files
