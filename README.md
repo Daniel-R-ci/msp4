@@ -319,6 +319,7 @@ The use of asychnronus functions also assumes ES8 standard. JSHint is told this 
 ````
 
 Assuming this settings, the file passes without warnings or errors
+![jshint_event_registration.png](static/readme/images/jshint_event_registration.png)
 
 ### Python validation
 
