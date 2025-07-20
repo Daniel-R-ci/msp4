@@ -62,9 +62,6 @@
                         on {{ comment.posted_on }}
                     </div>
 
-                    {% if comment.image %}
-                    <img src="{{ comment.image.url }}" class="card-img-top" alt="Image illustrating blog comment">
-                    {% endif %}
                     <div id="comment{{comment.pk}}">
                         {{ comment.comment | linebreaks }}
                     </div>

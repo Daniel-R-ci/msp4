@@ -10,16 +10,11 @@
 {% url 'user_profile' as user_profile_url %}
 {% url 'request_name' as request_name_url %}
 
-<!-- Check to see if logged in user has completed registration -->
-{% if user.is_authenticated and user.first_name == "" %}
-{% if request.path == logout_url or request.path == request_name_url %}
-<!-- Nothing -->
-{% else %}
+<!-- Check to see if logged in user has completed registration, if not redirect to request_name_url -->
+{% if user.is_authenticated and user.first_name == "" and request.path != logout_url and request.path != request_name_url %}
 <script type="text/javascript">
-    window.location.href = "{{request_name_url}}";
+    window.location.href = "{{ request_name_url }}";
 </script>
-{% endif %}
-
 {% endif %}
 
 <!DOCTYPE html>
@@ -211,7 +206,7 @@
     <script src="https://js.stripe.com/v3/"></script>
 
     <!-- Custom JS -->
-     <!-- Script to show any message toasts -->
+    <!-- Script to show any message toasts -->
     <script src="{% static 'js/base.js' %}"></script>
 
     <!-- Place for custom JS for each individual side, to be included as necessary -->
