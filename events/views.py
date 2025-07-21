@@ -99,15 +99,15 @@ def cache_registration_data(request):
 
 
 # Send a welcome email
-def _send_welcome_email(event, user):
+def _send_welcome_email(registration, user):
     """
     Send a welcome email
     """
     # Send an email to user confirming the reservation
-    if event.cost == 0:
+    if registration.eventcost == 0:
         cost = "Free"
     else:
-        cost = f"{event.cost:.2f}"
+        cost = f"{registration.event_cost:.2f}"
     send_mail(
         subject=(
             '[The Creative Barn] - Thank you for regestering at '
@@ -115,8 +115,8 @@ def _send_welcome_email(event, user):
         message=(
             f'Hello {user.first_name} {user.last_name}'
             f'! Thank you for registering at '
-            f'{event.title}!''\n\n'
-            f'Date: {event.time}''\n'
+            f'{registration.event_title}!''\n\n'
+            f'Date: {registration.event_time}''\n'
             f'Cost: {cost}''\n\n'
             'Welcome to us at The Creative Barn, and do not hesitate '
             'to contact us if you have any questions!\n\n'
@@ -199,7 +199,7 @@ def event_registration(request, event_id):
             registration.save()
 
             # Send a welcome email
-            _send_welcome_email(event, request.user)
+            _send_welcome_email(registration, request.user)
             return redirect('event_confirmed', event_id=event_id)
         else:
             # Event cost money, init STRIPE payment
