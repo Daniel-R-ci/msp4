@@ -42,8 +42,8 @@ Event registration
                     <form method="post" id="payment-form">
                         {% csrf_token %}
                         {{ payment_form | crispy }}
-                        <label class="form-label">Amount to be paid</label>
-                        <input type="text" vaLue="£ {{ event.cost | floatformat:2 }}" class="textinput form-control"
+                        <label class="form-label" for="amount">Amount to be paid</label>
+                        <input type="text" id="amount" vaLue="£ {{ event.cost | floatformat:2 }}" class="textinput form-control"
                             disabled>
                         <input type="hidden" id="userId" value="{{ user.id }}">
                         <input type="hidden" id="userEmail" value="{{ user.email }}">
