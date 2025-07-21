@@ -77,7 +77,7 @@ def blog_detail(request, article_id):
     return render(request, 'blog/blog_post.html', context)
 
 
-# Edit a comment
+# Edit and update a comment
 def edit_comment(request, article_id, comment_id):
     """
     Edit and update an article comment

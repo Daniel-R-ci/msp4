@@ -30,6 +30,7 @@ class Article(models.Model):
             article=self, visible=True).count()
 
 
+# Contains one comment on specific article
 class Article_Comment(models.Model):
     """
     Contains one comment on specific blog article

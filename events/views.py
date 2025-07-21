@@ -189,6 +189,9 @@ def event_registration(request, event_id):
 
 # Cancel an event registration
 def cancel_event_registration(request, event_id):
+    """
+    Cancel an event registration
+    """
     event = get_object_or_404(
         Event,
         id=event_id,
@@ -204,6 +207,8 @@ def cancel_event_registration(request, event_id):
 
 # Show confirmation of event registration
 def event_confirmed(request, event_id):
+    """ Show confirmation of event registration
+    """
 
     event = get_object_or_404(
         Event,
