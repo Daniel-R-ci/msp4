@@ -325,7 +325,17 @@ In event_registration.html there are two Bootstrap Modals for different purposes
 ![Incorrect use of thead and th](static/readme/images/validation_05.png)
 In user_profile.html, there had been some misplace thead-tags, and depending on the data being printed there was also some instances of a colspan being longer than the actual number of columns used. Columns where reworked, or totally omitted if there was no data to be shown.
 
-### Lighthouse validation
+### Lighthouse report
+
+All Chrome Lighthouse reports are from the deployed version at Heroku.com, using Incognito mode.
+
+All available Lighthouse reports are available [Lighthouse reports](/static/readme/README_lighthouse.md)
+
+**Test score evaluation**
+- The drop in SEO when showing blog posts and events is due to the standard "Read more" buttons, and not using more specific descriptions. Using other descriptions would however cause a more distracting appearance unless care would be taken to show all buttons still a uniform size.
+- The drop in Assesibility in event_registration is due to a aria-hidden setting in a bootstrap modal. The decision was to leave this alone rather than risk unwanted behaviour in a third party component.
+- Not surprisingly, event_registration has the lowest performance. This is due to the STRIPE payment implemented on this page but the performance is still within acceptable limits.
+- Assesibility was first somewhat low on the blog_list view. This was due to insufficient contrast between the comment symbol and counter. This was adjusted to reach full assesibility score.
 
 ### Javascript Validation
 
@@ -475,6 +485,7 @@ For a complete list of installed Django packages and versions, see [requirements
   - Troubleshooting toast initialization
 - [Coolors.co](https://coolors.co/) - Choosing a suitable color palette from a chosen image
 - [Draw SQL](https://drawsql.app/) - Creation of Entity Relationship Diagram
+- [Favicon.io](https://favicon.io/) - To make favicon out of logo
 - [Fotor.com](https://www.fotor.com/) - Online photo editor used to adjust size and quality of images
 - [Unsplash.com](https://unsplash.com/) - Images used in project
 
