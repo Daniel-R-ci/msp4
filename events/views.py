@@ -1,5 +1,7 @@
 from django.shortcuts import redirect, render, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
+from django.core.mail import send_mail
+from django.conf import settings
 from django.db.models import Q
 from django.contrib import messages
 from django.http import Http404
@@ -96,6 +98,36 @@ def cache_registration_data(request):
         return HttpResponse(content=e, status=400)
 
 
+# Send a welcome email
+def _send_welcome_email(event, user):
+    """
+    Send a welcome email
+    """
+    # Send an email to user confirming the reservation
+    if event.cost == 0:
+        cost = "Free"
+    else:
+        cost = f"{event.cost:.2f}"
+    send_mail(
+        subject=(
+            '[The Creative Barn] - Thank you for regestering at '
+            'one of our events'),
+        message=(
+            f'Hello {user.first_name} {user.last_name}'
+            f'! Thank you for registering at '
+            f'{event.title}!''\n\n'
+            f'Date: {event.time}''\n'
+            f'Cost: {cost}''\n\n'
+            'Welcome to us at The Creative Barn, and do not hesitate '
+            'to contact us if you have any questions!\n\n'
+            'Best regards, Arthur and Trillian!'),
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=[user.email],
+        fail_silently=False,
+    )
+    return
+
+
 # Register for an event
 def event_registration(request, event_id):
     """
@@ -128,7 +160,8 @@ def event_registration(request, event_id):
             registration.confirmed = True
             registration.save()
 
-            # TODO: Send confirmation email to user
+            # Send a welcome email
+            _send_welcome_email(registration, request.user)
 
             return redirect('event_confirmed', event_id=event_id)
         else:
@@ -164,8 +197,12 @@ def event_registration(request, event_id):
             # Event is free. Confirm reservation and send to event_confirmed
             registration.confirmed = True
             registration.save()
+
+            # Send a welcome email
+            _send_welcome_email(event, request.user)
             return redirect('event_confirmed', event_id=event_id)
         else:
+            # Event cost money, init STRIPE payment
             registration.save()
             payment_form = PaymentForm()
 
