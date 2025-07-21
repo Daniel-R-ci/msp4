@@ -24,8 +24,8 @@
     --header-text-color: white;
     --shadow-color: #906f3d; /* coyote */
     --font-color: black;
-    --extra-color: #76afd1; /* carolina-blue, not currently used */
-    --comment-counter-color: gray;
+    --extra-color: #76afd1; /* carolina-blue, used as border around cards etc */
+    --comment-counter-color: #707070;
 }
 
 body {
