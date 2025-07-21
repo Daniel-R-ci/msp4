@@ -271,9 +271,36 @@ Not all files or folders are pushed to Github, either due to security reasons as
 
 ## Stripe integration and registration flow
 
+There are several payment services that could for a project like this. This project uses Stripe, to take full advantage of both Code Institute lessons and reference book Django 5 by Example.
+
+For future projects, focusing on the Swedish market, other alternativt that would be looked into would be Zettle, Klarna or Mondido.
+
+### Registration and payment flow
+
+1. User clicks to register a course/event with available spots
+2. A second check is made to make sure there still is an available spot. Another user could have been faster to click register while the first user is looking or checking the calender. The booking is made with a time stamp, and is unconfirmed.
+3. If it is a free event, the booking is immediately confirmed and the user is sent to a confirmation page (flow stops here).
+4. An online form for card payment is shown. Stripe JS functions initialize and sends a payment_intent to Stripe.
+5. A five minute countdown timer commences (Javascript). Payment must be completed within five minutes, or user is sent to previous page and redo registration from step 1. The preliminary booking is removed.
+6. If Stripe payment succeeds, registration is marked as complete and user is sent to confirmaton page.
+7. To account for browser closing/crashing after Stripe has confirmed payment but before registration is confirmed, Stripe sends a webhook which the website is listening for.  
+8. When webhook is received, a check is made to see if the order is marked as confirmed. If so, nothing more happens (flow stops here).
+9. If registration exists but is not marked as confirmed, it is confirmed. (flow stops here).
+10. If registration no longer exists (can happen after more than five minutes, or if user tries to register again for the same event before first reegistration is confirmed), a refund will be issued throguh Stripe. The user has to register again.
+
 ## Testing
 
 ### Testing procedures
+
+Manual testing has been used over automated testing due to time constraints. All functions has been tested as developed, both locally on development server and after deployment to Heroku.
+
+Testing steps include, but not limited to
+- Registering a new user
+- Trying to register a new user with the same name as an existing one
+- Viewing blog posts
+- Commenting on blog posts, editing and deleting comments
+- Registration to events
+- Using browsers back function or manually entering urls to check for unwanted behaviour.
 
 ### HTML Validation
 All rendered html pages was tested with [W3 html validator](https://validator.w3.org/nu/)
@@ -302,12 +329,14 @@ In user_profile.html, there had been some misplace thead-tags, and depending on 
 
 ### Javascript Validation
 
-All custom-made Javascripts has been tested using [JSHINT.COM](https://jshint.com/).
+There are three justom-made Javascript files in the project. All custom-made Javascripts has been tested using [JSHINT.COM](https://jshint.com/).
+
+The files contain a mix of JQuery and standard JS which may not be optimal. Many JS functions are from different sources found online (and credited where used) but custom-made scripts or adaptations mostly use Jquery. No major effort has been put into rewriting scripts found online to use Jquery instead of standard JS, hence the mix.
 
 Settings used during validation shown below  
 ![jshint_configuration_settings.png](static/readme/images/jshint_settings.png)
 
-External JS files may assume that certain constants are declared in other places before calling the JS file. 
+External JS files assume that certain constants are declared in other places before calling the JS file. 
 Bootstrap, Jquery and Stripe is included in the base.html template, and assumed to be recognized anywhere.  
 The use of asychnronus functions in some scripts also assumes ES8 standard. JSHint is told this with the inclusion of  
 /* jshint esversion: 8 */  
@@ -328,6 +357,27 @@ Flake 8 was installed and used to find any remaining linting problems that remai
 
 The command ***python -m flake8 --exclude .venv,migrations*** was used to exclude files in the .venv and migrations folder, as recommended in CI Boutique Ado lessons.
 ![flake_linter.png](static/readme/images/flake_linter.png)
+
+noqa comments have been used sparingly, and only on settings or url files where breaking up the lines could lead to loosing overview or making it harder to compare lines.
+
+While using both # comments and docstrings may seem like unneccesary redundancy, this is a deliberate choice to make work in Visual Studio Code easier. When collapsing a function that does not need work, the comment still makes it easy to see and remember what the function does.
+
+````
+# Contains one blog article
+class Article(models.Model):
+    """
+    Containes one blog article
+    """
+    ...
+    ...
+````
+````
+# Contains one blog article
+class Article(models.Model):...
+
+# Contains one comment on specific article
+class Article_Comment(models.Model):...
+````
 
 [CI Python Linter](https://pep8ci.herokuapp.com/) could have been used as in previous MS3 project with copying the code from all relevant files, but using Flake 8 this way ensures that no file was missed.
 
@@ -413,6 +463,7 @@ For a complete list of installed Django packages and versions, see [requirements
 - [Django Central](https://djangocentral.com/) - Information about how to declare static methods in Django
 - [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/) - For lookup different aspects, methods, syntax etc.
 - [Google Groups](https://groups.google.com/) - How to find referring page using metadata in request. Credited in code where used
+- [JS Hint Documentation](https://jshint.com/docs/options/) - To better understand JS validation
 - [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where used
 - [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files
 - [W3 Schools](https://www.w3schools.com) - Guides and examples, escpecially countdown timer. Credited in code where used
