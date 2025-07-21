@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.core.mail import send_mail
+from django.conf import settings
 from django.db.models import Q
 from datetime import datetime
 
@@ -47,6 +49,20 @@ def request_name(request):
             user.save()
             messages.success(request, "Thank you for completing the \
                              registration by providing your full name!")
+
+            # Send a simple welcome email
+            send_mail(
+                subject='Thank you for registering at The Creative Barn',
+                message=(
+                    f'Thank you {user.first_name} {user.last_name} for '
+                    'creating an account with us. \n\n'
+                    'We hope you will enjoy your online stay with us!\n\n'
+                    'best regards, Arthur and Trillian!'),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
+
             return redirect('home')
         else:
             messages.error(request, "There was a problem completing the \

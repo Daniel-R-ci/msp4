@@ -1,4 +1,7 @@
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.core.mail import send_mail
+from django.conf import settings
 import stripe
 import time
 
@@ -34,7 +37,7 @@ class StripeWH_Handler:
         intent = event.data.object
         pid = intent.id
         registration_id = intent.metadata.registration_id
-        user_id = intent.metadata.user_id # noqa not currently used but would be needed to retrieve user and send email down below in TODO-comment 
+        user_id = intent.metadata.user_id
 
         # Check if the order has been payed
         if Event_Registration.objects.filter(pk=registration_id).exists():
@@ -64,8 +67,27 @@ class StripeWH_Handler:
                           not completed'},
             )
 
-            # TODO: Send an email to user informing that a reservation can't
+            # Send an email to user informing that a reservation can't
             # be made but that the money will be refunded
+            user = User.objects.get(pk=user_id)
+            send_mail(
+                subject='[The Creative Barn] - An error occured \
+                    during registration',
+                message=(
+                    f'Hello {user.first_name} {user.last_name}. We are very '
+                    'sorry but an error occured while you where trying to '
+                    'register for an event with us.\n\n'
+                    'Although a reservation could not be made, we have told '
+                    'our bank to immediately refund the money that was '
+                    'incorrectly deducted from your accout during the failed '
+                    'registration attempt.\n\n'
+                    'We offer our sincere apologies, and do not hesitate to '
+                    'contact us if there are any further problems.\n\n'
+                    'Best regards, Arthur and Trillian!'),
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[user.email],
+                fail_silently=False,
+            )
 
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
