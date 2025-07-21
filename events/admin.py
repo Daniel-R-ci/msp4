@@ -20,4 +20,4 @@ class Event_Registration_Admin(admin.ModelAdmin):
     def user_full_name(self, obj):
         return f"{obj.user.first_name} {obj.user.last_name}"
     user_full_name.short_description = 'User'
-    user_full_name.admin_order_field = 'user__first_name' 
+    user_full_name.admin_order_field = 'user__first_name'
