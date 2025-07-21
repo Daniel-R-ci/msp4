@@ -104,10 +104,10 @@ def _send_welcome_email(registration, user):
     Send a welcome email
     """
     # Send an email to user confirming the reservation
-    if registration.eventcost == 0:
+    if registration.event_cost == 0:
         cost = "Free"
     else:
-        cost = f"{registration.event_cost:.2f}"
+        cost = f"£{registration.event_cost:.2f}"
     send_mail(
         subject=(
             '[The Creative Barn] - Thank you for regestering at '
