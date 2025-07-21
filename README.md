@@ -1,11 +1,12 @@
 # Milestone Project 4 : The Creativity Barn
 
-![The Creativity Barn](static/images/home-image.png)
+![The Creativity Barn](static/images/home-image.webp)  
 Code Institute Milestone 4 project by Daniel Rydell
 
 Github repository available at [https://github.com/Daniel-R-ci/msp4](https://github.com/Daniel-R-ci/msp4)  
 Github Project Board available at [https://github.com/users/Daniel-R-ci/projects/8/](https://github.com/users/Daniel-R-ci/projects/8)  
 Heroku deployment available at [https://dr-ci-msp4-87974008a79d.herokuapp.com/](https://dr-ci-msp4-87974008a79d.herokuapp.com/)
+
 ## Table of contents
 
 ## Introduction
@@ -48,11 +49,9 @@ Not all functionality will need to be in place upon launch. In order to quickly 
 
 ## User stories
 
-For fully detailed user stories with criteria and tasks, see [The Barn User Stories](/static/readme/README_user_stories.md)
+The fully detailed user stories, including tasks and criteria, see [Github Projects](https://github.com/users/Daniel-R-ci/projects/8/) which shows an up to date view of the entire project.
 
-The user stories are also found and tracked on  [Github Projects](https://github.com/users/Daniel-R-ci/projects/8/)
-
-(MVP) (not included i excerpts below but featured in Github Project) means the criteria/task should be completed before moving on to the next user story (and ulitately project submission). When all MVP criteria/tasks are fullfilled, work can start on non mvp-tasks in order of priority.
+(MVP) (not included in excerpts below but featured in Github Project) means the criteria/task should be completed before moving on to the next user story (and ulitately project submission). When all MVP criteria/tasks are fullfilled, work can start on non mvp-tasks in order of priority.
 
 ### Owner: Publish courses and events
 As a _business owner_, I would like to _publish information about upcoming courses and events_ to _let customers now about them and to eventually let them sign up for them_.
@@ -99,19 +98,9 @@ As as _customer_, I would like to _register for The Barns secret craft boxes_ in
 
 Priority: Low
 
-## Developers reminder
+### Developers reminder
 
 While not a user story, this list resides in Github Projects with the user stories and serves as a developer's reminder of overall goals, tasks and things that need to be checked off before project submission. Things will be added during the entire project as issues arise.
-
-### Tasks included from the project start
-
-- Create a responsive web page using Bootstrap and Django 
-- Validate all Javascript code
-- Validate all Python code
-- Validate all rendered html pages
-- Create Lightroom report
-
-### Tasks included during project
 
 ## Basic design of website and page requirements
 
@@ -177,7 +166,7 @@ Latest ERD used in project. Some field types may differ from actual model due to
 Wireframes were constructed for most apps before work started on the respective Django app. By not constructing all wireframes at once, the first views served as a test to see if the proposed layout worked before starting on new wireframes, apps or views. Some minor changes where made to the header and menu area for better clarity and user experience.
 
 **Home app**  
-![Home view](static/readme/images/wireframe_home_1_1.png)
+![Home view](static/readme/images/wireframe_home_1_1.png)  
 Home page, index view when arriving to website
 
 **Blog app**  
@@ -295,44 +284,47 @@ For future projects, focusing on the Swedish market, other alternativt that woul
 Manual testing has been used over automated testing due to time constraints. All functions has been tested as developed, both locally on development server and after deployment to Heroku.
 
 Testing steps include, but not limited to
+- Testing all functions as they are being developed
 - Registering a new user
 - Trying to register a new user with the same name as an existing one
 - Viewing blog posts
 - Commenting on blog posts, editing and deleting comments
 - Registration to events
 - Using browsers back function or manually entering urls to check for unwanted behaviour.
+- Test again, since even small changes sometimes accidentally caused unexpected and undesired behaviour
 
 ### HTML Validation
 All rendered html pages was tested with [W3 html validator](https://validator.w3.org/nu/)
 
-**Warnings/errors caught and solved**
+**Warnings/errors caught and solved**  
 ![H1 Warning](/static/readme/images/validation_01.png)  
 This warning occured on all pages due to using h1 tag in the header. The h1 was replaced with a div using the already existing class .header-title. Some additional css styling had to be applied to make look like the previous h1 tag.
-<hr>
+
 
 ![Unclosed elements Error](/static/readme/images/validation_02.png)  
-Error in blog_list.html due to an unclosed div tag. Tag closed.
-<hr>
+Error in blog_list.html due to an unclosed div tag. Tag closed.  
 
-![Form action not set](static/readme/images/validation_03.png)
-Occured on several pages where form action="" was set. Although commonly used, this is not according to html standard. The solution was to simply delete the action method.
-<hr>
+
+![Form action not set](static/readme/images/validation_03.png)  
+Occured on several pages where form action="" was set. Although commonly used, this is not according to html standard. The solution was to simply delete the action method.  
+
 
 ![DuplicateID](static/readme/images/validation_04.png)  
-In event_registration.html there are two Bootstrap Modals for different purposes. The id of the modals (copied from Bootstrap) where changed upon implementation, but not the ID of all elements in the modal. Id changed in both modals to easily distinguish them.
-<hr>
+In event_registration.html there are two Bootstrap Modals for different purposes. The id of the modals (copied from Bootstrap) where changed upon implementation, but not the ID of all elements in the modal. Id changed in both modals to easily distinguish them.  
+
 
 ![Incorrect use of thead and th](static/readme/images/validation_05.png)
-In user_profile.html, there had been some misplace thead-tags, and depending on the data being printed there was also some instances of a colspan being longer than the actual number of columns used. Columns where reworked, or totally omitted if there was no data to be shown.
+In user_profile.html, there had been some misplace thead-tags, and depending on the data being printed there was also some instances of a colspan being longer than the actual number of columns used. Columns where reworked, or totally omitted if there was no data to be shown.  
 
 ### Lighthouse report
 
 All Chrome Lighthouse reports are from the deployed version at Heroku.com, using Incognito mode.
 
-All available Lighthouse reports are available [Lighthouse reports](/static/readme/README_lighthouse.md)
+All Lighthouse reports are available in the separate [Lighthouse reports](/static/readme/README_lighthouse.md) document.
 
 **Test score evaluation**
-- The drop in SEO when showing blog posts and events is due to the standard "Read more" buttons, and not using more specific descriptions. Using other descriptions would however cause a more distracting appearance unless care would be taken to show all buttons still a uniform size.
+- The drop in SEO when showing blog posts and events is due to the standard "Read more" buttons, and not using more specific descriptions. Using other descriptions would however cause a more distracting appearance unless care would be taken to show all buttons still a uniform size. The choice of using id instead of slugs has already been discussed earlier.  
+  A google search has shown that there are ways to include slugs for better SEO rating but still using the id for identification and retrieval, using urls like ***/blog/4-New open times during summer*** which should solve the problem. It has been noted in backlog / future development.
 - The drop in Assesibility in event_registration is due to a aria-hidden setting in a bootstrap modal. The decision was to leave this alone rather than risk unwanted behaviour in a third party component.
 - Not surprisingly, event_registration has the lowest performance. This is due to the STRIPE payment implemented on this page but the performance is still within acceptable limits.
 - Assesibility was first somewhat low on the blog_list view. This was due to insufficient contrast between the comment symbol and counter. This was adjusted to reach full assesibility score.
@@ -349,10 +341,14 @@ Settings used during validation shown below
 External JS files assume that certain constants are declared in other places before calling the JS file. 
 Bootstrap, Jquery and Stripe is included in the base.html template, and assumed to be recognized anywhere.  
 The use of asychnronus functions in some scripts also assumes ES8 standard. JSHint is told this with the inclusion of  
-/* jshint esversion: 8 */  
+````
+/* jshint esversion: 8 */
+````
 at the top of every js file. 
 Objects, variables or constants are declared using global where needed, for example
+````
 /* global timeoutUrl, stripePublicKey, clientSecret, bootstrap, Stripe */
+````
 
 **base.js**  
 ![jshint_base.png](static/readme/images/jshint_base.png)  
@@ -440,12 +436,12 @@ class Article_Comment(models.Model):...
 
 ## Finished website
 
-## Future development
+### Future development
 
-### Ideas for further development or new functions / backlog
+Following is a list for features that were noted in the User stories but not completed (partially or fully), as well as other issues that has arisen during development. While the website is fully functional and meeting the Minimal Viable Product criterias, there are still possibilities for further development and refining.
 
 - Implement the secret box subscription user story
-- Move STRIPE payment from Events app to a general checkout/payment app, especially when/if subscription or other material will require payment
+- Move STRIPE payment from Events app to a general checkout/payment app, especially when/if subscription or other material will require payment is introduced
 - Implement the users blog/feed where users can post images of their own proojects
 - Re-introduce possibility to post images in blog comments
 - Replace 404-errors with more informational errors, like when/if a user tries to browse back to event registration (or enter url manually)

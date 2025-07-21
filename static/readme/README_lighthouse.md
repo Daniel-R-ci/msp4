@@ -35,7 +35,8 @@ All Chrome Lighthouse reports are from the deployed version at Heroku.com, using
 ## Test score evaluation
 
 **Test score evaluation**
-- The drop in SEO when showing blog posts and events is due to the standard "Read more" buttons, and not using more specific descriptions. Using other descriptions would however cause a more distracting appearance unless care would be taken to show all buttons still a uniform size.
+- The drop in SEO when showing blog posts and events is due to the standard "Read more" buttons, and not using more specific descriptions. Using other descriptions would however cause a more distracting appearance unless care would be taken to show all buttons still a uniform size. The choice of using id instead of slugs has already been discussed earlier.  
+  A google search has shown that there are ways to include slugs for better SEO rating but still using the id for identification and retrieval, using urls like ***/blog/4-New open times during summer*** which should solve the problem. It has been noted in backlog / future development.
 - The drop in Assesibility in event_registration is due to a aria-hidden setting in a bootstrap modal. The decision was to leave this alone rather than risk unwanted behaviour in a third party component.
 - Not surprisingly, event_registration has the lowest performance. This is due to the STRIPE payment implemented on this page but the performance is still within acceptable limits.
 - Assesibility was first somewhat low on the blog_list view. This was due to insufficient contrast between the comment symbol and counter. This was adjusted to reach full assesibility score.
