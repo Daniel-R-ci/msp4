@@ -15,25 +15,12 @@ Heroku deployment available at [https://dr-ci-msp4-87974008a79d.herokuapp.com/](
   - [Store owners](#store-owners)  
   - [Customers](#customers)  
 - [MVP Priority](#mvp-priority)  
-  - [Highest priority](#highest-priority)  
-  - [Medium priority](#medium-priority)  
-  - [Lower priority](#lower-priority)  
 - [User Stories](#user-stories)  
-  - [Owner: Publish courses and events](#owner-publish-courses-and-events)  
-  - [Owner: Post articles/news](#owner-post-articlesnews)  
-  - [Customer: User registration](#customer-user-registration)  
-  - [Customer: Course and event registration](#customer-course-and-event-registration)  
-  - [Customer: Comment on articles](#customer-comment-on-articles)  
-  - [Customer: Post own projects / ask questions](#customer-post-own-projects--ask-questions)  
-  - [Owner: Information and contact](#owner-information-and-contact)  
-  - [Customer: Secret box subscription](#customer-secret-box-subscription)  
-  - [Developers reminder](#developers-reminder)  
 - [Basic Design of Website and Page Requirements](#basic-design-of-website-and-page-requirements)  
   - [Apps to be developed](#apps-to-be-developed)  
   - [Considerations & alternate ideas](#considerations--alternate-ideas)  
 - [Entity Relationship Diagram and Models](#entity-relationship-diagram-and-models)  
-  - [ERD versions](#erd-versions)  
-  - [Diagram image & model overview](#diagram-image--model-overview)  
+  - [ERD versions](#erd-versions)   
 - [Wireframes](#wireframes)  
 - [Colors and Fonts](#colors-and-fonts)  
 - [Project Log](#project-log)  
@@ -382,8 +369,8 @@ There are three justom-made Javascript files in the project. All custom-made Jav
 
 The files contain a mix of JQuery and standard JS which may not be optimal. Many JS functions are from different sources found online (and credited where used) but custom-made scripts or adaptations mostly use Jquery. No major effort has been put into rewriting scripts found online to use Jquery instead of standard JS, hence the mix.
 
-Settings used during validation shown below  
-![jshint_configuration_settings.png](static/readme/images/jshint_settings.png)
+Settings used during validation shown below in file below:  
+[*Shint configuration](static/readme/images/jshint_settings.png)
 
 External JS files assume that certain constants are declared in other places before calling the JS file. 
 Bootstrap, Jquery and Stripe is included in the base.html template, and assumed to be recognized anywhere.  
@@ -397,24 +384,24 @@ Objects, variables or constants are declared using global where needed, for exam
 /* global timeoutUrl, stripePublicKey, clientSecret, bootstrap, Stripe */
 ````
 
-**base.js**  
-![jshint_base.png](static/readme/images/jshint_base.png)  
-**blog_post.js**  
-![jshint_blog_post.png](static/readme/images/jshint_blog_post.png)  
-**event_registration.js**  
-![jshint_event_registration.png](static/readme/images/jshint_event_registration.png)
+All JS files passes JShint without errors or warnings. For Metrics of each file, click on the files belowbelow
+
+[base.js](static/readme/images/jshint_base.png)  
+[blog_post.js](static/readme/images/jshint_blog_post.png)  
+[event_registration.js](static/readme/images/jshint_event_registration.png)
 
 ### Python validation
 
 Flake 8 was installed and used to find any remaining linting problems that remained after manually going through the files. Some linting errors remain and all in the form of django.*something* imported but unused. These are all from files created by Django and has not been edited at all during the project. Those files are all models.py and admin.py (in apps that don't use any own models) and tests.py, since no automated testing has been performed.
 
-The command ***python -m flake8 --exclude .venv,migrations*** was used to exclude files in the .venv and migrations folder, as recommended in CI Boutique Ado lessons.
-![flake_linter.png](static/readme/images/flake_linter.png)
+The command ***python -m flake8 --exclude .venv,migrations*** was used to exclude files in the .venv and migrations folder, as recommended in CI Boutique Ado lessons.  
+[List of files not customized not passing Flake8 linter](static/readme/images/flake_linter.png)
 
 noqa comments have been used sparingly, and only on settings or url files where breaking up the lines could lead to loosing overview or making it harder to compare lines.
 
-While using both # comments and docstrings may seem like unneccesary redundancy, this is a deliberate choice to make work in Visual Studio Code easier. When collapsing a function that does not need work, the comment still makes it easy to see and remember what the function does.
+While using both # comments and docstrings may seem like unneccesary redundancy, this is a deliberate choice to make work in Visual Studio Code easier. When collapsing a function that does not require work at the moment, the comment still makes it easy to see and remember what the function does.
 
+Normal view:
 ````
 # Contains one blog article
 class Article(models.Model):
@@ -424,6 +411,7 @@ class Article(models.Model):
     ...
     ...
 ````
+Collapsed functions view:
 ````
 # Contains one blog article
 class Article(models.Model):...
@@ -493,14 +481,15 @@ Following is a list for features that were noted in the User stories but not com
 - Re-introduce possibility to post images in blog comments
 - Replace 404-errors with more informational errors, like when/if a user tries to browse back to event registration (or enter url manually)
 - Implement a convenient way for staff to copy event or blog post that may be very similar, and edit the new post before publishing.
+- Adjust emails to be more nicely styled using html-templates instead of simple text.
 
 
 ## Credits
 
 - Code Institute mentor Spencer Barriball - for guidelines, support and encouragement
-- Code Institute tutor support Oisin - for help with storage settings using AWS
 - Fellow Code Institute students Patrik L and Jere H for support, encouragement and sounding boards
 - Django 5 By Example, by Antonio Melé
+- Code Institute tutor support Oisin - for help with storage settings using AWS
 
 ### Framework , resources and libraries used in project
 
@@ -509,7 +498,6 @@ For a complete list of installed Django packages and versions, see [requirements
 - [Bootstrap v 5.3](https://getbootstrap.com/)
 - [Fontawesome](https://fontawesome.com/)
 - [JQuery (using 3.7.1 min](https://jquery.com/)
-
 
 ### Forums and guides 
 
@@ -521,7 +509,6 @@ For a complete list of installed Django packages and versions, see [requirements
 - [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files
 - [W3 Schools](https://www.w3schools.com) - Guides and examples, escpecially countdown timer. Credited in code where used
 
-
 ### Resources and tools used
 - [ChatGPT](https://chatgpt.com/) - Used for the following purposes:
   - Make a painting out of photograph for use home page
@@ -530,7 +517,7 @@ For a complete list of installed Django packages and versions, see [requirements
 - [Draw SQL](https://drawsql.app/) - Creation of Entity Relationship Diagram
 - [Favicon.io](https://favicon.io/) - To make favicon out of logo
 - [Fotor.com](https://www.fotor.com/) - Online photo editor used to adjust size and quality of images
-- [Unsplash.com](https://unsplash.com/) - Images used in project
+- [Unsplash.com](https://unsplash.com/) - Images used in project ([list and credit for photos used](static/readme/README_photos.md))
 
 
 
