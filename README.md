@@ -177,7 +177,6 @@ Courses and events will sometimes have a maximun number of participants, and reg
 - **Removing possibility to post images in blog comments**  
   Nearing project submission, the decision was made to remove the feature to include images in blog comments. The idea was for The Creative Barn to be able to make a blog post on a certain theme, and then ask their visistors to contribute with pictures on their own relating projects. Unofrtunately there was no time to include constraints for file size, image size and style pictures with different proportions to look good. Since the "public blog", where users could post their own pictures and project, wouldn't be included in project submission picture upload for other than staff was removed. The features would still be a welcome adition to the site, and is noted in Future development ideas at the end of this file.
 
-
 ### Entity Relationship Diagram and Models
 Latest ERD used in project. Some field types may differ from actual model due to difference in available types in tool used ([Draw SQL](https://drawsql.app/)). Id fields will not be specified in models but implemented by Django, shown in ERD for relationshsip purposes.
 
@@ -327,6 +326,10 @@ Testing steps include, but not limited to
 - Using browsers back function or manually entering urls to check for unwanted behaviour.
 - Test again, since even small changes sometimes accidentally caused unexpected and undesired behaviour
 
+### Responsiveness on different devices
+
+The site has been tested on the developers laptop with 17" screen, using both Google Chrome (main development) as well as Microsoft Edge for testing, including simulating different view sizes and adjustable responsiveness. Mobile version has been tested on a Google Pixel 7a (412wx915h resolution) and iPhone 12 (390w x 844h resolution).
+
 ### HTML Validation
 All rendered html pages was tested with [W3 html validator](https://validator.w3.org/nu/)
 
@@ -348,7 +351,9 @@ In event_registration.html there are two Bootstrap Modals for different purposes
 
 
 ![Incorrect use of thead and th](static/readme/images/validation_05.png)
-In user_profile.html, there had been some misplace thead-tags, and depending on the data being printed there was also some instances of a colspan being longer than the actual number of columns used. Columns where reworked, or totally omitted if there was no data to be shown.  
+In user_profile.html, there had been some misplace thead-tags, and depending on the data being printed there was also some instances of a colspan being longer than the actual number of columns used. Columns where reworked, or totally omitted if there was no data to be shown.
+
+**After resolving the above issues, no further errors has been found**
 
 ### Lighthouse report
 
@@ -384,7 +389,7 @@ Objects, variables or constants are declared using global where needed, for exam
 /* global timeoutUrl, stripePublicKey, clientSecret, bootstrap, Stripe */
 ````
 
-All JS files passes JShint without errors or warnings. For Metrics of each file, click on the files belowbelow
+All JS files passes JShint without errors or warnings. For Metrics of each file, click on the files below
 
 [base.js](static/readme/images/jshint_base.png)  
 [blog_post.js](static/readme/images/jshint_blog_post.png)  
@@ -395,7 +400,7 @@ All JS files passes JShint without errors or warnings. For Metrics of each file,
 Flake 8 was installed and used to find any remaining linting problems that remained after manually going through the files. Some linting errors remain and all in the form of django.*something* imported but unused. These are all from files created by Django and has not been edited at all during the project. Those files are all models.py and admin.py (in apps that don't use any own models) and tests.py, since no automated testing has been performed.
 
 The command ***python -m flake8 --exclude .venv,migrations*** was used to exclude files in the .venv and migrations folder, as recommended in CI Boutique Ado lessons.  
-[List of files not customized not passing Flake8 linter](static/readme/images/flake_linter.png)
+[List of files not customized and not passing Flake8 linter](static/readme/images/flake_linter.png)
 
 noqa comments have been used sparingly, and only on settings or url files where breaking up the lines could lead to loosing overview or making it harder to compare lines.
 
@@ -406,7 +411,7 @@ Normal view:
 # Contains one blog article
 class Article(models.Model):
     """
-    Containes one blog article
+    Contains one blog article
     """
     ...
     ...
@@ -424,52 +429,106 @@ class Article_Comment(models.Model):...
 
 ### Notable bugs found during development or testing
 
-- Back to previous page from event_details
+**Back to previous page button working to well**  
+**Problem:** The back to previous buttons on blog posts and event details where supposed to send users back to the page they came for, not simply the blog page but paginated page 3 (if that's where they came from). It worked well using metadata in page requests as long as no additional actions where taken. When blog commenting and event registration functionality was added the buttons refered the users back to those pages
+**Solution:** Buttons now point to main blog/events page, which means on paginated pages user will have to navigate to that page again.
 
-### Constantly reloading pages when logging in as a new user
+
+**Constantly reloading pages when logging in as a new user**  
 **Problem:** First time logging in as a new user, a script meant to send users to the view request_name sent the browser into a refresh loop
 **Solution:** The corresponing name in user_profile urls file had been changed and the script hadn't been tested after that. After looking over all urls names the function again works as intended.
 
-### Files not uploading when commenting on blog posts
+**Files not uploading when commenting on blog posts**  
 **Problem:** Image files not uploading when user attaches a file to a blog post comment
 **Solution:** Googling revealed that the form used for uploading the files should have the attribute ***enctype="multipart/form-data"***. [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/http/file-uploads/#basic-file-uploads)
+**Note:** This function was later removed and moved to backlog
 
-### Bootstrap toasts not showing
+**Bootstrap toasts not showing**  
 **Problem:** Bootstrap toasts not showing as expected, sometimes causing error
 **Solution:** This was due to JS/JQUERY code used in Boutique_ADO to show object was made for earlier Bootstrap version. Searching on Google did not help in find adjusted code, but ChatGPT was able to troubleshoot and provide correct code.
 
-### User not being able to re-register after registration timeout
+**User not being able to re-register after registration timeout**  
 **Problem:** After timeout on event registration, user was not able to registre again unless page was manually reloaded, or user went to another page and then back.  
 **Solution:** This was due to the deletion of unconfirmed registrations older than five minutes occured after the check if the user was already registered had accured. The deletion was not triggered until the property function available_spots() was called from the template. Calling the delete_unconfirmed_reservations() function before checking if user was registered solved this problem.  
 
-### Multiple preliminary bookings accidentally made during testing
+**Multiple preliminary bookings accidentally made during testing**  
 **Problem:** If a page refresh was made during the five minute countdown, a new preliminary booking would be made and the countdown would be restarted.  
 **Solution:** Before creating the registration all uncofirmed event registrations for this particular event and user is deleted, regardless of the normal five minute removal. After this deletion a new preliminary reservation is created. This does make it possible for a user to extend the reservation time indefinately by constantly refreshing the page, but the likelihood of doing so is very small.  
 **Remaining potential issue:** Every new refresh will send a new payment intent to Stripe and the previous one will never be completed, but from a transactional viewpoint it is safe and not worth investigation solutions for during this project.
 
-### User having to wait five minutes to retry booking
+**User having to wait five minutes to retry booking**  
 **Problem:** If a user for some reason needed to restart their browser during the five minute registration countdown, the user would be greeted by a "you have already registered for this event" message until the preliminary booking was deleted after five minutes.  
 **Solution:** Delete all unconfirmed bookings matching user and event in the beginning of the event_details view. This allows the user to start a new reservation, while still preventing anyone else from taking the users place while browser/computer is restarting.  
 **Potential remaining issue:** For the time it takes from when the event_detail page loads until the user clicks the registration button, there is a possibility that another faster user might be able to grab the spot, but considering the expected load of users using the Barns page that is considered unlikely. Also, there is a first-come first-serve priority.
 
-### User being able to go back and making multiple bookings
+**User being able to go back and making multiple bookings**  
 **Problem:** By using the browsers back-function, or saving urls, it was possible for a user to register several times for an event.  
 **Solution:** Before a new registration is made, a check is now done to see if there already is a confirmed registration for this user and event. If so, a 404 error is raised to prevent the user from accessing this page again.  
 **Remaining issue:** A more informational message would be nicer, and the idea of doing so has been entered in backlog.
 
-### Image handling when editing comments
+**Image handling when editing comments**  
 **Problem:** When editing a blog comment that contains images, the image need to be uploaded again or it will be removed from the post.  
+**Solution:** Images in comments removed in MVP release  
+**Remaining issue:** Problem noted in backlog  
+
+**No restriction on image sizes in blog comments**  
+**Problem:** There is no restriction on image size (neither file size nor image size) when uploading images  
+**Solution:** Images in comments removed in MVP release  
 **Remaining issue:** Problem noted in backlog
 
-### No restriction on image sizes in blog comments
-**Problem:** There is no restriction on image size (neither file size nor image size) when uploading images
-**Remaining issue:** Problem noted in backlog
-
-### Setting up AWS
-**Problem:** Guide from Boutique-Ado project couldn't be followed an caused errors
+**Setting up AWS**  
+**Problem:** Guide from Boutique-Ado project couldn't be followed an caused errors  
 **Solution:** Walkthrough project was made with Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the storage settings would be done in Django 5.
 
 ## Finished website
+
+### Index view
+![finished_index_mobile.png](static/readme/images/finished_index_mobile.png)  
+Mobile view, showing responsiveness on different screen sizes.
+
+### Blog
+![finished_blog_post_computer.png](static/readme/images/finished_blog_post_computer.png)  
+Computer view, showing a blog post and commenting functionality for registered users.
+
+### Events
+![finished_event_registration_computer.png](static/readme/images/finished_event_registration_computer.png)  
+Computer view, showing a registered user signing up for an event, using secure payment via Stripe. 
+
+### About / contact
+![finished_about_computer.png](static/readme/images/finished_about_computer.png)  
+Computer view, showing information about The Creative Barn as well as a contact form
+
+### Event handling
+![finished_superuser_event_registration.png](static/readme/images/finished_superuser_event_registration.png)
+Computer view, showing a superuser using Django admin interface to filter a list of users registerered to a specific event
+
+### User stories completed
+The above pictures shows the following user stories completed (either in total or meeting MVP requirements)
+
+- Owner: Publish courses and events
+  As a _business owner_, I would like to _publish information about upcoming courses and events_ to _let customers now about them and to eventually let them sign up for them_.
+- Owner: Post articles / news
+  As a _business owner_, I would like to _publish news about new supplies, craft tips etc_, to _inspire future craft projects and bring more customers to the store_.
+- Customer: User registration
+  As a _customer_, I would like to _register a user account_ in order to _take advantage of the online fuctions being offered_
+- Customer: Course and event registration
+  As a _customer_, I would like to be able to _register for upcoming courses and events_ in order to _secure a spot at those that interest me_
+- Customer: Comment on articles
+  As a registered user, I would like to be able to _comment on articles and news_ posted on the website in order to _provide feedback to the store_.
+- Owner: Inforamtion and contact
+  As a _business owner_, I need a way to _give general information about my store, as well as a way to let customers contact us_ in order to _provide expected customer service_.
+
+In the above user stories, some task and criteria remains (though all meet MVP requirements)
+- Most importans is to give superusers/admin a more convenient way to create events, like copying an older event and modifying it. A more user-friendly way to see all participants for an event would also be appreciated.
+
+### User stories not completed
+
+- Post information about own projects or ask questions
+  As a _registered user_, I would like a way to _show my projects or ask craft related questions_ in order to _receive feedback and interact more with the creative community around The Barn._
+- Customer: Sign up for secret box subscription
+  As as _customer_, I would like to _register for The Barns secret craft boxes_ in order to _try new creative areas of the craft hobby that I would not otherwise have considered_.
+
+These are noted in future development.
 
 ### Future development
 
@@ -477,12 +536,12 @@ Following is a list for features that were noted in the User stories but not com
 
 - Implement the secret box subscription user story
 - Move STRIPE payment from Events app to a general checkout/payment app, especially when/if subscription or other material will require payment is introduced
-- Implement the users blog/feed where users can post images of their own proojects
+- Implement the users blog/feed where users can post images of their own projects user story
 - Re-introduce possibility to post images in blog comments
 - Replace 404-errors with more informational errors, like when/if a user tries to browse back to event registration (or enter url manually)
 - Implement a convenient way for staff to copy event or blog post that may be very similar, and edit the new post before publishing.
+- Add more SEO-friendly urls for showing blog posts and events, like ***/blog/4-New open times during summer***
 - Adjust emails to be more nicely styled using html-templates instead of simple text.
-
 
 ## Credits
 
@@ -503,7 +562,7 @@ For a complete list of installed Django packages and versions, see [requirements
 
 - [Django Central](https://djangocentral.com/) - Information about how to declare static methods in Django
 - [Django Documentation](https://docs.djangoproject.com/en/5.2/topics/) - For lookup different aspects, methods, syntax etc.
-- [Google Groups](https://groups.google.com/) - How to find referring page using metadata in request. Credited in code where used
+- [Google Groups](https://groups.google.com/) - How to find referring page using metadata in request. (Note: function ultimately removed)
 - [JS Hint Documentation](https://jshint.com/docs/options/) - To better understand JS validation
 - [Stack Overflow](https://stackoverflow.com/) - For help finding finding answers in troubleshooting. Credited in code where used
 - [Techkettle Blog](https://techkettle.blogspot.com/2022/03/how-to-use-python-variable-in-external.html) - How to use Python variables in external JS files
