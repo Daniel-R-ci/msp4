@@ -316,15 +316,24 @@ For future projects, focusing on the Swedish market, other alternativt that woul
 
 Manual testing has been used over automated testing due to time constraints. All functions has been tested as developed, both locally on development server and after deployment to Heroku.
 
-Testing steps include, but not limited to
-- Testing all functions as they are being developed
-- Registering a new user
-- Trying to register a new user with the same name as an existing one
-- Viewing blog posts
-- Commenting on blog posts, editing and deleting comments
-- Registration to events
-- Using browsers back function or manually entering urls to check for unwanted behaviour.
-- Test again, since even small changes sometimes accidentally caused unexpected and undesired behaviour
+Testing include, but not limited to
+- **Testing all functions as they are being developed**
+  This is to ensure that no error occurs, that all relevant information displays properly, and that information stored in the database is in it's expected state
+- **Test case: Registering a new user**  
+  - Make sure unregistered users do not get access to restricted pages / functionality  
+  - Find all all-auth templates used that need to be changed for visual consistency
+  Tes- ting all-auth functionality, like trying to register a new user with the same name as an existing one or using an email adress already registered
+- **Test case: Blog functionality**
+  - Overall view with pagination
+  - Registered users commenting on blog posts, editing and deleting comments
+- **Test case: Events**
+  - Overall view with pagination
+  - Registered users signing up for events
+  - Secure payment with Stripe
+- **Test case: Checking for unexpected behaviour**
+  -  Using browsers back function
+  -  Manually entering urls to check for unwanted behaviour.
+- **Test again, since even small changes sometimes accidentally caused unexpected and undesired behaviour**
 
 ### Responsiveness on different devices
 
@@ -499,7 +508,7 @@ Computer view, showing a registered user signing up for an event, using secure p
 Computer view, showing information about The Creative Barn as well as a contact form
 
 ### Event handling
-![finished_superuser_event_registration.png](static/readme/images/finished_superuser_event_registration.png)
+![finished_superuser_event_registration.png](static/readme/images/finished_superuser_event_registration.png)  
 Computer view, showing a superuser using Django admin interface to filter a list of users registerered to a specific event
 
 ### User stories completed
@@ -538,6 +547,7 @@ Following is a list for features that were noted in the User stories but not com
 - Move STRIPE payment from Events app to a general checkout/payment app, especially when/if subscription or other material will require payment is introduced
 - Implement the users blog/feed where users can post images of their own projects user story
 - Re-introduce possibility to post images in blog comments
+- Allow use of Google accounts for sign in.
 - Replace 404-errors with more informational errors, like when/if a user tries to browse back to event registration (or enter url manually)
 - Implement a convenient way for staff to copy event or blog post that may be very similar, and edit the new post before publishing.
 - Add more SEO-friendly urls for showing blog posts and events, like ***/blog/4-New open times during summer***
