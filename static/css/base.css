@@ -106,16 +106,23 @@ h3 {
 
 /***** Styling of account pages, login etc... *****/
 
+/* Having all this classes may seem redundant, but they were created att different times and for different purposes /*
+/* Classes remain in case need comes up to alter appeareances on differnt forms */
 .home-card-url,
 .home-card-url:visited,
 .account-form a,
-.account-form a:visited{
+.account-form a:visited,
+.a-url,
+.a-url:visited
+{
     color: blue;
     text-decoration: none;
 }
 
 .home-card-url:hover,
-.account-form a:hover{
+.account-form a:hover,
+.a-url:hover
+{
     font-weight: bold;
     text-decoration: underline;
 }
@@ -185,14 +192,6 @@ footer {
 /***** Toasts *****/
 .toast-container{  
     padding-right: 1rem;
-}
-
-
-
-/***** TEST CSS TO BE REMOVED BEFORE SUBMISSION *****/
-
-.test-border {
-    border: dashed 1px red;
 }
 
 /*** Media querys ***/

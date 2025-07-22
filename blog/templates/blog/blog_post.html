@@ -54,6 +54,8 @@
                                     </div>
                                 </form>
                             </div>
+                        {% else %}
+                        <p><strong>You need to be <a href="{% url 'account_login' %}" class="a-url">logged in</a> to comment on blog posts</strong></p>
                         {% endif %}
 
                         {% for comment in comments %}

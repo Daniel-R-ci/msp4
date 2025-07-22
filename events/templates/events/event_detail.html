@@ -48,7 +48,7 @@
                                         <a href="{% url 'event_registration' event.id %}" class="btn btn-primary">Register for the event</a>
                                     {% endif %}
                                 {% else %}
-                                    <p><strong>You need to log in to be able to sign up for this event</strong></p>
+                                    <p><strong>You need to <a href="{% url 'account_login' %}" class="a-url">log in</a> to be able to register for this event</strong></p>
                                 {% endif %}
                             {% endif %}
                         </div>
