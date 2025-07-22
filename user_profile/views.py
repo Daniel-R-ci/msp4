@@ -18,7 +18,8 @@ def user_profile(request):
 
     upcoming_events = Event_Registration.objects.filter(
         Q(event_time__gte=datetime.now()) &
-        Q(user=request.user)
+        Q(user=request.user) &
+        Q(confirmed=True)
     ).order_by('event_time')
 
     previous_events = Event_Registration.objects.filter(
