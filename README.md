@@ -37,6 +37,8 @@ Heroku deployment available at [https://dr-ci-msp4-87974008a79d.herokuapp.com/](
   - [Python validation](#python-validation)  
   - [Notable bugs & fixes](#notable-bugs--fixes)  
 - [Finished Website](#finished-website)  
+  - [User stories completed](#user-stories-completed)
+  - [User stories not completed](#user-stories-not-completed)
 - [Future Development](#future-development)  
 - [Credits](#credits)  
 - [Framework, Resources and Libraries Used](#framework-resources-and-libraries-used)  
@@ -439,7 +441,7 @@ class Article_Comment(models.Model):...
 ### Notable bugs found during development or testing
 
 **Back to previous page button working to well**  
-**Problem:** The back to previous buttons on blog posts and event details where supposed to send users back to the page they came for, not simply the blog page but paginated page 3 (if that's where they came from). It worked well using metadata in page requests as long as no additional actions where taken. When blog commenting and event registration functionality was added the buttons refered the users back to those pages
+**Problem:** The back to previous buttons on blog posts and event details where supposed to send users back to the page they came for, not simply the blog page but paginated page 3 (if that's where they came from). It worked well using metadata in page requests as long as no additional actions where taken. When blog commenting and event registration functionality was added the buttons refered the users back to those pages.  
 **Solution:** Buttons now point to main blog/events page, which means on paginated pages user will have to navigate to that page again.
 
 
@@ -488,6 +490,10 @@ class Article_Comment(models.Model):...
 **Setting up AWS**  
 **Problem:** Guide from Boutique-Ado project couldn't be followed an caused errors  
 **Solution:** Walkthrough project was made with Django 3 and The Barn is made with Django 5. Code Institute tutor support quickly found what was causing the error and showed how the storage settings would be done in Django 5.
+
+**Unconfirmed bookings showing up in upcoming events**  
+**Problem:** If a user started registering for an event but changed their mind and directly navigating to another page instead of using Cancel button, the preliminary booking would show up for up to five minutes  
+**Solution:** Only show confirmed bookings in upcoming events
 
 ## Finished website
 
@@ -539,7 +545,7 @@ In the above user stories, some task and criteria remains (though all meet MVP r
 
 These are noted in future development.
 
-### Future development
+## Future development
 
 Following is a list for features that were noted in the User stories but not completed (partially or fully), as well as other issues that has arisen during development. While the website is fully functional and meeting the Minimal Viable Product criterias, there are still possibilities for further development and refining.
 
