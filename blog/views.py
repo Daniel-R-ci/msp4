@@ -60,18 +60,12 @@ def blog_detail(request, article_id):
             messages.error(request, "An error occured posting your comment.\
                             Please try again!")
 
-    # Used to get back to previous page, regardless of pagination
-    # Code found at https://groups.google.com/g/django-users/c/wWvhbbXq1tA
-    # Adjusted to suit purpose
-    previous_url = request.META.get('HTTP_REFERER', '/blog')
-
     comment_form = Article_Comment_Form()
 
     context = {
         'article': article,
         'comments': comments,
         'comment_form': comment_form,
-        'previous_url': previous_url
     }
 
     return render(request, 'blog/blog_post.html', context)

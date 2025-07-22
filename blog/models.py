@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 # Contains one blog article
 class Article(models.Model):
     """
-    Containes one blog article
+    Contains one blog article
     """
     author = models.ForeignKey(
         User,

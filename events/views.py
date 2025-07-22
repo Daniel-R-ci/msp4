@@ -64,14 +64,8 @@ def event_detail(request, event_id):
         user_already_registered = Event_Registration.objects.filter(
             event=event, user=request.user).exists()
 
-    # Used to get back to previous page, regardless of pagination
-    # Code found at https://groups.google.com/g/django-users/c/wWvhbbXq1tA
-    # Adjusted to suit purpose
-    previous_url = request.META.get('HTTP_REFERER', '/events')
-
     context = {
         'event': event,
-        'previous_url': previous_url,
         'user_already_registered': user_already_registered
     }
 
