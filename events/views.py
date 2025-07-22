@@ -55,14 +55,15 @@ def event_detail(request, event_id):
     # Needed to make user_already_registered work
     # Remove all uncofirmed registrations older than five minutes
     Event_Registration.remove_unconfirmed_registrations()
-    # Delete any previous uncompleted registration from current user
-    Event_Registration.objects.filter(
-        event=event, user=request.user, confirmed=False).delete()
 
     user_already_registered = False
     if request.user.is_authenticated:
         user_already_registered = Event_Registration.objects.filter(
             event=event, user=request.user).exists()
+        
+        # Delete any previous uncompleted registration for user (
+        Event_Registration.objects.filter(
+            event=event, user=request.user, confirmed=False).delete()
 
     context = {
         'event': event,
