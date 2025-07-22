@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Default title Creativity Barn -->
+<!-- Remove if custom title is not needed -->
+{% block title %}
+Page can not be found
+{% endblock %}
+
+<!-- Extra JS och imports that needs to be placed in header -->
+{% block head_js %}
+{% endblock %}
+
+<!-- Extra CSS files, if needed-->
+{% block extra_css %}
+{% endblock %}
+
+<!-- Main content-->
+<!-- Container not supplied and must be included -->
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>An error has occured</h1>
+            <p>We are sorry, but an error occured while doing something the computed didn't quite expect to happen. 
+                If the error persists and you are unable to reach a specific page, please contact us</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<!-- Custom JS specific to this page-->
+{% block postload_custom_js %}
+{% endblock %}
